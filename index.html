@@ -482,6 +482,180 @@ footer {
   color:#94A3B8; text-decoration:none; transition:all .2s;
 }
 .ft-sns a:hover { background:rgba(167,139,250,.15); border-color:rgba(167,139,250,.4); color:#A78BFA; }
+
+/* ============================================================
+   RESPONSIVE: Tablet (≤1024px) + Mobile (≤768px)
+   ============================================================ */
+
+/* ===== TABLET (≤ 1024px) ===== */
+@media (max-width: 1024px) {
+  nav { padding: 0 32px; height: 64px; }
+  .nav-logo-text { font-size: 19px; }
+  .nav-links { gap: 24px; }
+  .nav-links a { font-size: 13px; }
+  .nav-cta { padding: 8px 18px; font-size: 13px; }
+
+  .hero { padding: 100px 32px 80px; min-height: auto; }
+  .hero h1 { font-size: clamp(48px, 7vw, 80px); letter-spacing: -3px; }
+  .hero p.lead { font-size: 17px; max-width: 460px; margin-bottom: 40px; }
+  .stats-bar { gap: 40px; margin-top: 56px; padding-top: 36px; }
+  .stat-n { font-size: 30px; }
+
+  .sec-wrap { padding: 80px 0; }
+  .sec-inner { padding: 0 32px; }
+  .sec-h { font-size: clamp(26px, 3.6vw, 40px); }
+
+  /* 3-col → 2-col */
+  .pain-grid { grid-template-columns: 1fr 1fr; }
+  .ind-grid { grid-template-columns: 1fr 1fr; }
+  .pr-grid, .pr-points { grid-template-columns: 1fr 1fr; }
+  .pr-grid > *:nth-child(3),
+  .pr-points > *:nth-child(3) { grid-column: span 2; }
+
+  /* 2-col → 1-col stack */
+  .sol-wrap { grid-template-columns: 1fr; gap: 48px; }
+  .sol-visual { padding: 40px; max-width: 380px; margin: 0 auto; aspect-ratio: 1; }
+  .sv-grid { grid-template-columns: 1fr; }
+  .line-inner { grid-template-columns: 1fr; gap: 56px; padding: 80px 32px; }
+
+  /* Process: 4-col → 2-col, hide horizontal connector */
+  .proc-steps { grid-template-columns: 1fr 1fr; gap: 36px 16px; }
+  .proc-steps::before { display: none; }
+
+  /* Pricing card features */
+  .pr-quote { padding: 44px 32px; }
+
+  footer { padding: 40px 32px; }
+  .ft-links { gap: 24px; }
+}
+
+/* ===== MOBILE (≤ 768px) ===== */
+@media (max-width: 768px) {
+  /* NAV: hide menu links, keep logo + CTA only */
+  nav { padding: 0 18px; height: 60px; }
+  .nav-logo-text { font-size: 17px; }
+  .nav-logo svg { width: 32px; height: 32px; }
+  .nav-links { display: none; }
+  .nav-cta { padding: 7px 14px; font-size: 12px; border-radius: 6px; }
+
+  /* HERO */
+  .hero { padding: 88px 20px 64px; min-height: auto; }
+  .hero-mark svg { width: 90px; height: 90px; }
+  .hero-mark { margin-bottom: 24px; }
+  .hero-mark::after { width: 160px; height: 160px; }
+  .h-eye { font-size: 10px; padding: 5px 14px; margin-bottom: 24px; letter-spacing: 2px; }
+  .hero h1 { font-size: clamp(36px, 11vw, 56px); letter-spacing: -2px; line-height: 1.05; margin-bottom: 20px; }
+  .hero p.lead { font-size: 15px; max-width: 340px; margin-bottom: 32px; line-height: 1.7; }
+  .btns { gap: 12px; flex-direction: column; align-items: stretch; max-width: 320px; margin: 0 auto; }
+  .btn-p, .btn-s { padding: 16px 28px; font-size: 15px; text-align: center; }
+  .hero-note { font-size: 11px; margin-top: 18px; }
+  .o1 { width: 400px; height: 400px; top: -100px; }
+  .o2 { width: 300px; height: 300px; }
+  .o3 { width: 250px; height: 250px; }
+
+  /* STATS: vertical stack */
+  .stats-bar { flex-direction: column; gap: 24px; margin-top: 40px; padding-top: 28px; }
+  .stat-n { font-size: 28px; }
+  .stat-l { font-size: 12px; line-height: 1.5; }
+
+  /* SECTION */
+  .sec-wrap { padding: 60px 0; }
+  .sec-inner { padding: 0 20px; }
+  .sec-ey { font-size: 10px; letter-spacing: 2.5px; margin-bottom: 12px; }
+  .sec-h { font-size: clamp(22px, 5.5vw, 32px); letter-spacing: -1px; margin-bottom: 16px; }
+  .sec-sub { font-size: 14px; line-height: 1.7; }
+
+  /* PAIN: 1-col stack */
+  .pain-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 32px; }
+  .pain-card { padding: 28px 22px; border-radius: 16px; }
+  .pain-q { font-size: 15px; line-height: 1.7; }
+
+  /* SOLUTION */
+  .sol-wrap { gap: 40px; margin-top: 40px; }
+  .sol-visual { padding: 32px; max-width: 280px; }
+  .sol-visual svg { width: 160px; height: 160px; }
+  .sol-pts { gap: 24px; }
+  .sol-pt { gap: 16px; }
+  .pt-n { width: 32px; height: 32px; font-size: 13px; }
+  .pt-t { font-size: 16px; }
+  .pt-d { font-size: 13px; line-height: 1.7; }
+
+  /* SERVICES */
+  .sv-grid { gap: 18px; margin-top: 36px; }
+  .sv-card { padding: 32px 24px; border-radius: 22px; }
+  .sv-icon { width: 52px; height: 52px; font-size: 24px; margin-bottom: 22px; border-radius: 14px; }
+  .sv-t { font-size: 22px; }
+  .sv-price-tag { font-size: 20px; margin-bottom: 14px; }
+  .sv-d { font-size: 14px; margin-bottom: 22px; }
+  .sv-list li { font-size: 13px; padding: 8px 0; }
+  .opt-note { font-size: 12px; padding: 14px; }
+
+  /* PROCESS: 1-col vertical, no connector */
+  .proc-steps { grid-template-columns: 1fr; gap: 20px; }
+  .proc-steps::before { display: none; }
+  .proc-step { display: grid; grid-template-columns: 52px 1fr; align-items: start; column-gap: 16px; row-gap: 4px; text-align: left; padding: 0; }
+  .st-n { width: 44px; height: 44px; font-size: 16px; margin: 0; grid-row: span 2; }
+  .st-t { font-size: 15px; margin-bottom: 4px; grid-column: 2; }
+  .st-d { font-size: 13px; line-height: 1.65; grid-column: 2; }
+  .flow-block { margin-top: 36px; }
+  .flow-block + .flow-block { margin-top: 44px; }
+  .flow-label { font-size: 12px; padding: 5px 14px; margin-bottom: 24px; }
+
+  /* INDUSTRIES */
+  .ind-grid { grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; }
+  .ind-card { padding: 18px 16px; gap: 12px; border-radius: 14px; }
+  .ind-icon { font-size: 24px; }
+  .ind-name { font-size: 13px; }
+
+  /* PRICING */
+  .pr-grid, .pr-points { grid-template-columns: 1fr; gap: 16px; margin-top: 36px; }
+  .pr-grid > *:nth-child(3),
+  .pr-points > *:nth-child(3) { grid-column: span 1; }
+  .pr-card { padding: 32px 26px; border-radius: 22px; }
+  .pr-card.ft::before { font-size: 10px; padding: 4px 16px; }
+  .pr-price { font-size: 32px; }
+  .pr-price small { font-size: 14px; }
+  .pr-list li { font-size: 13px; padding: 9px 0; }
+  .pr-cta { padding: 12px; font-size: 14px; }
+  .pr-quote { padding: 36px 22px; border-radius: 22px; }
+  .pr-quote h3 { font-size: clamp(20px, 5vw, 26px); }
+  .pr-quote p { font-size: 14px; margin-bottom: 24px; }
+  .pr-point { padding: 28px 22px; }
+  .pr-point-icon { font-size: 32px; margin-bottom: 16px; }
+  .pr-point-t { font-size: 16px; }
+  .pr-point-d { font-size: 13px; }
+
+  /* LINE CTA */
+  .line-inner { padding: 60px 20px; gap: 40px; }
+  .line-copy h2 { font-size: clamp(22px, 5.5vw, 32px); letter-spacing: -1px; }
+  .line-copy p { font-size: 14px; margin-bottom: 28px; }
+  .line-step { padding: 16px 18px; gap: 12px; }
+  .ls-n { width: 26px; height: 26px; font-size: 11px; border-radius: 7px; }
+  .ls-t { font-size: 13px; }
+  .ls-d { font-size: 12px; }
+
+  /* CTA BANNER */
+  .cta-inner { padding: 60px 20px; }
+  .cta-inner h2 { font-size: clamp(22px, 5.5vw, 32px); }
+  .cta-inner p { font-size: 14px; margin-bottom: 32px; }
+
+  /* FOOTER: vertical stack */
+  footer { padding: 32px 20px; }
+  .ft-inner { flex-direction: column; gap: 20px; text-align: center; }
+  .ft-links { gap: 18px; flex-wrap: wrap; justify-content: center; font-size: 12px; }
+  .ft-sns { gap: 12px; }
+  .ft-sns a { width: 32px; height: 32px; }
+  .ft-copy { font-size: 11px; }
+}
+
+/* ===== SMALL MOBILE (≤ 380px) — extra tightening ===== */
+@media (max-width: 380px) {
+  .hero { padding: 80px 16px 56px; }
+  .hero h1 { font-size: 32px; letter-spacing: -1.5px; }
+  .sec-inner { padding: 0 16px; }
+  .pain-card, .sv-card, .pr-card { padding: 24px 18px; }
+  .ind-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
