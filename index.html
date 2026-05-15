@@ -497,6 +497,50 @@ footer {
 }
 .ft-sns a:hover { background:rgba(167,139,250,.15); border-color:rgba(167,139,250,.4); color:#A78BFA; }
 
+/* ===== FAQ ===== */
+.faq-list {
+  margin-top:36px;
+  display:flex; flex-direction:column; gap:12px;
+}
+.faq-item {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden;
+  transition:box-shadow .2s;
+}
+.faq-item[open] {
+  box-shadow:0 4px 24px rgba(124,58,237,.08);
+  border-color:rgba(124,58,237,.2);
+}
+.faq-q {
+  padding:18px 24px; cursor:pointer;
+  font-size:15px; font-weight:700; color:var(--text);
+  list-style:none; position:relative;
+  padding-right:48px;
+  display:flex; align-items:center;
+}
+.faq-q::-webkit-details-marker { display:none; }
+.faq-q::before {
+  content:'Q'; flex-shrink:0;
+  width:24px; height:24px; border-radius:6px;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  color:white; font-family:'Space Grotesk',sans-serif;
+  font-size:13px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+  margin-right:14px;
+}
+.faq-q::after {
+  content:'+'; position:absolute; right:24px;
+  color:var(--purple); font-size:22px; font-weight:300;
+  transition:transform .2s;
+  line-height:1;
+}
+.faq-item[open] .faq-q::after { content:'−'; }
+.faq-a {
+  padding:0 24px 22px 62px;
+  font-size:14px; color:var(--text2); line-height:1.75;
+}
+.faq-a strong { color:var(--text); }
+
 /* ===== SHOWCASE (できること・事例) ===== */
 .show-grid {
   display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;
@@ -774,7 +818,7 @@ footer {
   <ul class="nav-links">
     <li><a href="#showcase">できること</a></li>
     <li><a href="#services">サービス</a></li>
-    <li><a href="#process">流れ</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact">お問い合わせ</a></li>
   </ul>
   <a href="#contact" class="nav-cta">無料相談 →</a>
@@ -1157,6 +1201,68 @@ footer {
 </div>
 
 
+<!-- ===== FAQ ===== -->
+<div class="sec-wrap" id="faq">
+  <div class="sec-inner">
+    <p class="sec-ey">FAQ</p>
+    <h2 class="sec-h">よくあるご質問</h2>
+
+    <div class="faq-list">
+
+      <details class="faq-item">
+        <summary class="faq-q">AIをまだ使ったことがありませんが、相談しても大丈夫ですか？</summary>
+        <div class="faq-a">
+          むしろ「使ったことがない」状態からのスタートが得意です。<strong>一度も触ったことがない方こそ最適</strong>です。スマホ操作レベルから無理なく入れる導入プランをご提案します。
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">何から始めればいいか分かりません。</summary>
+        <div class="faq-a">
+          まず<strong>LINEから無料相談</strong>してください。15-20分のZoomで現状をお聞きし、御社にとって最適な「最初の一歩」をご提案します。サービス申込の前提ではないので、相談だけでも歓迎です。
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">料金はいくらかかりますか？</summary>
+        <div class="faq-a">
+          AI導入支援は<strong>¥50,000（30分Zoomヒアリング）</strong>から、本格導入はZoomフルセット<strong>¥88,000〜</strong>、訪問<strong>¥180,000〜</strong>。制作・開発は<strong>¥50,000〜</strong>で個別見積。詳細はLINEで提示します。
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">どんな業種に対応していますか？</summary>
+        <div class="faq-a">
+          建設・士業（税理士・社労士）・美容・小売・飲食を中心に、<strong>地方の中小企業全般</strong>。それ以外でも書類作成・顧客対応・SNS発信などAI活用余地のある業種ならご相談ください。
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">広島・岡山以外でも依頼できますか？</summary>
+        <div class="faq-a">
+          <strong>全国オンライン対応可能</strong>です（Zoom）。訪問は広島・岡山中心、近郊（山口・島根・鳥取・兵庫・香川）は交通費別途、四国（香川除く）・九州・関西以遠は遠方プランで対応します。
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">補助金は使えますか？セキュリティは大丈夫ですか？</summary>
+        <div class="faq-a">
+          <strong>IT導入補助金</strong>の活用についてはご相談時にご案内します（一部サービスが対象になる場合があります）。<br>
+          <strong>セキュリティ</strong>面は、顧客の機密情報をAIに渡す際の判断基準・運用ルールも併せてご提案。データの取り扱いは契約書で明記し、業務終了後は適切に廃棄します。
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">導入後のサポートはありますか？</summary>
+        <div class="faq-a">
+          <strong>月額¥30,000〜の定期サポート（任意）</strong>でLINE随時相談・月1回Zoom定例。AIは進化が早いため、新ツールの紹介や運用改善提案も含みます。買い切り型での依頼ももちろん可能です。
+        </div>
+      </details>
+
+    </div>
+  </div>
+</div>
+
 <!-- ===== LINE CTA ===== -->
 <div class="line-sec" id="contact">
   <div class="line-inner">
@@ -1204,6 +1310,8 @@ footer {
     <ul class="ft-links">
       <li><a href="#services">サービス</a></li>
       <li><a href="#process">ご依頼の流れ</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="blog/">ブログ</a></li>
       <li><a href="#contact">お問い合わせ</a></li>
       <li><a href="privacy.html">プライバシーポリシー</a></li>
     </ul>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ブログ | CHIKAI</title>
+<meta name="description" content="CHIKAIの公式ブログ。地方中小企業のためのAI導入・業務効率化の実例・コラムをお届けします。">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body {
+  background:#FFFFFF; color:var(--text);
+  font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.6;
+}
+
+/* Nav */
+nav {
+  position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px); border-bottom:1px solid var(--border);
+  padding:14px 56px; display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-back { font-size:13px; color:var(--text2); text-decoration:none; transition:color .2s; }
+.nav-back:hover { color:var(--purple); }
+
+/* Hero */
+.hero {
+  background:linear-gradient(135deg, #FAFAFF 0%, #F0EEFF 100%);
+  padding:64px 56px 48px;
+  border-bottom:1px solid var(--border);
+}
+.hero-inner { max-width:980px; margin:0 auto; }
+.hero-eye {
+  font-size:11px; font-weight:600; letter-spacing:3px;
+  color:var(--purple); text-transform:uppercase; margin-bottom:12px;
+}
+.hero h1 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(32px,4vw,52px); font-weight:700;
+  letter-spacing:-1.5px; line-height:1.15; color:var(--text);
+}
+.hero p {
+  margin-top:14px; font-size:16px; color:var(--text2); line-height:1.7;
+  max-width:600px;
+}
+
+/* Article list */
+.list-wrap { max-width:980px; margin:0 auto; padding:64px 56px 100px; }
+.article-card {
+  background:var(--white); border:1px solid var(--border); border-radius:18px;
+  padding:32px 36px; transition:box-shadow .3s, transform .3s;
+  text-decoration:none; color:var(--text); display:block;
+  margin-bottom:18px;
+}
+.article-card:hover {
+  box-shadow:0 8px 40px rgba(124,58,237,.1); transform:translateY(-2px);
+  border-color:rgba(124,58,237,.2);
+}
+.art-meta { display:flex; gap:12px; align-items:center; margin-bottom:12px; }
+.art-cat {
+  font-size:10px; font-weight:700; letter-spacing:1.5px;
+  padding:4px 10px; border-radius:100px;
+  background:linear-gradient(135deg,#EDE9FE,#DDD6FE); color:var(--purple);
+}
+.art-date { font-size:12px; color:var(--text3); }
+.art-title {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:22px; font-weight:700; letter-spacing:-.5px;
+  line-height:1.4; margin-bottom:10px;
+}
+.art-excerpt { font-size:14px; color:var(--text2); line-height:1.7; }
+.art-arrow {
+  margin-top:16px; font-size:13px; font-weight:600; color:var(--purple);
+}
+.art-arrow::after { content:' →'; transition:margin-left .2s; }
+.article-card:hover .art-arrow::after { margin-left:6px; }
+
+.coming-soon {
+  margin-top:36px; text-align:center;
+  padding:32px; border-radius:18px;
+  background:linear-gradient(135deg,#FAFAFF,#F0EEFF);
+  border:1px dashed rgba(124,58,237,.2);
+  color:var(--text3); font-size:14px;
+}
+
+/* Footer */
+footer {
+  background:var(--dark); padding:32px 56px; text-align:center;
+}
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .hero { padding:44px 20px 36px; }
+  .hero p { font-size:15px; }
+  .list-wrap { padding:36px 20px 56px; }
+  .article-card { padding:24px 22px; }
+  .art-title { font-size:18px; }
+  .art-excerpt { font-size:13px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6"/>
+          <stop offset="100%" stop-color="#4F46E5"/>
+        </linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#06B6D4"/>
+          <stop offset="100%" stop-color="#3B82F6"/>
+        </linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <a href="../index.html" class="nav-back">← トップに戻る</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eye">— BLOG</p>
+    <h1>地方中小企業のための<br>AI活用ヒント。</h1>
+    <p>「ChatGPT、興味はあるけど何から？」を解決するための実例・コラムを発信します。</p>
+  </div>
+</section>
+
+<div class="list-wrap">
+
+  <a href="posts/article-001.html" class="article-card">
+    <div class="art-meta">
+      <span class="art-cat">AI活用入門</span>
+      <span class="art-date">2026年5月15日</span>
+    </div>
+    <h2 class="art-title">地方の中小企業が今すぐAIで自動化できる業務TOP5（具体例つき）</h2>
+    <p class="art-excerpt">「AIで何ができるの？」の答えを、地方の中小企業の現場に絞って5つの業務で解説。すべて無料ツールで始められます。</p>
+    <div class="art-arrow">続きを読む</div>
+  </a>
+
+  <div class="coming-soon">
+    新しい記事を毎週公開予定です。<br>
+    お楽しみに。
+  </div>
+</div>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

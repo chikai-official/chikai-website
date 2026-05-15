@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>地方の中小企業が今すぐAIで自動化できる業務TOP5（具体例つき） | CHIKAI ブログ</title>
+<meta name="description" content="ChatGPTやClaudeなどのAIで、中小企業がまず取り組むべき業務を5つに絞って解説。すべて無料ツールから始められます。広島・岡山中心にAI導入を支援するCHIKAIが現場目線で書きました。">
+<meta property="og:title" content="地方の中小企業が今すぐAIで自動化できる業務TOP5">
+<meta property="og:description" content="ChatGPT・Claudeで中小企業が今すぐ始められる業務効率化の実例。">
+<meta property="og:type" content="article">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body {
+  background:#FFFFFF; color:var(--text);
+  font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.8;
+}
+
+/* Nav */
+nav {
+  position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px); border-bottom:1px solid var(--border);
+  padding:14px 56px; display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--purple); }
+
+/* Article */
+.article {
+  max-width:780px; margin:0 auto;
+  padding:56px 56px 100px;
+}
+.breadcrumb {
+  font-size:12px; color:var(--text3); margin-bottom:14px;
+}
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--purple); }
+.cat-tag {
+  display:inline-block;
+  font-size:10px; font-weight:700; letter-spacing:1.5px;
+  padding:4px 10px; border-radius:100px;
+  background:linear-gradient(135deg,#EDE9FE,#DDD6FE); color:var(--purple);
+  margin-bottom:14px;
+}
+h1.art-title {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(28px,3.6vw,42px); font-weight:700;
+  letter-spacing:-1.5px; line-height:1.3; color:var(--text);
+  margin-bottom:14px;
+}
+.art-meta {
+  font-size:12px; color:var(--text3); margin-bottom:40px;
+  padding-bottom:28px; border-bottom:1px solid var(--border);
+}
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:26px; font-weight:700; letter-spacing:-.5px;
+  margin-top:48px; margin-bottom:20px; color:var(--text);
+  padding-left:18px; border-left:4px solid var(--purple);
+}
+.art-body h3 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:20px; font-weight:700; letter-spacing:-.3px;
+  margin-top:32px; margin-bottom:14px; color:var(--text);
+}
+.art-body strong { color:var(--purple); font-weight:700; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead {
+  font-size:18px; color:var(--text2); line-height:1.85;
+  margin-bottom:32px; padding:20px 24px;
+  background:linear-gradient(135deg,#FAFAFF,#F0EEFF);
+  border-left:3px solid var(--purple); border-radius:6px;
+}
+.example-box {
+  background:#F9FAFB; border:1px solid var(--border);
+  border-radius:12px; padding:20px 24px; margin:20px 0;
+}
+.example-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  color:var(--purple); text-transform:uppercase; margin-bottom:10px;
+}
+.before-after {
+  display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0;
+}
+.ba-cell {
+  padding:14px 16px; border-radius:10px; font-size:14px;
+}
+.ba-before { background:#FEE2E2; color:#7F1D1D; }
+.ba-after { background:#D1FAE5; color:#065F46; }
+.ba-label { font-size:11px; font-weight:700; margin-bottom:6px; opacity:.75; }
+
+/* CTA */
+.cta-box {
+  margin-top:60px; padding:36px;
+  background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%);
+  border-radius:20px; text-align:center;
+  color:#F1F5F9;
+}
+.cta-box h3 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:24px; font-weight:700; letter-spacing:-.5px; color:#F1F5F9;
+  margin-bottom:14px; padding:0; border:none;
+}
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn {
+  display:inline-block;
+  background:linear-gradient(135deg,#7C3AED,#3B82F6);
+  color:#FFFFFF; padding:14px 32px; border-radius:12px;
+  font-weight:600; text-decoration:none; font-size:15px;
+  box-shadow:0 4px 24px rgba(124,58,237,.4);
+  transition:transform .2s;
+}
+.cta-btn:hover { transform:translateY(-2px); }
+
+/* Footer */
+footer {
+  background:var(--dark); padding:32px 56px; text-align:center;
+}
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .before-after { grid-template-columns:1fr; gap:8px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6"/>
+          <stop offset="100%" stop-color="#4F46E5"/>
+        </linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#06B6D4"/>
+          <stop offset="100%" stop-color="#3B82F6"/>
+        </linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ AI活用入門</p>
+
+  <span class="cat-tag">AI活用入門</span>
+  <h1 class="art-title">地方の中小企業が今すぐAIで自動化できる業務TOP5（具体例つき）</h1>
+  <p class="art-meta">公開：2026年5月15日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      「ChatGPTやClaudeが話題だけど、うちみたいな小さい会社で何ができるのか分からない」
+      ——そんな声をよく聞きます。<br>
+      この記事では、<strong>広島・岡山を中心に地方中小企業のAI導入を支援するCHIKAI</strong>が、現場で「これが効く」と実感している5つの業務を、具体例つきでまとめました。すべて<strong>無料ツールから始められる</strong>内容です。
+    </p>
+
+    <h2>1. メール・問い合わせ返信の下書き</h2>
+
+    <p>「文章を考える時間がない」「返信が後回しになる」——中小企業オーナーの永遠の悩み。これはAIが最も得意とする領域です。</p>
+
+    <p>顧客からの問い合わせ内容をChatGPTに貼り付けて、「丁寧で具体的な返信を作って」と頼むだけで、80点の下書きが30秒で出てきます。あとは固有名詞や数字を直すだけ。</p>
+
+    <div class="before-after">
+      <div class="ba-cell ba-before">
+        <div class="ba-label">BEFORE</div>
+        1通あたり 15-20分（迷いながら書く）
+      </div>
+      <div class="ba-cell ba-after">
+        <div class="ba-label">AFTER</div>
+        1通あたり 3-5分（AI下書き＋微調整）
+      </div>
+    </div>
+
+    <p>1日5通対応するなら、<strong>毎日約1時間の節約</strong>。月20営業日で<strong>20時間が浮く</strong>計算です。</p>
+
+    <h2>2. 議事録・打ち合わせメモの要約</h2>
+
+    <p>現場ミーティングや顧客との打ち合わせ。録音しても、文字起こし＆要約は誰もやりたくない作業の代表格です。</p>
+
+    <p>スマホの録音アプリで会話を録る → 文字起こしツール（Notta、Whisperなど）で文字化 → ChatGPTに「要約とToDo抽出して」と依頼。これで<strong>60分の会議録音→3分で要約＋ToDo一覧</strong>になります。</p>
+
+    <div class="example-box">
+      <div class="example-label">建設業の例</div>
+      週次の現場会議（60分）の録音をAI処理。<br>
+      要約・進捗・ToDo・期限・担当者まで自動抽出され、職人さんへLINE一斉送信できる形に。<strong>議事録作成工数 95%削減</strong>。
+    </div>
+
+    <h2>3. 商品・サービス説明文の量産</h2>
+
+    <p>ECサイト、SNS投稿、店頭POP。同じ商品の説明文を、媒体ごとに書き直す手間は意外と大きい。</p>
+
+    <p>商品名と簡単なスペックを渡せば、AIが<strong>EC用（180字）／Instagram用（90字＋ハッシュタグ）／店頭POP用（短文・縦書き）</strong>を一度に生成します。</p>
+
+    <div class="example-box">
+      <div class="example-label">小売業の例</div>
+      商品100点の説明文を一括生成。<br>
+      従来 約20時間 → AI処理 約10分。<strong>時間 99%削減</strong>。
+    </div>
+
+    <h2>4. 契約書・申告書類のドラフト作成</h2>
+
+    <p>士業向けの話に聞こえますが、<strong>すべての中小企業</strong>に効く業務です。業務委託契約、秘密保持契約、簡単な見積書・請求書テンプレート——どれも「ゼロから書く」より「AIに骨子を作らせて修正」の方が圧倒的に速い。</p>
+
+    <p>「クライアントの状況」「契約期間」「金額」「特殊条件」を伝えるだけで、契約書の骨子が2分で完成。あとは弁護士・専門家の確認を受ければ完成です（重要な契約は必ず専門家確認を）。</p>
+
+    <div class="example-box">
+      <div class="example-label">士業の例</div>
+      月次顧問契約書のドラフト作成：<strong>従来45分 → AI 2分（96%削減）</strong>。空いた時間でクライアント1社分の追加対応が可能。
+    </div>
+
+    <h2>5. SNS投稿のキャプション・ハッシュタグ生成</h2>
+
+    <p>Instagram・Threads・TikTok。投稿内容は決まってもキャプションを書くのが億劫——あるあるです。</p>
+
+    <p>「商品の写真」と「伝えたいポイント」をAIに渡せば、<strong>3パターンのキャプション案＋ハッシュタグセット</strong>が即出てきます。あとは選んで投稿するだけ。</p>
+
+    <div class="example-box">
+      <div class="example-label">美容室の例</div>
+      ヘアスタイルのビフォー・アフター写真を投稿する際、AIが「カラーの解説」「お客様目線のメリット」「次回来店促進文」を3パターン生成。<strong>投稿あたり15分→3分</strong>。週3投稿なら<strong>月1.5時間が浮く</strong>。
+    </div>
+
+    <h2>まとめ：AIは「考える時間」を返してくれる</h2>
+
+    <p>5つの業務に共通するのは、いずれも<strong>「定型的だが、ゼロから書くと時間がかかる」</strong>仕事ということ。AIはこのゾーンを最も得意とします。</p>
+
+    <p>逆に、<strong>判断・交渉・関係構築・新規アイデア</strong>はAIではなく人間にしかできません。AIに渡せる業務をAIに渡し、空いた時間を「人間にしかできないこと」に使う——これがAI導入の本質です。</p>
+
+    <p>「自社の業務でどれが効くか分からない」「ツールはあるけど使いこなせていない」——そんなときは、CHIKAIの無料相談からお気軽にどうぞ。<strong>15-20分のZoomで業務を伺い、最適なAI活用ポイントをご提案</strong>します。</p>
+
+    <div class="cta-box">
+      <h3>あなたの業務でAIが効くポイントを<br>無料で診断します。</h3>
+      <p>15-20分のZoomで、御社の業務に合わせた最適なAI活用方法をご提案。<br>強引な営業はしません。「話を聞いてみる」だけでOKです。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
