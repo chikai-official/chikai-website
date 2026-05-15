@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatGPTを業務で使う前に知っておくべき5つの注意点 | CHIKAI ブログ</title>
+<meta name="description" content="ChatGPTを業務で使う前に知っておきたい5つのリスクと回避策。情報漏洩・誤情報・著作権など、中小企業が見落としがちなポイントを地方目線で解説します。">
+<meta property="og:title" content="ChatGPTを業務で使う前に知っておくべき5つの注意点">
+<meta property="og:description" content="情報漏洩・誤情報・著作権など、中小企業が見落としがちな注意点を解説。">
+<meta property="og:type" content="article">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body {
+  background:#FFFFFF; color:var(--text);
+  font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.8;
+}
+
+nav {
+  position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px); border-bottom:1px solid var(--border);
+  padding:14px 56px; display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--purple); }
+
+.article {
+  max-width:780px; margin:0 auto;
+  padding:56px 56px 100px;
+}
+.breadcrumb {
+  font-size:12px; color:var(--text3); margin-bottom:14px;
+}
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--purple); }
+.cat-tag {
+  display:inline-block;
+  font-size:10px; font-weight:700; letter-spacing:1.5px;
+  padding:4px 10px; border-radius:100px;
+  background:linear-gradient(135deg,#FEF3C7,#FED7AA); color:#9A3412;
+  margin-bottom:14px;
+}
+h1.art-title {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(28px,3.6vw,42px); font-weight:700;
+  letter-spacing:-1.5px; line-height:1.3; color:var(--text);
+  margin-bottom:14px;
+}
+.art-meta {
+  font-size:12px; color:var(--text3); margin-bottom:40px;
+  padding-bottom:28px; border-bottom:1px solid var(--border);
+}
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:26px; font-weight:700; letter-spacing:-.5px;
+  margin-top:48px; margin-bottom:20px; color:var(--text);
+  padding-left:18px; border-left:4px solid var(--purple);
+}
+.art-body h3 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:20px; font-weight:700; letter-spacing:-.3px;
+  margin-top:32px; margin-bottom:14px; color:var(--text);
+}
+.art-body strong { color:var(--purple); font-weight:700; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead {
+  font-size:18px; color:var(--text2); line-height:1.85;
+  margin-bottom:32px; padding:20px 24px;
+  background:linear-gradient(135deg,#FAFAFF,#F0EEFF);
+  border-left:3px solid var(--purple); border-radius:6px;
+}
+.warn-box {
+  background:#FEF2F2; border:1px solid #FCA5A5;
+  border-radius:12px; padding:18px 22px; margin:20px 0;
+}
+.warn-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  color:#B91C1C; text-transform:uppercase; margin-bottom:10px;
+}
+.warn-box p { margin-bottom:0; color:#7F1D1D; }
+.tip-box {
+  background:#F0FDF4; border:1px solid #86EFAC;
+  border-radius:12px; padding:18px 22px; margin:20px 0;
+}
+.tip-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  color:#166534; text-transform:uppercase; margin-bottom:10px;
+}
+.tip-box p { margin-bottom:0; color:#14532D; }
+
+.cta-box {
+  margin-top:60px; padding:36px;
+  background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%);
+  border-radius:20px; text-align:center;
+  color:#F1F5F9;
+}
+.cta-box h3 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:24px; font-weight:700; letter-spacing:-.5px; color:#F1F5F9;
+  margin-bottom:14px; padding:0; border:none;
+}
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn {
+  display:inline-block;
+  background:linear-gradient(135deg,#7C3AED,#3B82F6);
+  color:#FFFFFF; padding:14px 32px; border-radius:12px;
+  font-weight:600; text-decoration:none; font-size:15px;
+  box-shadow:0 4px 24px rgba(124,58,237,.4);
+  transition:transform .2s;
+}
+.cta-btn:hover { transform:translateY(-2px); }
+
+footer {
+  background:var(--dark); padding:32px 56px; text-align:center;
+}
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6"/>
+          <stop offset="100%" stop-color="#4F46E5"/>
+        </linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#06B6D4"/>
+          <stop offset="100%" stop-color="#3B82F6"/>
+        </linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ AI活用入門</p>
+
+  <span class="cat-tag">AI活用入門</span>
+  <h1 class="art-title">ChatGPTを業務で使う前に<br>知っておくべき5つの注意点</h1>
+  <p class="art-meta">公開：2026年5月16日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      「とりあえずChatGPT使ってみよう」——気軽に始められるのがAIの良さですが、業務利用となると話が変わります。<br>
+      この記事では、CHIKAIが現場で「これは事前に伝えておくべき」と感じている<strong>5つの注意点</strong>と、それぞれの<strong>具体的な回避策</strong>をまとめました。
+    </p>
+
+    <h2>1. 入力した情報はAI提供元に渡る前提で考える</h2>
+
+    <p>無料版のChatGPTやClaudeに入力した内容は、<strong>AIモデルの学習データに使われる可能性</strong>があります。つまり、顧客名・取引先名・売上数字などをそのまま貼り付けると、将来的に他人の質問への回答に断片が現れるリスクがあります。</p>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ NG例</div>
+      <p>「株式会社〇〇商事の年商3億円・従業員25人の会社向けに、提案書作って」<br>
+      → 会社名・売上・人数すべてAI側に渡る。</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ 回避策</div>
+      <p>会社名は「A社」、数字は「年商3億円規模」など<strong>匿名化・抽象化</strong>してから貼り付ける。あるいはChatGPT Team / Claude Enterprise などの<strong>有料プラン</strong>を使う（学習対象外設定が可能）。</p>
+    </div>
+
+    <h2>2. AIの回答は「正しい」とは限らない</h2>
+
+    <p>AIは<strong>もっともらしい嘘（ハルシネーション）</strong>を平気で出します。特に法律・税務・医療など、専門領域の数字や条文を聞くと、存在しない条文を断定的に答えることがあります。</p>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ NG例</div>
+      <p>「労働基準法の最新改正条文を教えて」→ AIが架空の条文番号を堂々と答える。それを信じて社内マニュアルに転載してしまう。</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ 回避策</div>
+      <p>AIの回答は<strong>「下書き」「たたき台」</strong>として扱い、最終確認は必ず人間がする。法律・税務・医療系は<strong>専門家への確認必須</strong>。</p>
+    </div>
+
+    <h2>3. 著作権・肖像権のあるコンテンツに注意</h2>
+
+    <p>AI画像生成・文章生成では、既存の作品やキャラクターに似た出力が出ることがあります。商用利用する場合、著作権・肖像権を侵害するリスクが残ります。</p>
+
+    <ul>
+      <li>「〇〇（有名キャラクター名）風のロゴ作って」→ NG</li>
+      <li>有名な楽曲の歌詞を貼り付けて編集してもらう → 引用範囲を超えるとNG</li>
+      <li>競合他社のWebサイトのテキストをそのままAIで「リライト」→ 著作権侵害の可能性</li>
+    </ul>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ 回避策</div>
+      <p>AI生成物を商用利用する前に「この出力で著作権侵害の可能性は？」とAI自身に確認させる。重要案件は弁護士確認。</p>
+    </div>
+
+    <h2>4. 機密情報・個人情報の取り扱いルールを社内で決める</h2>
+
+    <p>「うちの会社、AIで何を入力していいの？」——社内ルールがないと、スタッフ各人が判断バラバラになります。これが最も事故が起きやすいポイントです。</p>
+
+    <p>最低限決めておくべき5項目：</p>
+
+    <ol>
+      <li><strong>顧客名・取引先名</strong>を入力していいか</li>
+      <li><strong>個人情報</strong>（住所・電話・メアド）を入力していいか</li>
+      <li><strong>売上・財務数字</strong>を入力していいか</li>
+      <li><strong>社外秘の戦略・契約内容</strong>を入力していいか</li>
+      <li>使っていい<strong>AIサービス</strong>の限定リスト（無料版は一部禁止など）</li>
+    </ol>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ 回避策</div>
+      <p>A4 1枚の「AI利用ガイドライン」を作成して全スタッフに配布。CHIKAIではこれをテンプレートで用意しています。</p>
+    </div>
+
+    <h2>5. 「AIに頼りすぎる」と現場の判断力が落ちる</h2>
+
+    <p>これは技術的注意点というより<strong>運用上のリスク</strong>。AIに何でも聞く癖がつくと、スタッフが「自分で考えて判断する」力が衰えます。特に新人教育では、まず手を動かして覚える基礎を経てからAIを使わせる、という順序が重要です。</p>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ 回避策</div>
+      <p><strong>「どこをAIに任せ、どこを人間が判断するか」</strong>の線引きを明文化する。例：「初稿はAI、最終判断は人」「数字計算はAI、意思決定は人」など。</p>
+    </div>
+
+    <h2>まとめ：怖がりすぎず、無防備すぎず</h2>
+
+    <p>5つの注意点を読んで「やっぱりAI怖い」と感じた方もいるかもしれません。でも、これらはすべて<strong>事前に知っておけば防げるリスク</strong>です。逆に、何も知らずに使い始めて事故るより、最初に5分でもリスクを学んでから始めた方が、結果的にAI活用が長続きします。</p>
+
+    <p>CHIKAIではAI導入支援の中で、こうしたリスク対策・社内ルール作りまで一緒に進めます。「うちの業種ではどこに気をつければいい？」という個別相談もLINEから無料で受け付けています。</p>
+
+    <div class="cta-box">
+      <h3>御社のAI利用ガイドライン、<br>一緒に作りませんか？</h3>
+      <p>業種・業務内容に合わせたAI利用ルールをCHIKAIが整理。<br>強引な営業はしません。「話を聞いてみる」だけでOKです。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
