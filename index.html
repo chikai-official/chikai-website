@@ -633,14 +633,12 @@ footer {
   text-align:center;
 }
 .comp-table thead th.us {
-  background:linear-gradient(135deg,#EDE9FE,#DDD6FE);
-  color:var(--purple); font-weight:700; position:relative;
+  background:linear-gradient(135deg,var(--purple),var(--blue));
+  color:#FFFFFF; font-weight:700; font-size:15px;
+  letter-spacing:.5px;
 }
 .comp-table thead th.us::before {
-  content:'★ CHIKAI'; position:absolute; top:-2px; left:50%;
-  transform:translate(-50%,-50%); background:linear-gradient(135deg,var(--purple),var(--blue));
-  color:white; padding:3px 12px; border-radius:0 0 8px 8px;
-  font-size:10px; font-weight:700; letter-spacing:1px; white-space:nowrap;
+  content:'★ '; color:#FDE68A;
 }
 .comp-table tbody tr:last-child td { border-bottom:none; }
 .comp-table tbody td.label {
