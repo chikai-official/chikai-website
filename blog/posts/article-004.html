@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+
+<title>士業のための「AIに書類ドラフトを任せる」実践ガイド | CHIKAI ブログ</title>
+<meta name="description" content="税理士・社労士・行政書士・司法書士向け。AIに書類ドラフトを任せる具体的な手順とプロンプト、守秘義務リスクの回避策を実例で解説します。">
+<meta property="og:title" content="士業のための「AIに書類ドラフトを任せる」実践ガイド">
+<meta property="og:description" content="顧問先への提案書・申告書補助メモ・契約書ひな型。士業がAIに書類ドラフトを任せる4つの実践シーンと守秘義務の守り方。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-004.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-004.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "士業のための「AIに書類ドラフトを任せる」実践ガイド",
+  "description": "税理士・社労士・行政書士向け。AIに書類ドラフトを任せる4シーンと守秘義務リスクの回避策を実例で解説。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-05-17",
+  "dateModified": "2026-05-17",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-004.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body {
+  background:#FFFFFF; color:var(--text);
+  font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.8;
+}
+
+nav {
+  position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px); border-bottom:1px solid var(--border);
+  padding:14px 56px; display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--purple); }
+
+.article {
+  max-width:780px; margin:0 auto;
+  padding:56px 56px 100px;
+}
+.breadcrumb {
+  font-size:12px; color:var(--text3); margin-bottom:14px;
+}
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--purple); }
+.cat-tag {
+  display:inline-block;
+  font-size:10px; font-weight:700; letter-spacing:1.5px;
+  padding:4px 10px; border-radius:100px;
+  background:linear-gradient(135deg,#FEF3C7,#FDE68A); color:#78350F;
+  margin-bottom:14px;
+}
+h1.art-title {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(28px,3.6vw,42px); font-weight:700;
+  letter-spacing:-1.5px; line-height:1.3; color:var(--text);
+  margin-bottom:14px;
+}
+.art-meta {
+  font-size:12px; color:var(--text3); margin-bottom:40px;
+  padding-bottom:28px; border-bottom:1px solid var(--border);
+}
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:26px; font-weight:700; letter-spacing:-.5px;
+  margin-top:48px; margin-bottom:20px; color:var(--text);
+  padding-left:18px; border-left:4px solid #D97706;
+}
+.art-body h3 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:20px; font-weight:700; letter-spacing:-.3px;
+  margin-top:32px; margin-bottom:14px; color:var(--text);
+}
+.art-body strong { color:#B45309; font-weight:700; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead {
+  font-size:18px; color:var(--text2); line-height:1.85;
+  margin-bottom:32px; padding:20px 24px;
+  background:linear-gradient(135deg,#FFFBEB,#FEF3C7);
+  border-left:3px solid #D97706; border-radius:6px;
+}
+.example-box {
+  background:#F9FAFB; border:1px solid var(--border);
+  border-radius:12px; padding:20px 24px; margin:20px 0;
+}
+.example-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  color:#B45309; text-transform:uppercase; margin-bottom:10px;
+}
+.warn-box {
+  background:#FEF2F2; border:1px solid #FECACA;
+  border-radius:12px; padding:20px 24px; margin:20px 0;
+}
+.warn-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  color:#B91C1C; text-transform:uppercase; margin-bottom:10px;
+}
+.before-after {
+  display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0;
+}
+.ba-cell {
+  padding:14px 16px; border-radius:10px; font-size:14px;
+}
+.ba-before { background:#FEE2E2; color:#7F1D1D; }
+.ba-after { background:#D1FAE5; color:#065F46; }
+.ba-label { font-size:11px; font-weight:700; margin-bottom:6px; opacity:.75; }
+
+.prompt-box {
+  background:#0F172A; color:#E2E8F0;
+  border-radius:12px; padding:20px 24px; margin:20px 0;
+  font-family:'Inter',monospace; font-size:14px; line-height:1.7;
+}
+.prompt-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  color:#FCD34D; text-transform:uppercase; margin-bottom:10px;
+}
+
+.cta-box {
+  margin-top:60px; padding:36px;
+  background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%);
+  border-radius:20px; text-align:center;
+  color:#F1F5F9;
+}
+.cta-box h3 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:24px; font-weight:700; letter-spacing:-.5px; color:#F1F5F9;
+  margin-bottom:14px; padding:0; border:none;
+}
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn {
+  display:inline-block;
+  background:linear-gradient(135deg,#7C3AED,#3B82F6);
+  color:#FFFFFF; padding:14px 32px; border-radius:12px;
+  font-weight:600; text-decoration:none; font-size:15px;
+  box-shadow:0 4px 24px rgba(124,58,237,.4);
+  transition:transform .2s;
+}
+.cta-btn:hover { transform:translateY(-2px); }
+
+footer {
+  background:var(--dark); padding:32px 56px; text-align:center;
+}
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .before-after { grid-template-columns:1fr; gap:8px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6"/>
+          <stop offset="100%" stop-color="#4F46E5"/>
+        </linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#06B6D4"/>
+          <stop offset="100%" stop-color="#3B82F6"/>
+        </linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ 業種別Tips</p>
+
+  <span class="cat-tag">⚖️ 業種別Tips｜士業</span>
+  <h1 class="art-title">士業のための「AIに書類ドラフトを任せる」実践ガイド</h1>
+  <p class="art-meta">公開：2026年5月17日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      税理士・社労士・行政書士・司法書士の現場で、書類作成にかかる時間は仕事の半分以上を占めると言われます。<br>
+      AIに「ゼロから書かせる」のではなく、<strong>「ドラフトを80%まで作らせて、最後の20%だけ人間が仕上げる」</strong>使い方なら、守秘義務リスクを抑えながら劇的に時間を圧縮できます。
+    </p>
+
+    <h2>大前提：固有名詞・個人情報は必ず外す</h2>
+
+    <p>士業がAIを使う上で、最初に決めるべきルールはこれです。<strong>顧問先名・個人名・マイナンバー・口座番号などをそのままAIに貼り付けない</strong>。これだけで守秘義務リスクの90%は回避できます。</p>
+
+    <div class="warn-box">
+      <div class="warn-label">守秘義務上の注意</div>
+      ChatGPT無料版・Plus版は、入力データが学習に使われる場合があります。<strong>顧客情報は必ず仮名（A社・B氏など）に置換</strong>してから入力してください。法人向けプラン（ChatGPT Business / Team / Enterprise、Claude for Work）なら学習対象外になります。
+    </div>
+
+    <p>「仮名化が面倒」と感じるかもしれませんが、最初の3回だけ意識すれば習慣化します。テンプレ化すれば1案件30秒で済みます。</p>
+
+    <h2>シーン1：顧問先への提案書ドラフト</h2>
+
+    <p>顧問先に新サービス（電子申請対応・補助金申請代行・労務DXなど）を提案したいけど、提案書作成に時間がかかって後回しになる——これがAIで一気に解決します。</p>
+
+    <p>「<strong>飲食店（従業員10名）に、電子帳簿保存法対応の提案書を作って</strong>」と業種・規模・テーマを伝えるだけで、構成案＋本文ドラフトが数分で出てきます。</p>
+
+    <div class="prompt-box">
+      <div class="prompt-label">プロンプト例</div>
+      あなたは税理士事務所のコンサル担当です。<br>
+      顧客：飲食店（従業員10名、年商1.2億円）<br>
+      提案テーマ：電子帳簿保存法対応<br>
+      A4・2枚分の提案書ドラフトを、以下の構成で作って：<br>
+      ①現状の課題 ②法対応の必要性 ③当事務所の支援内容 ④費用感 ⑤次のステップ
+    </div>
+
+    <div class="before-after">
+      <div class="ba-cell ba-before">
+        <div class="ba-label">BEFORE</div>
+        提案書作成 2-3時間
+      </div>
+      <div class="ba-cell ba-after">
+        <div class="ba-label">AFTER</div>
+        ドラフト10分＋修正20分
+      </div>
+    </div>
+
+    <h2>シーン2：申告書・申請書の補助メモ</h2>
+
+    <p>申告書そのものはAIに書かせるわけにはいきません。が、<strong>「申告にあたって顧問先に確認すべき事項リスト」</strong>「<strong>添付書類のチェックリスト</strong>」「<strong>類似ケースの注意点まとめ</strong>」など、補助メモは絶大な威力を発揮します。</p>
+
+    <div class="example-box">
+      <div class="example-label">使い方の例</div>
+      「個人事業主の確定申告で、開業初年度に確認すべき特例制度を整理して」<br>
+      → 青色申告承認申請、減価償却の特例、開業費の繰延、消費税の納税義務免除など、抜け漏れチェックリストが瞬時に出る
+    </div>
+
+    <p>ベテラン税理士の頭の中にある「経験則チェックリスト」を、AIが即座に文章化してくれるイメージ。<strong>若手スタッフへの教育資料としても流用</strong>できます。</p>
+
+    <h2>シーン3：契約書・規程類のひな型作成</h2>
+
+    <p>社労士なら就業規則・36協定、行政書士なら各種契約書・規程類。「<strong>既存ひな型を、特定の業種・規模向けにカスタマイズする</strong>」作業は、AIが最も得意とする分野です。</p>
+
+    <p>既存のひな型をAIに渡して「<strong>建設業の小規模事業者（従業員15名）向けに、現場勤務の特性を踏まえた表現に書き換えて</strong>」と依頼すれば、たたき台が即完成します。</p>
+
+    <div class="warn-box">
+      <div class="warn-label">必須：最終チェックは人間が</div>
+      法改正・判例の反映、業種特有の規定の妥当性は、必ず有資格者が確認してください。AIは2024年以前の情報で止まっている可能性があり、最新の労基法改正などをカバーできないことがあります。
+    </div>
+
+    <h2>シーン4：顧問先への定期レターやニュース解説</h2>
+
+    <p>「税制改正のポイント」「労務トピック」など、顧問先向けの月次レター。書きたいけど時間がない——これもAIで月次運用が現実的になります。</p>
+
+    <p>国税庁・厚労省の発表PDFをAIに読ませて、「<strong>中小企業の経営者向けに、A4半分で要点と実務影響をまとめて</strong>」と依頼。専門用語を噛み砕いた解説が数分で完成します。</p>
+
+    <div class="before-after">
+      <div class="ba-cell ba-before">
+        <div class="ba-label">BEFORE</div>
+        月次レター作成 半日
+      </div>
+      <div class="ba-cell ba-after">
+        <div class="ba-label">AFTER</div>
+        AI下書き15分＋校正30分
+      </div>
+    </div>
+
+    <p>毎月配信できるようになると、<strong>顧問先からの信頼度が一段上がり、解約率も下がる</strong>のが実感できるはずです。「先生はちゃんと最新情報を追ってくれている」という安心感は、価格競争から抜け出す武器になります。</p>
+
+    <h2>まとめ：士業×AIは「品質を保ちながら時間だけ圧縮する」</h2>
+
+    <p>士業の本質的な価値は「<strong>判断・責任・関係性</strong>」にあります。これらはAIに代替できません。一方で、書類作成・調査・文章化など<strong>「作業」部分はAIで圧縮できる</strong>。空いた時間を顧問先との対話や戦略的な提案に回せば、事務所全体の単価が上がります。</p>
+
+    <p>「うちの事務所では具体的に何から始められる？」というご相談はLINEから無料で受け付けています。守秘義務との両立も含めて、士業に最適な導入順序をご提案します。</p>
+
+    <div class="cta-box">
+      <h3>士業事務所のAI活用、<br>無料診断で導入ポイントをご提案。</h3>
+      <p>15-20分のZoomで業務を伺い、守秘義務と効率化を両立するAI活用方法をご提案。<br>強引な営業はしません。「話を聞いてみる」だけでOKです。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
