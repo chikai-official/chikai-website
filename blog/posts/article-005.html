@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+
+<title>ChatGPTプロンプトの書き方・基本テンプレ7つ | CHIKAI ブログ</title>
+<meta name="description" content="ChatGPTで思った答えが返ってこない方へ。プロンプトの書き方を「役割・目的・前提・出力形式」の型に分解。今日からコピペで使える基本テンプレ7つを公開します。">
+<meta property="og:title" content="ChatGPTプロンプトの書き方・基本テンプレ7つ">
+<meta property="og:description" content="役割・目的・前提・出力形式の型で組む。中小企業オーナーが今日から使えるChatGPTプロンプト7テンプレ。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-005.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-005.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "ChatGPTプロンプトの書き方・基本テンプレ7つ",
+  "description": "役割・目的・前提・出力形式の型で組む、中小企業オーナーが今日から使えるChatGPTプロンプト7テンプレ。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-05-18",
+  "dateModified": "2026-05-18",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-005.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body {
+  background:#FFFFFF; color:var(--text);
+  font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.8;
+}
+
+nav {
+  position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94);
+  backdrop-filter:blur(14px); border-bottom:1px solid var(--border);
+  padding:14px 56px; display:flex; align-items:center; justify-content:space-between;
+}
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--purple); }
+
+.article {
+  max-width:780px; margin:0 auto;
+  padding:56px 56px 100px;
+}
+.breadcrumb {
+  font-size:12px; color:var(--text3); margin-bottom:14px;
+}
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--purple); }
+.cat-tag {
+  display:inline-block;
+  font-size:10px; font-weight:700; letter-spacing:1.5px;
+  padding:4px 10px; border-radius:100px;
+  background:linear-gradient(135deg,#CFFAFE,#A5F3FC); color:#155E75;
+  margin-bottom:14px;
+}
+h1.art-title {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(28px,3.6vw,42px); font-weight:700;
+  letter-spacing:-1.5px; line-height:1.3; color:var(--text);
+  margin-bottom:14px;
+}
+.art-meta {
+  font-size:12px; color:var(--text3); margin-bottom:40px;
+  padding-bottom:28px; border-bottom:1px solid var(--border);
+}
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:26px; font-weight:700; letter-spacing:-.5px;
+  margin-top:48px; margin-bottom:20px; color:var(--text);
+  padding-left:18px; border-left:4px solid #0891B2;
+}
+.art-body h3 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:20px; font-weight:700; letter-spacing:-.3px;
+  margin-top:32px; margin-bottom:14px; color:var(--text);
+}
+.art-body strong { color:#0E7490; font-weight:700; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead {
+  font-size:18px; color:var(--text2); line-height:1.85;
+  margin-bottom:32px; padding:20px 24px;
+  background:linear-gradient(135deg,#ECFEFF,#CFFAFE);
+  border-left:3px solid #0891B2; border-radius:6px;
+}
+.example-box {
+  background:#F9FAFB; border:1px solid var(--border);
+  border-radius:12px; padding:20px 24px; margin:20px 0;
+}
+.example-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  color:#0E7490; text-transform:uppercase; margin-bottom:10px;
+}
+.tip-box {
+  background:#F0FDFA; border:1px solid #99F6E4;
+  border-radius:12px; padding:20px 24px; margin:20px 0;
+}
+.tip-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  color:#0F766E; text-transform:uppercase; margin-bottom:10px;
+}
+.before-after {
+  display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0;
+}
+.ba-cell {
+  padding:14px 16px; border-radius:10px; font-size:14px;
+}
+.ba-before { background:#FEE2E2; color:#7F1D1D; }
+.ba-after { background:#D1FAE5; color:#065F46; }
+.ba-label { font-size:11px; font-weight:700; margin-bottom:6px; opacity:.75; }
+
+.prompt-box {
+  background:#0F172A; color:#E2E8F0;
+  border-radius:12px; padding:20px 24px; margin:20px 0;
+  font-family:'Inter','SF Mono',monospace; font-size:14px; line-height:1.7;
+  white-space:pre-wrap;
+}
+.prompt-label {
+  font-size:11px; font-weight:700; letter-spacing:1.5px;
+  color:#5EEAD4; text-transform:uppercase; margin-bottom:10px;
+  font-family:'Inter',sans-serif;
+}
+.tmpl-num {
+  display:inline-block;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:12px; font-weight:700; letter-spacing:1px;
+  color:#FFFFFF; background:linear-gradient(135deg,#06B6D4,#0891B2);
+  padding:3px 10px; border-radius:6px; margin-right:8px;
+  vertical-align:middle;
+}
+
+.cta-box {
+  margin-top:60px; padding:36px;
+  background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%);
+  border-radius:20px; text-align:center;
+  color:#F1F5F9;
+}
+.cta-box h3 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:24px; font-weight:700; letter-spacing:-.5px; color:#F1F5F9;
+  margin-bottom:14px; padding:0; border:none;
+}
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn {
+  display:inline-block;
+  background:linear-gradient(135deg,#7C3AED,#3B82F6);
+  color:#FFFFFF; padding:14px 32px; border-radius:12px;
+  font-weight:600; text-decoration:none; font-size:15px;
+  box-shadow:0 4px 24px rgba(124,58,237,.4);
+  transition:transform .2s;
+}
+.cta-btn:hover { transform:translateY(-2px); }
+
+footer {
+  background:var(--dark); padding:32px 56px; text-align:center;
+}
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .before-after { grid-template-columns:1fr; gap:8px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#8B5CF6"/>
+          <stop offset="100%" stop-color="#4F46E5"/>
+        </linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%">
+          <stop offset="0%" stop-color="#06B6D4"/>
+          <stop offset="100%" stop-color="#3B82F6"/>
+        </linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ プロンプト</p>
+
+  <span class="cat-tag">💬 プロンプト</span>
+  <h1 class="art-title">ChatGPTプロンプトの書き方・基本テンプレ7つ</h1>
+  <p class="art-meta">公開：2026年5月18日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      「ChatGPTに聞いても、当たり障りのない答えしか返ってこない」<br>
+      その原因はAIの性能ではなく、<strong>プロンプト（指示文）の書き方</strong>にあります。<br>
+      この記事では、業務でそのままコピペできる7つの基本テンプレを、型と一緒にお渡しします。
+    </p>
+
+    <h2>プロンプトの基本：4つの要素で組み立てる</h2>
+
+    <p>うまくいくプロンプトは、ほぼ例外なく以下の4要素で構成されています。逆にこの4つが揃ってないと、AIは「無難な平均値」を返してきます。</p>
+
+    <ul>
+      <li><strong>役割</strong>：誰として答えてほしいか（例：ベテラン税理士、地方工務店の営業担当）</li>
+      <li><strong>目的</strong>：何のために、誰に向けて作るのか</li>
+      <li><strong>前提</strong>：業種・規模・条件・参考にしてほしい資料</li>
+      <li><strong>出力形式</strong>：箇条書き／表／文字数／構成順</li>
+    </ul>
+
+    <div class="before-after">
+      <div class="ba-cell ba-before">
+        <div class="ba-label">BEFORE（雑な指示）</div>
+        「営業メール書いて」
+      </div>
+      <div class="ba-cell ba-after">
+        <div class="ba-label">AFTER（4要素入り）</div>
+        「地方工務店の営業担当として、新築検討中の30代夫婦向けに、現場見学会の案内メールを300字で書いて」
+      </div>
+    </div>
+
+    <p>では、この型を使った実用テンプレを7つ紹介します。すべて<strong>業種を入れ替えればそのまま使える</strong>形にしてあります。</p>
+
+    <h2><span class="tmpl-num">01</span>メール返信ドラフト</h2>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト</span>
+あなたは私の秘書です。
+以下のメールに、丁寧かつ簡潔（200字程度）に返信するドラフトを作って。
+こちらの状況：[来週月曜に時間が取れる／オンライン希望]
+返信トーン：ビジネスフレンドリー
+
+──元メール──
+[ここに受信メール全文を貼る]</div>
+
+    <p>「とりあえず返信ドラフト出して」が口癖になるくらい便利。最後の調整だけ自分でやれば、メール処理時間が<strong>1/3</strong>になります。</p>
+
+    <h2><span class="tmpl-num">02</span>議事録の要約とToDo抽出</h2>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト</span>
+以下は社内会議の文字起こしです。
+①議論の要約（300字以内）
+②決定事項
+③ToDo（担当者・期限つき）
+の3点を、Markdown形式で出して。
+
+──文字起こし──
+[Notta等のテキストを貼る]</div>
+
+    <h2><span class="tmpl-num">03</span>顧客向け説明文の書き換え</h2>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト</span>
+以下の文章を、[業種・例：60代の地方の経営者]向けに
+専門用語を使わず、3段落・各2-3文で書き直して。
+重要なメリットは太字で示して。
+
+──元文章──
+[書き換えたい文章]</div>
+
+    <p>パンフレット・HP・LINE配信の文面を、ターゲット別に書き分けたい時に強力です。</p>
+
+    <h2><span class="tmpl-num">04</span>FAQ自動生成</h2>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト</span>
+以下のサービス内容について、想定顧客が抱きやすい質問を10個挙げて、
+それぞれに対する回答を80字前後で作って。
+質問は「料金」「進め方」「他社との違い」「アフターサポート」のカテゴリに分けて。
+
+──サービス内容──
+[サービス概要を貼る]</div>
+
+    <h2><span class="tmpl-num">05</span>ブログ・SNS記事の構成案</h2>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト</span>
+テーマ：[例：地方の中小企業がAIで効率化できる業務]
+ターゲット：地方の経営者・現場責任者
+SEO狙いキーワード：[例：中小企業 AI 業務効率化]
+
+このテーマで2000字のブログ記事の構成案を作って。
+リード→h2見出し4-6本（各h2に簡単な要点付き）→まとめ、の形式で。</div>
+
+    <p>記事の<strong>骨格を作るのが一番時間がかかる</strong>もの。骨ができれば中身は手が動きます。</p>
+
+    <h2><span class="tmpl-num">06</span>提案書のたたき台</h2>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト</span>
+あなたは[業種・例：システム開発会社]の営業担当です。
+顧客：[業種・規模・例：従業員10名の歯科医院]
+提案テーマ：[例：予約管理システムの導入]
+
+A4・2枚分の提案書のたたき台を、以下の構成で作って。
+①現状の課題 ②解決アプローチ ③導入後の効果（数字つき）
+④費用感 ⑤次のステップ</div>
+
+    <div class="tip-box">
+      <div class="tip-label">コツ</div>
+      「数字つき」を明示すると、AIは仮の数値を含めた具体的な提案を作ってくれます。実数は後で差し替え前提でOK。
+    </div>
+
+    <h2><span class="tmpl-num">07</span>誤字脱字・敬語チェック</h2>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト</span>
+以下の文章を校正してください。
+①誤字脱字
+②敬語の誤り（二重敬語・尊敬/謙譲の混同など）
+③読みにくい長い文の分割提案
+
+の3点を表形式で指摘し、最後に修正後の全文を出してください。
+
+──文章──
+[校正したい文章]</div>
+
+    <p>請求書・契約書・メールの最終チェックに。<strong>第三者の目</strong>として一度通すだけで、ミスがぐっと減ります。</p>
+
+    <h2>使いこなすコツ：型を覚えたら少しずつ崩す</h2>
+
+    <p>最初は7テンプレをそのままコピペで使ってOK。慣れてきたら、自分の業務固有の前提（顧客の特性、よく使う言い回し）を<strong>「前提」部分に書き足していく</strong>と、AIの精度が一気に上がります。</p>
+
+    <p>もう一つのコツは、<strong>一発で完璧を狙わない</strong>こと。「これを軸に、もう少し営業色を弱めて」「これだと固いので、もっと柔らかく」と追加指示で詰めていく方が、結果的に早く・良いものに辿り着きます。</p>
+
+    <h2>まとめ：プロンプトは「指示書」、AIは「優秀だけど察しない部下」</h2>
+
+    <p>ChatGPTを「察してくれない部下」だと思って指示を書くと、急に書きやすくなります。<strong>役割・目的・前提・出力形式</strong>——この4要素をテンプレ化して、業務ごとに保存しておくと、毎回ゼロから考えずに済みます。</p>
+
+    <p>「自社の業務に最適化したプロンプト集を作りたい」というご相談はLINEから無料で受け付けています。業務フローを伺って、すぐ使えるテンプレを一緒に整備します。</p>
+
+    <div class="cta-box">
+      <h3>御社専用のプロンプト集、<br>無料診断でたたき台をお渡しします。</h3>
+      <p>15-20分のZoomで業務を伺い、頻出シーン3〜5本のテンプレを作成。<br>強引な営業はしません。「話を聞いてみる」だけでOKです。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
