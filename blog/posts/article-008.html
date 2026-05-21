@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+
+<title>小売店オーナーが今日から使えるAI商品説明文プロンプト | CHIKAI ブログ</title>
+<meta name="description" content="地方の小売店オーナー向け。ChatGPTで商品説明文・POPコピー・SNS投稿用テキストを瞬時に量産するプロンプト6種を、コピペ可能な形で公開します。">
+<meta property="og:title" content="小売店オーナーが今日から使えるAI商品説明文プロンプト">
+<meta property="og:description" content="商品名と特徴を一言伝えるだけ。商品説明・POP・SNS用文がAIで瞬時に完成するプロンプト6種を公開。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-008.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-008.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "小売店オーナーが今日から使えるAI商品説明文プロンプト",
+  "description": "商品名と特徴を一言伝えるだけ。商品説明・POP・SNS用文がAIで瞬時に完成するプロンプト6種。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-05-21",
+  "dateModified": "2026-05-21",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-008.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.8; }
+
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--purple); }
+
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--purple); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#FEF3C7,#FDE68A); color:#92400E; margin-bottom:14px; }
+h1.art-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:700; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #D97706; }
+.art-body h3 { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#92400E; font-weight:700; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#FEF3C7,#FDE68A); border-left:3px solid #D97706; border-radius:6px; }
+
+.prompt-box { background:#0F172A; color:#E2E8F0; border-radius:12px; padding:20px 24px; margin:20px 0; font-family:'Inter','SF Mono',monospace; font-size:14px; line-height:1.7; white-space:pre-wrap; }
+.prompt-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#FCD34D; text-transform:uppercase; margin-bottom:10px; font-family:'Inter',sans-serif; }
+
+.example-box { background:#FFFBEB; border:1px solid #FDE68A; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.example-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#92400E; text-transform:uppercase; margin-bottom:10px; }
+
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#7C3AED,#3B82F6); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(124,58,237,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ 業種別Tips</p>
+
+  <span class="cat-tag">🛍 業種別Tips｜小売業</span>
+  <h1 class="art-title">小売店オーナーが今日から使えるAI商品説明文プロンプト</h1>
+  <p class="art-meta">公開：2026年5月21日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      「商品入荷したけど、説明文書くのに30分かかる」<br>
+      「POP書きが追いつかない」「SNS投稿のキャッチが浮かばない」——<br>
+      地方の小売店オーナーが抱える"言葉のアウトプット疲れ"。<br>
+      <strong>ChatGPTで全部、5分以内に終わる</strong>プロンプト6種を、コピペ可能な形で公開します。
+    </p>
+
+    <h2>なぜ「商品説明文」がAIで激変するのか</h2>
+
+    <p>小売店の集客・販売は、結局のところ<strong>「言葉のアウトプット量」</strong>に比例します。</p>
+
+    <ul>
+      <li>商品ページの説明文</li>
+      <li>店頭POP</li>
+      <li>SNS投稿（Instagram/X/Threads）</li>
+      <li>食べログ・Googleマップの紹介文</li>
+      <li>新聞折込・チラシのキャッチコピー</li>
+    </ul>
+
+    <p>これらは<strong>「商品の特徴」というインプットから、文体・字数・媒体に応じてアウトプットを変える作業</strong>です。
+    つまり、AIが最も得意な仕事。本来オーナーが時間をかけるべき場所ではありません。</p>
+
+    <h2>プロンプト①：商品ページ用 説明文（200字）</h2>
+
+    <p>ネットショップやGoogleマップに載せる、<strong>標準的な商品紹介文</strong>。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト①</span>
+あなたは地方の[業種]小売店のスタッフです。
+以下の商品の説明文を、200字以内で書いてください。
+
+トーン：親しみやすく、押し付けがましくない
+読者：30-50代女性、地元在住、品質重視
+
+──商品──
+名称：[商品名]
+特徴：[特徴を3つ]
+価格帯：[円]
+ターゲット：[誰向け]</div>
+
+    <div class="example-box">
+      <div class="example-label">入力例</div>
+      名称：手作り味噌（500g）<br>
+      特徴：地元産大豆使用 / 1年熟成 / 添加物なし<br>
+      価格帯：800円<br>
+      ターゲット：体に良いものを選びたい主婦
+    </div>
+
+    <h2>プロンプト②：POP用キャッチコピー（30字）</h2>
+
+    <p>店頭で<strong>瞬間で目を止める</strong>言葉を3パターン量産。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト②</span>
+以下の商品のPOPキャッチコピーを、3パターン出してください。
+各30字以内。
+
+スタイル：
+1パターン目：感情訴求型（"ホッとする〜"など）
+2パターン目：数字インパクト型（"〇〇%カット！"など）
+3パターン目：シンプル断言型（"地元で一番〜"など）
+
+──商品──
+名称：[商品名]
+売りポイント：[1つ]</div>
+
+    <h2>プロンプト③：SNS投稿用テキスト（150字＋ハッシュタグ5個）</h2>
+
+    <p>Instagram・X・Threadsに使い回せる<strong>SNS最適化文</strong>。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト③</span>
+以下の商品のSNS投稿文を作ってください。
+文字数：150字以内
+ハッシュタグ：5個（地域名と商品名含む）
+トーン：店主の人柄が出る親しみやすさ
+最後に「店舗情報・営業時間」への誘導を入れて
+
+──商品──
+名称：[商品名]
+特徴：[特徴]
+地域：[地名]</div>
+
+    <h2>プロンプト④：食べログ／Google マップ用 紹介文（250字）</h2>
+
+    <p>検索流入を狙う<strong>SEO意識の店舗紹介</strong>。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト④</span>
+以下の店舗の紹介文を、Googleマップとレビューサイト向けに250字で書いてください。
+検索ワード：[地域名] [業種]
+含めるべき要素：①地域への愛着 ②店の歴史 or 店主の想い ③おすすめ商品TOP3
+
+──店舗情報──
+名称：[店名]
+所在：[地域]
+業種：[何屋]
+開業：[年]
+看板商品：[3つ]</div>
+
+    <h2>プロンプト⑤：チラシ・新聞折込用 キャッチ＋本文（800字）</h2>
+
+    <p>地方の<strong>新聞折込チラシ向け、地域密着型コピー</strong>。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト⑤</span>
+地方の小売店向けに、新聞折込チラシのコピーを作成してください。
+
+①インパクトあるキャッチコピー（30字）
+②サブキャッチ（50字）
+③本文（500字）
+④店舗情報＆地図への誘導文（100字）
+合計：約800字
+
+──イベント情報──
+セール内容：[内容]
+期間：[いつ〜いつ]
+対象商品：[3-5つ]
+価格：[いくら]
+特典：[ある場合]</div>
+
+    <h2>プロンプト⑥：複数商品をまとめた「今週のおすすめ3選」</h2>
+
+    <p>SNS・LINE配信・店頭ボードで使う<strong>「3つピックアップ」</strong>のテンプレ。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト⑥</span>
+以下の3つの商品について、「今週の店長おすすめ3選」として
+ひとまとめのSNS投稿文を作ってください。
+
+各商品に①商品名②魅力ポイント1行③おすすめの理由50字
+全体は400字以内、最後に来店誘導の一文
+
+──商品3つ──
+1. [商品A]：[特徴]
+2. [商品B]：[特徴]
+3. [商品C]：[特徴]</div>
+
+    <h2>プロンプトを使いこなす3つのコツ</h2>
+
+    <h3>コツ1：「業種」「ターゲット」「トーン」を必ず最初に指定する</h3>
+    <p>同じ商品でも、コーヒー専門店と100均では刺さる言葉が違います。<strong>「あなたは地方の和菓子屋のスタッフです」</strong>のように、AIに役を演じさせると一発で当たります。</p>
+
+    <h3>コツ2：「字数指定」を細かく入れる</h3>
+    <p>「短く」「長めに」より、<strong>「150字以内」「800字程度」</strong>と数字で指定。AIはこの指示に忠実です。</p>
+
+    <h3>コツ3：1回目で完璧を狙わない</h3>
+    <p>AIに「2パターン目もっと攻めて」「3パターン目はもっとシンプルに」と<strong>会話しながら絞り込む</strong>のがコツ。最初の出力は"叩き台"です。</p>
+
+    <h2>注意：「実体験」だけは人が入れる</h2>
+
+    <p>AIで作った文章には<strong>「実際に食べた感想」「常連さんの声」「店主の苦労話」</strong>は入りません。これらは人にしか書けない部分です。</p>
+
+    <p>AIで7割の骨格を作って、最後の3割で<strong>"自分の言葉"</strong>を加える。これが、AIに頼りつつも"その店らしさ"を残す秘訣です。</p>
+
+    <h2>まとめ：今日から使えば、月10時間以上が戻る</h2>
+
+    <p>商品説明文・POP・SNS投稿——これらを全部AIに任せれば、地方小売店オーナーの<strong>週2-3時間 × 月4週 = 月10時間以上</strong>が手元に戻ります。</p>
+
+    <p>「言葉のアウトプット」がボトルネックになっていたお店ほど、効果が大きく出ます。
+    まずは1つ、今日仕入れた商品で試してみてください。</p>
+
+    <p>「自店向けにプロンプトをカスタマイズしてほしい」「最初の数本を一緒に作ってほしい」というご相談は、CHIKAI の LINE で無料受付中です。あなたのお店の業種・客層・売れ筋を伺って、<strong>あなた専用のプロンプトテンプレ集</strong>をお作りします。</p>
+
+    <div class="cta-box">
+      <h3>あなたの店専用のAI活用、<br>15分で診断します。</h3>
+      <p>15-20分のZoomで業務を伺い、地方小売店に合わせたAI活用の始め方をご提案。<br>強引な営業はしません。「話を聞いてみる」感覚で大丈夫です。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
