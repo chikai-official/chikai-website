@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+
+<title>メール返信に1日30分使ってる人へ：AI下書きの始め方 | CHIKAI ブログ</title>
+<meta name="description" content="毎日のメール返信に消える30分-90分。AIを「下書き専属の若手」に変身させて、返信時間を1/3に圧縮するプロンプト4種＋人が最後に手を入れる3か所を実例ベースで公開します。">
+<meta property="og:title" content="メール返信に1日30分使ってる人へ：AI下書きの始め方">
+<meta property="og:description" content="返信下書きをAIに任せて、人は最終チェックだけ。中小企業の経営者・担当者が今日から使えるプロンプト4種を公開。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-010.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-010.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "メール返信に1日30分使ってる人へ：AI下書きの始め方",
+  "description": "メール返信時間を1/3に圧縮するプロンプト4種＋人が最後に手を入れる3か所。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-05-23",
+  "dateModified": "2026-05-23",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-010.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.8; }
+
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--purple); }
+
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--purple); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); color:#155E75; margin-bottom:14px; }
+h1.art-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:700; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #0E7490; }
+.art-body h3 { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#0E7490; font-weight:700; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); border-left:3px solid #0E7490; border-radius:6px; }
+
+.prompt-box { background:#0F172A; color:#E2E8F0; border-radius:12px; padding:20px 24px; margin:20px 0; font-family:'Inter','SF Mono',monospace; font-size:14px; line-height:1.7; white-space:pre-wrap; }
+.prompt-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#67E8F9; text-transform:uppercase; margin-bottom:10px; font-family:'Inter',sans-serif; }
+
+.example-box { background:#ECFEFF; border:1px solid #A5F3FC; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.example-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#0E7490; text-transform:uppercase; margin-bottom:10px; }
+
+.tip-box { background:#F0FDF4; border:1px solid #BBF7D0; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#15803D; text-transform:uppercase; margin-bottom:10px; }
+
+.warn-box { background:#FFFBEB; border:1px solid #FDE68A; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.warn-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#92400E; text-transform:uppercase; margin-bottom:10px; }
+
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#7C3AED,#3B82F6); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(124,58,237,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ プロンプト</p>
+
+  <span class="cat-tag">📝 プロンプト｜メール返信</span>
+  <h1 class="art-title">メール返信に1日30分使ってる人へ：AI下書きの始め方</h1>
+  <p class="art-meta">公開：2026年5月23日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      朝、メールを開いた瞬間に「うわ…」と感じる。<br>
+      問い合わせ、見積もり依頼、お詫び、お断り——<br>
+      考えること自体は大したことないのに、<strong>文面を整える時間で1日30〜90分が消える</strong>。<br>
+      この記事では、AIを「下書き専属の若手」に変身させて、返信時間を <strong>1/3に圧縮</strong>するプロンプト4種を公開します。
+    </p>
+
+    <h2>なぜメール返信に時間がかかるのか</h2>
+
+    <p>「中身を考える」より、<strong>「言葉を整える」</strong>のに時間を使っているケースが大半です。</p>
+
+    <ul>
+      <li>敬語の使い分けで迷う</li>
+      <li>失礼にならない言い回しを探す</li>
+      <li>「お世話になっております」から書き出すのがダルい</li>
+      <li>長すぎ・短すぎを気にして書き直す</li>
+      <li>過去メールを探して同じパターンを使い回す</li>
+    </ul>
+
+    <p>これらは全部<strong>"言葉のフォーマット作業"</strong>。AIが最も得意な領域です。
+    人にしかできない「中身の判断」と、AIに任せられる「文面の整形」を分けるだけで、メール業務は劇的に短くなります。</p>
+
+    <h2>AIで返信を「下書き化」する基本フロー</h2>
+
+    <ol>
+      <li><strong>受信メールの本文をコピペ</strong>してAIに渡す</li>
+      <li>こちらの「返したい内容（箇条書きでOK）」を伝える</li>
+      <li>AIが整形された返信文を出力</li>
+      <li>人は<strong>「事実関係」「金額」「日程」だけ</strong>を最終確認</li>
+      <li>必要なら2-3か所だけ直して送信</li>
+    </ol>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ 3分以内で返信が終わる</div>
+      慣れれば<strong>1通あたり3分以内</strong>で送信できるようになります。1日10通で30分。今までの 90分→30分の圧縮が現実的に起きます。
+    </div>
+
+    <h2>プロンプト①：問い合わせメールへの返信</h2>
+
+    <p>新規問い合わせへの<strong>初動返信</strong>。第一印象を決める重要シーン。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト①</span>
+あなたは[業種]の[役職]です。
+以下の問い合わせメールに、返信文を作ってください。
+
+トーン：丁寧・親しみやすい・押し付けがましくない
+文字数：300字以内
+構成：①感謝 ②次のステップ提示 ③連絡先
+
+──受信メール──
+[ここに受信メール本文をコピペ]
+
+──返したい内容──
+・[次の打合せ希望日を提案する]
+・[必要な情報をヒアリング]
+・[添付資料の案内]</div>
+
+    <div class="example-box">
+      <div class="example-label">入力例（飲食店オーナー想定）</div>
+      業種：飲食店<br>
+      役職：店長<br>
+      返したい内容：①来店日時を伺いたい ②人数とアレルギーの有無を確認 ③コース表を別送する旨を伝える
+    </div>
+
+    <h2>プロンプト②：見積もり依頼への返信</h2>
+
+    <p><strong>金額・納期</strong>を含む、フォーマル度の高い返信。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト②</span>
+以下の見積もり依頼メールへの返信文を作ってください。
+
+トーン：ビジネス丁寧・専門性を感じさせる
+文字数：400字以内
+構成：①感謝 ②概算金額の提示 or 詳細ヒアリング ③次の流れ
+
+──受信メール──
+[ここに受信メール本文]
+
+──返したい内容──
+・概算：[金額レンジ]
+・正式見積りには[必要情報]が必要
+・対面/オンライン打合せ希望日：[3案提示]</div>
+
+    <h2>プロンプト③：謝罪・遅延報告メール</h2>
+
+    <p>こちらに非がある時の<strong>誠実さが伝わる文面</strong>。<strong>言い訳に聞こえないトーン</strong>がポイント。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト③</span>
+以下の状況で、謝罪＋経緯説明＋今後の対応を含む返信文を作ってください。
+
+トーン：誠実・率直・言い訳を含まない
+文字数：350字以内
+構成：①謝罪 ②事実の経緯 ③今後の対応 ④再発防止
+
+──状況──
+何が起きたか：[事実を一行で]
+影響範囲：[相手にどう迷惑がかかったか]
+今の対応状況：[いま何をしているか]
+今後の対策：[再発を防ぐためにすること]
+
+──相手の立場──
+[取引先/お客様/上司 など]</div>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ 謝罪メールだけは必ず一度声に出して読む</div>
+      AI生成文は文法的に正しくても、<strong>感情が乗っていないことが多い</strong>です。謝罪メールだけは、送る前に必ず声に出して読み、「真心が伝わるか」を確かめてください。
+    </div>
+
+    <h2>プロンプト④：丁寧にお断りするメール</h2>
+
+    <p>無理な依頼・受けられない仕事への返信。<strong>関係を壊さずに断る</strong>のが目的。</p>
+
+    <div class="prompt-box"><span class="prompt-label">プロンプト④</span>
+以下の依頼を、丁寧にお断りする返信文を作ってください。
+
+トーン：申し訳なさを示しつつ、毅然と断る
+文字数：300字以内
+構成：①検討した感謝 ②断る理由（簡潔に） ③代替案 or 今後の継続の含み
+
+──受信メール──
+[ここに依頼内容]
+
+──断る理由──
+[キャパオーバー / 専門外 / 納期が合わない 等]
+
+──代替案──
+[紹介できる人がいる / 別タイミングなら可 / 別案を提示]</div>
+
+    <h2>人が最後に手を入れる3か所</h2>
+
+    <p>AI下書きをそのまま送ってはダメです。<strong>人が必ず確認する3か所</strong>を決めておきましょう。</p>
+
+    <h3>①事実関係（数字・日付・金額・固有名詞）</h3>
+    <p>AIは「もっともらしい数字」を作ってしまうことがあります。<strong>金額・日程・人名・社名</strong>は必ず人が再確認。</p>
+
+    <h3>②相手特有の事情の反映</h3>
+    <p>「○○さんは以前××のトラブルがあった」「この会社は△△の方針」など、AIには知り得ない<strong>個別の文脈</strong>を1-2行で加えると一気に質が上がります。</p>
+
+    <h3>③感謝・気遣いの一言</h3>
+    <p>定型句ではなく、「先日のお話、参考になりました」「お忙しい中ありがとうございます」のような<strong>あなたしか書けない一言</strong>を冒頭か末尾に1つ。これだけで「テンプレ感」が消えます。</p>
+
+    <h2>注意：機密情報を含むメールは特に慎重に</h2>
+
+    <p>顧客名・契約情報・社内機密が含まれるメールをそのままAIに貼るのは<strong>守秘義務上のリスク</strong>があります。</p>
+
+    <ul>
+      <li>具体名は仮名（A社、B様）に置き換えてからAIに渡す</li>
+      <li>業務用には<strong>セキュアな環境（社内環境のAI / 法人契約のAPI）</strong>を選ぶ</li>
+      <li>個人情報・金額の生データはコピペしない</li>
+    </ul>
+
+    <p>CHIKAI の AI 導入支援では、こうした<strong>「業務でAIを使う時の安全な範囲」</strong>のガイドラインも含めてサポートしています。</p>
+
+    <h2>まとめ：30分→10分のために、最初に5分かける</h2>
+
+    <p>メール返信のAI化は、<strong>「最初にプロンプトを整える5分」</strong>が全てです。プロンプトを業務用テンプレとして保存しておけば、2回目以降はコピペで終わります。</p>
+
+    <p>まずは今日、<strong>「問い合わせ返信」</strong>のプロンプト①を試してみてください。1通の返信が3分で終わる体験ができれば、メール業務の景色が完全に変わります。</p>
+
+    <p>「うちの業種特有の文面パターンを教えてほしい」「過去のやりとりを学習させるには？」というご相談は、CHIKAI の LINE で無料受付中です。<strong>あなたの業種・お客様の特性に合わせたプロンプトテンプレ集</strong>を一緒に作ります。</p>
+
+    <div class="cta-box">
+      <h3>あなたの会社のメール業務、<br>"3分返信"の仕組みを一緒に作ります</h3>
+      <p>15-20分のZoomで現状のメール業務を伺い、最も時間を奪っている1パターンを特定。<br>業種・トーンに合うプロンプトをその場でお渡しします。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
