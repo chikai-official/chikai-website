@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+
+<title>飲食店で議事録AIが店長会議を変える話 | CHIKAI ブログ</title>
+<meta name="description" content="飲食店の店長会議が録音→AI要約だけで激変。月4回の会議×半日が、議事録AIで翌日朝には共有完了に。地方の飲食店オーナー向けに、実践プロンプトと運用フローを公開します。">
+<meta property="og:title" content="飲食店で議事録AIが店長会議を変える話">
+<meta property="og:description" content="店長会議の議事録、翌日午前丸つぶれ問題をAIで解決。録音→要約→ToDo化までの実践フローを公開。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-011.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-011.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "飲食店で議事録AIが店長会議を変える話",
+  "description": "店長会議の議事録、翌日午前丸つぶれ問題をAIで解決。録音→要約→ToDo化までの実践フロー。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-05-24",
+  "dateModified": "2026-05-24",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-011.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.8; }
+
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--purple); }
+
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--purple); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#FEF3C7,#FDE68A); color:#92400E; margin-bottom:14px; }
+h1.art-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:700; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #D97706; }
+.art-body h3 { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#92400E; font-weight:700; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#FEF3C7,#FDE68A); border-left:3px solid #D97706; border-radius:6px; }
+
+.prompt-box { background:#0F172A; color:#E2E8F0; border-radius:12px; padding:20px 24px; margin:20px 0; font-family:'Inter','SF Mono',monospace; font-size:14px; line-height:1.7; white-space:pre-wrap; }
+.prompt-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#FCD34D; text-transform:uppercase; margin-bottom:10px; font-family:'Inter',sans-serif; }
+
+.ba-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+.ba-card { padding:18px 20px; border-radius:12px; }
+.ba-bad { background:#FEF2F2; border:1px solid #FECACA; }
+.ba-good { background:#ECFDF5; border:1px solid #A7F3D0; }
+.ba-card-label { font-size:11px; font-weight:700; letter-spacing:1.5px; margin-bottom:8px; }
+.ba-bad .ba-card-label { color:#991B1B; }
+.ba-good .ba-card-label { color:#065F46; }
+.ba-card-body { font-size:14px; line-height:1.7; color:#1F2937; }
+
+.tip-box { background:#FFFBEB; border:1px solid #FDE68A; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#92400E; text-transform:uppercase; margin-bottom:10px; }
+
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#7C3AED,#3B82F6); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(124,58,237,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .ba-grid { grid-template-columns:1fr; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ 業種別Tips</p>
+
+  <span class="cat-tag">🍽 業種別Tips｜飲食業</span>
+  <h1 class="art-title">飲食店で議事録AIが店長会議を変える話</h1>
+  <p class="art-meta">公開：2026年5月24日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      多店舗展開する飲食店オーナーへ。<br>
+      月1〜2回の店長会議、その<strong>議事録づくりに翌日半日を取られていませんか</strong>？<br>
+      議事録AIを入れるだけで、会議終了から<strong>15分以内に「要点＋ToDo＋共有」</strong>が完了します。<br>
+      この記事では、地方の飲食店オーナーが今日から使える運用フローを公開します。
+    </p>
+
+    <h2>飲食店の店長会議、ここが時間を奪う</h2>
+
+    <p>多店舗・スタッフ多めの飲食店ほど、店長会議の運営に隠れた時間コストが積もります。</p>
+
+    <ul>
+      <li>会議中はメモを取りながら話を聞く → 集中が割れる</li>
+      <li>会議後、メモを元に議事録を書き起こす → 翌日午前まる潰れ</li>
+      <li>店長間に共有 → LINEで送る or プリントアウト</li>
+      <li>「で、ToDoって誰が何を？」が曖昧で実行されない</li>
+      <li>翌月、同じ議題がまた出る</li>
+    </ul>
+
+    <p>これら全部、議事録AIで<strong>「録音→要約→ToDo抽出→共有」</strong>のフローを組めば解消します。</p>
+
+    <h2>BEFORE / AFTER：店長会議のリアル比較</h2>
+
+    <div class="ba-grid">
+      <div class="ba-card ba-bad">
+        <div class="ba-card-label">❌ BEFORE</div>
+        <div class="ba-card-body">
+          会議2時間 → 翌日朝、議事録づくり3時間 → 各店長へLINEで送付 → 半数が読まない → ToDoが宙に浮く
+        </div>
+      </div>
+      <div class="ba-card ba-good">
+        <div class="ba-card-label">○ AFTER</div>
+        <div class="ba-card-body">
+          会議2時間 → 録音をAIに渡す3分 → 要約＋ToDoが10分で生成 → LINEで自動共有 → 翌朝には全員把握済み
+        </div>
+      </div>
+    </div>
+
+    <p>月4回会議×半日 = <strong>月12時間以上の業務削減</strong>が、飲食店オーナーの肌感で起きます。</p>
+
+    <h2>実践フロー：会議終了から15分以内に共有完了まで</h2>
+
+    <h3>STEP 1：会議をスマホで録音（会議冒頭にひと言）</h3>
+    <p>iPhoneのボイスメモ、または「Otter」「Notta」などの文字起こしアプリで会議全体を録音。冒頭に<strong>「今日はAIで議事録を作るので録音します」</strong>と全員に一声かければOK。</p>
+
+    <h3>STEP 2：文字起こしテキストをAIに渡す</h3>
+    <p>録音 → 文字起こしツールでテキスト化（Otter/Notta なら自動）→ そのテキストをChatGPTやClaudeに貼る。</p>
+
+    <h3>STEP 3：プロンプトで要約＋ToDo抽出</h3>
+
+    <div class="prompt-box"><span class="prompt-label">議事録AI用プロンプト</span>
+あなたは飲食店の議事録専門のアシスタントです。
+以下は飲食店の店長会議の文字起こしです。
+次の形式で要約してください。
+
+【会議の概要】（3行以内）
+[何の会議で、何を決めるためのものか]
+
+【決定事項】（箇条書き）
+- ◯◯について：[結論]
+- △△について：[結論]
+
+【ToDo一覧】（誰が・いつまでに・何を）
+- [担当者名] / [期限] / [内容]
+- ...
+
+【次回までの宿題】（次回会議に向けて）
+- [事前準備が必要な項目]
+
+【気になる発言・伏線】（オーナー向けに）
+- [後で深掘りすべき発言]
+
+──文字起こし──
+[ここに会議の文字起こしを貼る]</div>
+
+    <h3>STEP 4：生成された議事録をLINEに送信</h3>
+    <p>出力された要約をそのままLINEグループへ。<strong>「読みやすい」「ToDoが明確」</strong>な状態で全店長が15分後には把握できます。</p>
+
+    <h2>飲食店ならではの活用シーン5つ</h2>
+
+    <h3>① 店長会議の議事録（メイン用途）</h3>
+    <p>月1〜2回の定例会議。一番効果が大きいシーン。</p>
+
+    <h3>② 新メニュー検討会議</h3>
+    <p>料理長・店長・オーナーの3者会議。<strong>「アイデア出し→絞り込み→決定事項」</strong>の流れがAIで自動整理されると、月次の新メニューサイクルが早まります。</p>
+
+    <h3>③ スタッフ面談の記録</h3>
+    <p>1on1面談を録音→AIで要約→次回までの宿題を明確化。<strong>「面談したのに何話したか覚えてない」問題</strong>が消えます。※スタッフに事前同意を取ること。</p>
+
+    <h3>④ 仕入れ業者との打合せ</h3>
+    <p>食材業者・酒販店との価格交渉・新商品提案。あとから「あの時いくらだっけ？」を防げます。</p>
+
+    <h3>⑤ 不具合・クレーム対応の振り返り</h3>
+    <p>「お客様からのクレーム → 対応 → 再発防止策」を録音して整理。<strong>店舗共通のマニュアルづくり</strong>に転用できます。</p>
+
+    <h2>注意：個人情報・センシティブな話題の扱い</h2>
+
+    <p>面談・クレーム対応など<strong>個人を特定できる情報</strong>を含む録音は、AIに渡す前に下記を必ず行ってください。</p>
+
+    <ul>
+      <li>スタッフ・お客様の<strong>実名は仮名に置換</strong>（Aさん、B様）してから貼る</li>
+      <li>住所・電話・メールアドレスは削除</li>
+      <li>会議参加者の<strong>事前同意</strong>を取ってから録音</li>
+    </ul>
+
+    <p>「便利だから」と何でもAIに貼ると、守秘義務違反になり得ます。CHIKAI の AI 導入支援では、こうした<strong>飲食店ならではの安全運用ライン</strong>もセットでお伝えしています。</p>
+
+    <h2>導入コストはほぼゼロ。今週からテストできる</h2>
+
+    <p>議事録AIに必要なもの：</p>
+
+    <ul>
+      <li><strong>録音アプリ</strong>（iPhoneボイスメモ：無料）</li>
+      <li><strong>文字起こしツール</strong>（Otter/Notta：無料枠あり、有料でも月千円程度）</li>
+      <li><strong>ChatGPT or Claude</strong>（無料枠あり、有料でも月3,000円）</li>
+    </ul>
+
+    <p>月4,000円以下で月12時間の業務削減。<strong>時給換算で軽く元が取れる</strong>計算です。</p>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ まず今週の会議で1回試す</div>
+      最初から完璧を狙わなくてOK。<strong>次回の店長会議1回</strong>で試してみて、「思ったより使える」と感じたら全店長会議に拡大する流れがおすすめです。
+    </div>
+
+    <h2>まとめ：店長の時間を取り戻し、戦略に回す</h2>
+
+    <p>飲食店オーナーの<strong>本来の仕事は、戦略・新メニュー開発・スタッフ育成</strong>です。議事録づくりに半日を奪われるべきではありません。</p>
+
+    <p>議事録AIを使えば、「会議を主催すること」自体のハードルが下がり、<strong>店長間のコミュニケーション頻度</strong>も上げられます。</p>
+
+    <p>「うちの店舗、こういう会議の議事録もAI化できる？」というご相談は、CHIKAI の LINE で無料受付中です。あなたの店舗の規模・会議スタイルに合わせた<strong>導入プラン</strong>を一緒に作ります。</p>
+
+    <div class="cta-box">
+      <h3>あなたの店舗専用の<br>議事録AIフロー、15分で診断します</h3>
+      <p>15-20分のZoomで会議スタイルを伺い、最も時間が浮く運用パターンをご提案。<br>強引な営業はしません。「話を聞いてみる」感覚で大丈夫です。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
