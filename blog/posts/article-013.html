@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+
+<title>顧客対応FAQをAIで自動化する4ステップ | CHIKAI ブログ</title>
+<meta name="description" content="お客様からの問い合わせ、同じ質問に何回答えてますか？ FAQ自動化はAI導入の中で最も成果が出やすいテーマ。今日から始められる4ステップを、業種問わず使えるプロンプト付きで公開します。">
+<meta property="og:title" content="顧客対応FAQをAIで自動化する4ステップ">
+<meta property="og:description" content="同じ質問に答え続ける時間を、月10時間以上削減。FAQ自動化の実践フローと汎用プロンプトを公開。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-013.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-013.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "顧客対応FAQをAIで自動化する4ステップ",
+  "description": "FAQ自動化の実践フローと汎用プロンプトを公開。月10時間以上の時短が現実的。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-05-27",
+  "dateModified": "2026-05-27",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-013.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.8; }
+
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--purple); }
+
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--purple); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); color:#155E75; margin-bottom:14px; }
+h1.art-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:700; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #0E7490; }
+.art-body h3 { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#0E7490; font-weight:700; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); border-left:3px solid #0E7490; border-radius:6px; }
+
+.prompt-box { background:#0F172A; color:#E2E8F0; border-radius:12px; padding:20px 24px; margin:20px 0; font-family:'Inter','SF Mono',monospace; font-size:14px; line-height:1.7; white-space:pre-wrap; }
+.prompt-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#67E8F9; text-transform:uppercase; margin-bottom:10px; font-family:'Inter',sans-serif; }
+
+.step-box { background:#ECFEFF; border:1px solid #A5F3FC; border-radius:12px; padding:24px 28px; margin:20px 0; }
+.step-num {
+  display:inline-block;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:18px; font-weight:800;
+  padding:4px 12px;
+  background:#0E7490; color:white;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+.step-title { font-size:18px; font-weight:700; margin-bottom:10px; color:#0E7490; }
+
+.tip-box { background:#F0FDF4; border:1px solid #BBF7D0; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#15803D; text-transform:uppercase; margin-bottom:10px; }
+
+.warn-box { background:#FFFBEB; border:1px solid #FDE68A; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.warn-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#92400E; text-transform:uppercase; margin-bottom:10px; }
+
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#7C3AED,#3B82F6); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(124,58,237,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ プロンプト</p>
+
+  <span class="cat-tag">💬 プロンプト｜FAQ自動化</span>
+  <h1 class="art-title">顧客対応FAQをAIで自動化する4ステップ</h1>
+  <p class="art-meta">公開：2026年5月27日　／<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      「営業時間は？」「駐車場あります？」「キャンセル料は？」<br>
+      毎日同じ質問に答えていませんか？<br>
+      FAQ自動化は<strong>AI導入の中で最も成果が出やすい</strong>テーマ。<br>
+      4ステップ＋汎用プロンプトで、今日から月10時間以上の時短が始まります。
+    </p>
+
+    <h2>なぜFAQ自動化が「最初の1業務」に最適なのか</h2>
+
+    <p>地方の中小企業が AI を導入する時、<strong>最初の1業務をどこに置くか</strong>でその後の浸透が決まります。FAQ自動化が最適な理由は3つ：</p>
+
+    <ul>
+      <li><strong>頻度が高い</strong>：毎日発生し、効果がすぐ測れる</li>
+      <li><strong>パターンが少ない</strong>：質問は意外と10-20種類に集約される</li>
+      <li><strong>失敗が致命的でない</strong>：人がチェックしてから送信できる</li>
+    </ul>
+
+    <p>議事録AIや見積もり生成より <strong>導入難易度が低く、効果が現場で即実感できる</strong>。スタッフを巻き込んでAIを根付かせる第一歩として完璧です。</p>
+
+    <h2>4ステップで進める実践フロー</h2>
+
+    <div class="step-box">
+      <div class="step-num">STEP 01</div>
+      <div class="step-title">よくある質問を20個書き出す</div>
+      <p>過去1ヶ月のメール・電話・LINE・口頭で受けた質問を、<strong>20個ほど思い出してリスト化</strong>します。完璧を狙わず、思いつく順でOK。スタッフ全員に「最近よく聞かれた質問は？」と1分聞くだけでも十分集まります。</p>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">STEP 02</div>
+      <div class="step-title">「回答のトーン・長さ」を3パターン決める</div>
+      <p>質問のタイプによって、返す文章のトーンが変わります。<strong>3つのトーン</strong>を先に決めておくと、AI への指示がブレません。</p>
+      <ul>
+        <li>📞 <strong>電話・口頭用</strong>：話し言葉・1-2文の短い回答</li>
+        <li>📧 <strong>メール用</strong>：丁寧語・3-5行</li>
+        <li>📱 <strong>LINE/SNS用</strong>：絵文字あり・カジュアル・3行以内</li>
+      </ul>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">STEP 03</div>
+      <div class="step-title">汎用プロンプトに「質問＋トーン」を入れる</div>
+      <p>下記の汎用プロンプトに、Step 1 の質問と Step 2 のトーンを当てはめれば、即回答が出ます。</p>
+
+      <div class="prompt-box"><span class="prompt-label">FAQ汎用プロンプト</span>
+あなたは [業種] の [役職] です。
+お客様からの以下の質問に、
+次の条件で回答してください。
+
+──質問──
+[質問内容をペースト]
+
+──回答条件──
+媒体：[電話/メール/LINE のいずれか]
+トーン：[丁寧・親しみやすい / フォーマル / カジュアル]
+文字数：[50字 / 200字 / 100字以内 など]
+注意：実体験・実数値・約束事は含めない
+
+──店舗・会社情報──
+業種：[業種]
+所在：[地域]
+営業時間：[時間]
+特徴：[1行で]</div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">STEP 04</div>
+      <div class="step-title">出力をテンプレ集としてスプレッドシートに保存</div>
+      <p>AIに作らせた回答を、Q&A形式で<strong>スプレッドシートに溜める</strong>。これが「あなたの店専用のFAQ集」になります。スタッフ全員がコピペで使えるようになり、回答の質がバラつかなくなります。</p>
+      <p>20問答えるのに約30分。<strong>1回作れば、半年は使い回せます</strong>。</p>
+    </div>
+
+    <h2>実例：飲食店オーナーの場合</h2>
+
+    <p>「営業時間外に〇〇人の予約取れる？」という質問への AI 回答例：</p>
+
+    <div class="prompt-box"><span class="prompt-label">AI出力例（LINE用・親しみカジュアル）</span>
+ご連絡ありがとうございます😊
+
+通常営業は20時までですが、
+〇〇人以上のご予約でしたら
+22時まで対応可能です🍽
+
+ご希望の日時をお知らせください！
+仕込みのため3日前までにご予約をお願いします🙏</div>
+
+    <p>これを <strong>スタッフがコピペして編集→送信</strong> するだけで、返信時間が90%カット。お客様の体験は変わらず、スタッフの時間は戻ります。</p>
+
+    <h2>4つの「やってはいけない」</h2>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ AI回答をそのまま送る前に必ず人が確認すること</div>
+      ・<strong>金額・人数・日付</strong>：AIが間違える可能性あり<br>
+      ・<strong>キャンセル規定・契約事項</strong>：法的拘束力があるものはAI出力を信用しない<br>
+      ・<strong>顧客の個人情報</strong>：AIに渡す前に仮名化<br>
+      ・<strong>競合への悪口・社内トラブル</strong>：絶対AIに書かせない
+    </div>
+
+    <h2>FAQ自動化の効果試算</h2>
+
+    <p>仮に1日10件の同じ質問に答える店舗なら、こうなります：</p>
+
+    <ul>
+      <li>BEFORE：1件あたり5分 × 10件 = 50分/日</li>
+      <li>AFTER：1件あたり1分（コピペ＋微調整） × 10件 = 10分/日</li>
+      <li>削減：40分/日 = 月13時間以上</li>
+    </ul>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ おまけ：スタッフ教育コストも下がる</div>
+      新人が入った時、「お客様への返答」を一から教える必要が減ります。<strong>FAQ集を見せて「これに沿って」</strong>と伝えるだけ。AI 経由で<strong>応対品質を平準化</strong>できます。
+    </div>
+
+    <h2>導入1週目のスケジュール案</h2>
+
+    <ol>
+      <li><strong>1日目</strong>：質問20個リスト化（30分）</li>
+      <li><strong>2日目</strong>：3トーン定義（15分）</li>
+      <li><strong>3-4日目</strong>：プロンプトでAI回答生成 → スプレッドシート化（1時間）</li>
+      <li><strong>5日目</strong>：スタッフに共有・コピペ運用開始</li>
+      <li><strong>7日目</strong>：使ってみての修正・追加</li>
+    </ol>
+
+    <p>1週間で<strong>業務フローの一部</strong>として根付かせるのが目標。「個人スキル」ではなく「業務手順」にすると、確実に定着します。</p>
+
+    <h2>まとめ：FAQ自動化はAI導入の入り口に最適</h2>
+
+    <p>議事録AI・見積もり生成・メール返信自動化など、AI活用には色々ありますが、<strong>FAQ自動化が一番ハードルが低く、効果が見えやすい</strong>のは間違いありません。</p>
+
+    <p>「うちの業種だと、どんな質問をプロンプト化すべき？」というご相談は、CHIKAI の LINE で無料受付中です。あなたの店舗・会社のFAQ20個を一緒に整理し、<strong>業種別のプロンプトテンプレ集</strong>もお作りします。</p>
+
+    <div class="cta-box">
+      <h3>あなたの会社のFAQ集、<br>30分で一緒に作ります</h3>
+      <p>15-20分のZoomで「よく受ける質問」を一緒に書き出し、<br>そのままAIに回答生成させる流れをご一緒に体験できます。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
