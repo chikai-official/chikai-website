@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>制作サンプル・デモ集 ｜ CHIKAI（地方中小企業のHP・LP・Web制作）</title>
+<meta name="description" content="CHIKAIが作れるホームページ・LP・ネットショップの制作サンプル（デモ）集。飲食店・コーポレート・美容室・ECなど、業種に合わせて実際に触れるデモをご用意しました。">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/demos/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="制作サンプル・デモ集 ｜ CHIKAI">
+<meta property="og:description" content="CHIKAIが作れるHP・LP・ECの制作サンプル（デモ）集。実際に触れる見本をご用意しました。">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/demos/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --purple:#7C3AED;--blue:#3B82F6;--cyan:#06B6D4;--pink:#FF8FB1;
+  --bg:#FCFBFF;--bg-alt:#F4F2FD;--ink:#1C1733;--ink2:#5B5676;--ink3:#9C97B4;
+  --line:rgba(124,58,237,.12);--white:#fff;
+  --grad:linear-gradient(135deg,#7C3AED 0%,#3B82F6 52%,#06B6D4 100%);
+  --shadow:0 14px 44px rgba(124,58,237,.10);--shadow-lg:0 30px 70px rgba(124,58,237,.16);--shadow-sm:0 2px 10px rgba(28,23,51,.05);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(60vw 60vw at 85% -10%,rgba(167,139,250,.16),transparent 60%),
+  radial-gradient(50vw 50vw at -10% 20%,rgba(34,211,238,.12),transparent 60%),
+  radial-gradient(45vw 45vw at 50% 120%,rgba(255,143,177,.10),transparent 60%),var(--bg)}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:68px;padding:0 clamp(20px,5vw,56px);display:flex;align-items:center;justify-content:space-between;background:rgba(252,251,255,.8);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nav-logo svg{width:32px;height:32px}
+.nav-logo-text{font-family:'Space Grotesk',sans-serif;font-size:20px;font-weight:700;letter-spacing:-.5px;color:var(--ink)}
+.nav-logo-text .ai{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.nav-back{color:var(--ink2);text-decoration:none;font-size:14px;font-weight:600;transition:color .2s}
+.nav-back:hover{color:var(--purple)}
+
+.head{padding:130px clamp(20px,5vw,56px) 40px;text-align:center;max-width:780px;margin:0 auto}
+.head .eye{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--purple);background:rgba(124,58,237,.08);padding:8px 18px;border-radius:100px;border:1px solid var(--line);display:inline-block;margin-bottom:22px}
+.head h1{font-size:clamp(32px,5vw,52px);font-weight:900;line-height:1.25;letter-spacing:-.01em;margin-bottom:18px}
+.head p{font-size:clamp(14px,1.8vw,16px);color:var(--ink2)}
+.note{max-width:680px;margin:22px auto 0;background:rgba(124,58,237,.06);border:1px solid var(--line);border-radius:14px;padding:14px 20px;font-size:13px;color:var(--ink2)}
+
+.grid{max-width:1140px;margin:0 auto;padding:30px clamp(20px,5vw,56px) 40px;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+
+.card{background:var(--white);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.thumb{aspect-ratio:16/10;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;overflow:hidden}
+.thumb .bar{position:absolute;top:0;left:0;right:0;height:30px;background:rgba(255,255,255,.16);display:flex;align-items:center;gap:6px;padding:0 12px}
+.thumb .bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.5)}
+.thumb .emoji{font-size:54px;margin-top:14px}
+.thumb .bname{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;letter-spacing:1px}
+.t-cafe{background:linear-gradient(150deg,#3a2a1e,#1f1712)}.t-cafe .bname{color:#E9CE86}
+.t-corp{background:linear-gradient(150deg,#0E2A47,#1E4D7B)}.t-corp .bname{color:#7DD3FC}
+.t-moco{background:linear-gradient(150deg,#FFE9C7,#FFD7DD)}.t-moco .bname{color:#26A89B}
+.t-bloom{background:linear-gradient(150deg,#FF6FA0,#FF3D77)}.t-bloom .bname{color:#fff}
+.t-ec{background:linear-gradient(150deg,#FFE0CF,#FFD0B8)}.t-ec .bname{color:#D44E1E}
+.card-body{padding:24px 26px 26px;display:flex;flex-direction:column;flex:1}
+.card-tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tag{font-size:11px;font-weight:700;padding:5px 12px;border-radius:100px;background:var(--bg-alt);color:var(--ink2)}
+.tag.g{background:rgba(124,58,237,.1);color:var(--purple)}
+.card h2{font-size:20px;font-weight:800;margin-bottom:8px}
+.card p{font-size:14px;color:var(--ink2);flex:1;margin-bottom:18px}
+.card .go{font-size:14px;font-weight:700;color:var(--purple);display:inline-flex;align-items:center;gap:6px}
+.card .go::after{content:'↗';transition:transform .2s}
+.card:hover .go::after{transform:translate(3px,-3px)}
+
+.foot-cta{max-width:900px;margin:20px auto 0;padding:0 clamp(20px,5vw,56px) 90px}
+.foot-box{background:var(--grad);border-radius:30px;padding:clamp(36px,6vw,60px);text-align:center;color:#fff;box-shadow:var(--shadow-lg)}
+.foot-box h2{font-size:clamp(22px,3.4vw,34px);font-weight:900;margin-bottom:14px}
+.foot-box p{opacity:.92;margin-bottom:28px;font-size:15px}
+.foot-box .btn{display:inline-block;background:#fff;color:var(--purple);padding:16px 40px;border-radius:100px;font-weight:700;text-decoration:none;transition:transform .2s}
+.foot-box .btn:hover{transform:translateY(-3px)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">
+    <svg viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#A78BFA"/><stop offset="100%" stop-color="#6D28D9"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#60A5FA"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <a href="../index.html" class="nav-back">← CHIKAIトップに戻る</a>
+</nav>
+
+<header class="head">
+  <span class="eye">Production Samples</span>
+  <h1>CHIKAIが作る<br><span class="grad-text">ホームページの実例</span></h1>
+  <p>「こんなサイトが作れます」を、実際に触って確かめてください。業種・雰囲気に合わせて、デザインも動きも自由自在です。</p>
+  <p class="note">※ 以下はすべて <strong>CHIKAIが制作したデモ（架空の店舗・会社）</strong> です。実在の企業様の事例ではありません。御社向けには、業種・ご要望に合わせて一から制作します。</p>
+</header>
+
+<main class="grid">
+
+  <a href="cafe-luna.html" target="_blank" rel="noopener" class="card reveal d1">
+    <div class="thumb t-cafe"><div class="bar"><i></i><i></i><i></i></div><span class="emoji">🍷</span><span class="bname">BISTRO LUNA</span></div>
+    <div class="card-body">
+      <div class="card-tags"><span class="tag g">飲食店 LP</span><span class="tag">高級・落ち着き</span></div>
+      <h2>夜にひらく、小さなビストロ</h2>
+      <p>明朝体×温かみのある配色で、お店の世界観を表現。メニュー・ギャラリー・予約導線まで揃った1ページLP。</p>
+      <span class="go">デモを開く</span>
+    </div>
+  </a>
+
+  <a href="corp-minato.html" target="_blank" rel="noopener" class="card reveal d2">
+    <div class="thumb t-corp"><div class="bar"><i></i><i></i><i></i></div><span class="emoji">🏢</span><span class="bname">MINATO</span></div>
+    <div class="card-body">
+      <div class="card-tags"><span class="tag g">コーポレート</span><span class="tag">信頼・堅実</span></div>
+      <h2>業種問わず使える 会社サイト</h2>
+      <p>紺基調の堅実なデザイン。代表メッセージ・事業内容・数字・会社概要まで、企業サイトの基本構成を網羅。</p>
+      <span class="go">デモを開く</span>
+    </div>
+  </a>
+
+  <a href="character-moco.html" target="_blank" rel="noopener" class="card reveal d1">
+    <div class="thumb t-moco"><div class="bar"><i></i><i></i><i></i></div><span class="emoji">🎈</span><span class="bname">MOCO WORKS</span></div>
+    <div class="card-body">
+      <div class="card-tags"><span class="tag g">キャラクター案内</span><span class="tag">遊び心</span></div>
+      <h2>キャラが歩いて案内するHP</h2>
+      <p>マスコットがスクロールに合わせて歩いて移動・ジャンプしながら会社を案内。記憶に残る、楽しい体験型サイト。</p>
+      <span class="go">デモを開く</span>
+    </div>
+  </a>
+
+  <a href="salon-bloom.html" target="_blank" rel="noopener" class="card reveal d2">
+    <div class="thumb t-bloom"><div class="bar"><i></i><i></i><i></i></div><span class="emoji">💇‍♀️</span><span class="bname">BLOOM</span></div>
+    <div class="card-body">
+      <div class="card-tags"><span class="tag g">美容室・サロン</span><span class="tag">モダン・明るい</span></div>
+      <h2>トレンド感のあるサロンサイト</h2>
+      <p>白×ビビッドピンクの今っぽいデザイン。スタイル実績写真が自動で横に流れるギャラリー付き。</p>
+      <span class="go">デモを開く</span>
+    </div>
+  </a>
+
+  <a href="ec-tumugu.html" target="_blank" rel="noopener" class="card reveal d1">
+    <div class="thumb t-ec"><div class="bar"><i></i><i></i><i></i></div><span class="emoji">🛍️</span><span class="bname">TUMUGU STORE</span></div>
+    <div class="card-body">
+      <div class="card-tags"><span class="tag g">ネットショップ</span><span class="tag">EC・物販</span></div>
+      <h2>カートが動く オンラインストア</h2>
+      <p>商品グリッド・バッジ・セール表示に加え、「カートに入れる」が実際に動くEC。ネット販売も丸ごと作れます。</p>
+      <span class="go">デモを開く</span>
+    </div>
+  </a>
+
+</main>
+
+<section class="foot-cta">
+  <div class="foot-box reveal">
+    <h2>御社のサイトも、作れます。</h2>
+    <p>「こんな感じにしたい」のイメージだけでOK。業種・ご予算に合わせて、一からご提案します。</p>
+    <a href="../index.html#contact" class="btn">LINEで無料相談する →</a>
+  </div>
+</section>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

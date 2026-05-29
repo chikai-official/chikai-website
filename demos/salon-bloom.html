@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- CHIKAI 制作サンプル（架空のサロン）。検索インデックス対象外。 -->
+<meta name="robots" content="noindex,nofollow">
+<title>hair & beauty BLOOM ｜ なりたい私に、咲く（CHIKAI 制作サンプル）</title>
+<meta name="description" content="CHIKAIの制作サンプル（架空の美容サロンサイト）。モダンで明るいデザイン＋実績写真が自動で流れるギャラリーの見本です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;0,800;1,600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --pink:#FF3D77; --pink-d:#E62E66; --pink-l:#FFE7EF; --lilac:#A98CF0;
+  --ink:#1C1420; --ink2:#6E6571; --line:#F1E7EC; --bg:#FFFFFF; --bg2:#FFF6F9;
+  --shadow:0 22px 56px rgba(255,61,119,.16); --shadow-sm:0 8px 24px rgba(28,20,32,.08);
+}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{background:var(--bg);color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+.chikai-bar{position:fixed;top:0;left:0;right:0;z-index:200;background:linear-gradient(135deg,#7C3AED,#3B82F6,#06B6D4);color:#fff;font-size:12.5px;font-weight:700;text-align:center;padding:8px 16px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.chikai-bar a{color:#fff;text-decoration:underline}
+.chikai-bar .tag{background:rgba(255,255,255,.22);padding:2px 10px;border-radius:100px;font-size:11px}
+
+nav{position:fixed;top:37px;left:0;right:0;z-index:100;height:70px;padding:0 clamp(20px,5vw,56px);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.9);backdrop-filter:blur(16px);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-bottom-color:var(--line)}
+.brand{font-family:'Poppins',sans-serif;font-weight:800;font-size:25px;letter-spacing:1px;color:var(--ink);text-decoration:none}
+.brand i{color:var(--pink);font-style:normal}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{color:var(--ink2);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--pink)}
+.nav-resv{background:var(--pink);color:#fff;padding:11px 26px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 10px 24px rgba(255,61,119,.32);transition:transform .2s,background .2s}
+.nav-resv:hover{transform:translateY(-2px);background:var(--pink-d)}
+@media(max-width:880px){.nav-links{display:none}}
+
+/* HERO（モダン・左右分割・大きな太字） */
+.hero{padding:150px clamp(20px,5vw,56px) 70px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,var(--pink-l),transparent 70%);top:-120px;left:-120px;z-index:-1}
+.hero-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero .eyebrow{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;letter-spacing:4px;color:var(--pink);margin-bottom:20px}
+.hero h1{font-size:clamp(40px,6.4vw,76px);font-weight:900;line-height:1.18;letter-spacing:.01em;margin-bottom:22px}
+.hero h1 .hl{color:var(--pink)}
+.hero h1 .en{font-family:'Poppins',sans-serif;font-style:italic;font-weight:600;font-size:.5em;color:var(--ink2);display:block;letter-spacing:1px;margin-top:8px}
+.hero p{font-size:16px;color:var(--ink2);max-width:440px;margin-bottom:32px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.btn-fill{background:var(--pink);color:#fff;padding:16px 38px;border-radius:100px;font-weight:700;text-decoration:none;box-shadow:0 14px 32px rgba(255,61,119,.32);transition:transform .2s,background .2s}
+.btn-fill:hover{transform:translateY(-3px);background:var(--pink-d)}
+.btn-text{color:var(--ink);font-weight:700;text-decoration:none;border-bottom:2px solid var(--pink);padding-bottom:3px}
+.hero-visual{position:relative}
+.hv-img{aspect-ratio:4/5;border-radius:30px;background:linear-gradient(150deg,#FF6FA0,#FF3D77);display:flex;align-items:center;justify-content:center;font-size:120px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hv-img .ph{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:rgba(255,255,255,.8);font-size:12px;letter-spacing:1px}
+.hv-badge{position:absolute;left:-22px;bottom:40px;background:#fff;border-radius:20px;padding:16px 22px;box-shadow:var(--shadow-sm);display:flex;align-items:center;gap:12px}
+.hv-badge .star{font-family:'Poppins';font-weight:800;font-size:30px;color:var(--pink)}
+.hv-badge .lbl{font-size:12px;color:var(--ink2);line-height:1.4}.hv-badge .lbl b{color:var(--ink);font-size:14px}
+.hv-blob{position:absolute;top:-26px;right:-26px;width:120px;height:120px;border-radius:50%;background:var(--lilac);opacity:.25;z-index:-1}
+@media(max-width:880px){.hero-inner{grid-template-columns:1fr;gap:44px}.hero-visual{max-width:360px;margin:0 auto;width:100%}}
+
+section{padding:clamp(60px,8vw,100px) clamp(20px,5vw,56px)}
+.wrap{max-width:1180px;margin:0 auto}
+.eyebrow-c{font-family:'Poppins',sans-serif;font-weight:600;font-size:13px;letter-spacing:3px;color:var(--pink);text-align:center;margin-bottom:10px}
+.title-c{font-size:clamp(26px,4.2vw,42px);font-weight:900;text-align:center;margin-bottom:14px}
+.title-c .hl{color:var(--pink)}
+.lead-c{text-align:center;color:var(--ink2);max-width:560px;margin:0 auto 50px;font-size:15px}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+/* FEATURES */
+.feat{background:var(--bg2)}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.feat-card{background:#fff;border-radius:24px;padding:34px 28px;text-align:center;box-shadow:var(--shadow-sm);transition:transform .3s,box-shadow .3s}
+.feat-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.feat-ico{width:72px;height:72px;border-radius:22px;background:var(--pink-l);display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 16px}
+.feat-card h3{font-size:19px;font-weight:900;margin-bottom:8px}
+.feat-card p{font-size:14px;color:var(--ink2)}
+@media(max-width:820px){.feat-grid{grid-template-columns:1fr}}
+
+/* MENU */
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:840px;margin:0 auto}
+.menu-card{display:flex;align-items:center;justify-content:space-between;gap:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px 26px;transition:border-color .2s,transform .2s}
+.menu-card:hover{border-color:var(--pink);transform:translateY(-3px)}
+.menu-card .nm{font-size:16px;font-weight:700}
+.menu-card .nm small{display:block;font-size:12px;color:var(--ink2);font-weight:400;margin-top:2px}
+.menu-card .pr{font-family:'Poppins',sans-serif;font-weight:700;font-size:22px;color:var(--pink);white-space:nowrap}
+.menu-note{text-align:center;font-size:12px;color:var(--ink2);margin-top:22px}
+@media(max-width:760px){.menu-grid{grid-template-columns:1fr}}
+
+/* GALLERY — 横に自動で流れるマーキー */
+.gallery{background:var(--ink);overflow:hidden}
+.gallery .eyebrow-c{color:#FF8FB4}.gallery .title-c{color:#fff}.gallery .lead-c{color:rgba(255,255,255,.7)}
+.marquee{overflow:hidden;width:100%;-webkit-mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.marquee+.marquee{margin-top:18px}
+.mq-track{display:flex;gap:18px;width:max-content}
+.mq-track.left{animation:mqL 34s linear infinite}
+.mq-track.right{animation:mqR 40s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+@keyframes mqL{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.mq-item{width:230px;aspect-ratio:3/4;border-radius:18px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px;font-size:46px;color:rgba(255,255,255,.85);position:relative;overflow:hidden}
+.mq-item .ph{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:11px;color:rgba(255,255,255,.65)}
+.mq-item .e{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);font-size:50px}
+.mq-item:nth-child(5n+1){background:linear-gradient(150deg,#FF6FA0,#FF3D77)}
+.mq-item:nth-child(5n+2){background:linear-gradient(150deg,#C8A0F5,#9B7CF0)}
+.mq-item:nth-child(5n+3){background:linear-gradient(150deg,#FFB37E,#FF7A8A)}
+.mq-item:nth-child(5n+4){background:linear-gradient(150deg,#7FD7E8,#5B8CFF)}
+.mq-item:nth-child(5n+5){background:linear-gradient(150deg,#FF9FC2,#E62E66)}
+
+/* INFO */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:center}
+.info-list{list-style:none}
+.info-row{display:flex;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.info-row .k{font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;letter-spacing:1px;color:var(--pink);width:120px;flex-shrink:0}
+.info-row .v{color:var(--ink2);font-size:15px}
+.map-ph{aspect-ratio:4/3;border-radius:24px;background:linear-gradient(150deg,var(--pink-l),#FFD0E0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--pink-d);box-shadow:var(--shadow-sm)}
+.map-ph .ico{font-size:50px}.map-ph .t{font-size:12px;letter-spacing:1px}
+@media(max-width:820px){.info-grid{grid-template-columns:1fr;gap:30px}}
+
+/* RESERVE */
+.resv{background:linear-gradient(135deg,#FF6FA0,#E62E66);color:#fff;text-align:center}
+.resv .title-c,.resv .eyebrow-c{color:#fff}
+.resv p{opacity:.92;margin-bottom:30px}
+.resv .phone{font-family:'Poppins',sans-serif;font-weight:800;font-size:38px;margin-bottom:6px}
+.resv .btn-wht{display:inline-block;background:#fff;color:var(--pink-d);padding:16px 44px;border-radius:100px;font-weight:700;text-decoration:none;transition:transform .2s}
+.resv .btn-wht:hover{transform:translateY(-3px)}
+
+footer{background:var(--ink);color:rgba(255,255,255,.65);padding:50px clamp(20px,5vw,56px) 40px;text-align:center}
+.f-brand{font-family:'Poppins',sans-serif;font-weight:800;font-size:26px;color:#fff;letter-spacing:1px}
+.f-brand i{color:var(--pink);font-style:normal}
+.f-made{margin-top:26px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);font-size:13px}
+.f-made a{color:#FF8FB4;text-decoration:none;font-weight:700}
+.back-cta{position:fixed;right:20px;bottom:20px;z-index:150;background:linear-gradient(135deg,#7C3AED,#06B6D4);color:#fff;padding:14px 22px;border-radius:100px;text-decoration:none;font-size:13.5px;font-weight:700;box-shadow:0 12px 34px rgba(124,58,237,.4);transition:transform .2s}
+.back-cta:hover{transform:translateY(-3px)}
+@media(max-width:560px){.back-cta{padding:12px 16px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.mq-track{animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="chikai-bar">
+  <span class="tag">SAMPLE</span>
+  <span>これは <strong>CHIKAI の制作サンプル</strong>です（架空のサロン）。「美容室ならこんなHPが作れます」という見本。ギャラリーは自動で流れます💫</span>
+  <a href="../index.html">→ CHIKAIを見る</a>
+</div>
+
+<nav id="nav">
+  <a href="#top" class="brand">BL<i>OO</i>M</a>
+  <ul class="nav-links">
+    <li><a href="#feature">こだわり</a></li>
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#gallery">スタイル</a></li>
+    <li><a href="#info">アクセス</a></li>
+  </ul>
+  <a href="#reserve" class="nav-resv">ご予約</a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="reveal">
+      <p class="eyebrow">HAIR & BEAUTY SALON</p>
+      <h1>なりたい私に、<br><span class="hl">咲く</span>。<span class="en">BLOOM into you.</span></h1>
+      <p>トレンドも、似合うも、ぜんぶ叶える。一人ひとりに寄りそう、明るくて居心地のいいサロンです。</p>
+      <div class="hero-btns">
+        <a href="#reserve" class="btn-fill">かんたんWeb予約</a>
+        <a href="#menu" class="btn-text">メニューを見る →</a>
+      </div>
+    </div>
+    <div class="hero-visual reveal d1">
+      <div class="hv-blob"></div>
+      <div class="hv-img">💇‍♀️<span class="ph">サロン・スタイルの写真が入ります</span></div>
+      <div class="hv-badge"><span class="star">4.9</span><span class="lbl"><b>口コミ高評価</b><br>多数のご来店</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- FEATURES -->
+<section class="feat" id="feature">
+  <div class="wrap">
+    <p class="eyebrow-c reveal">Why BLOOM</p>
+    <h2 class="title-c reveal d1">えらばれる<span class="hl">3つの理由</span></h2>
+    <div class="feat-grid" style="margin-top:46px">
+      <div class="feat-card reveal d1"><div class="feat-ico">🌿</div><h3>髪質改善メニュー</h3><p>傷ませない薬剤と技術で、ツヤのある"なりたい髪"へ。</p></div>
+      <div class="feat-card reveal d2"><div class="feat-ico">🛋️</div><h3>半個室のくつろぎ空間</h3><p>まわりを気にせず、ゆったり過ごせるプライベート設計。</p></div>
+      <div class="feat-card reveal d3"><div class="feat-ico">📱</div><h3>24時間Web予約</h3><p>スマホからいつでも予約OK。LINEでの相談も歓迎。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <p class="eyebrow-c reveal">Menu</p>
+    <h2 class="title-c reveal d1">メニュー＆<span class="hl">料金</span></h2>
+    <p class="lead-c reveal d1">すべて税込・カウンセリング込み（※サンプル価格）</p>
+    <div class="menu-grid">
+      <div class="menu-card reveal d1"><span class="nm">カット<small>シャンプー・ブロー込み</small></span><span class="pr">¥5,500</span></div>
+      <div class="menu-card reveal d2"><span class="nm">カット＋カラー<small>リタッチ</small></span><span class="pr">¥11,000</span></div>
+      <div class="menu-card reveal d1"><span class="nm">髪質改善トリートメント<small>4ステップ</small></span><span class="pr">¥8,800</span></div>
+      <div class="menu-card reveal d2"><span class="nm">ヘッドスパ<small>30分・極上リラックス</small></span><span class="pr">¥4,400</span></div>
+    </div>
+    <p class="menu-note reveal d2">※ 実際のサイトでは、メニューや価格を自由に編集できます。</p>
+  </div>
+</section>
+
+<!-- GALLERY: 自動で横に流れる -->
+<section class="gallery" id="gallery">
+  <div class="wrap" style="margin-bottom:44px">
+    <p class="eyebrow-c reveal">Style Gallery</p>
+    <h2 class="title-c reveal d1">スタイル実績</h2>
+    <p class="lead-c reveal d1">※ 実際の施術写真がここを自動で流れます（サンプルのため色面表示／カーソルを乗せると停止）</p>
+  </div>
+  <!-- 上段：左へ流れる -->
+  <div class="marquee">
+    <div class="mq-track left">
+      <div class="mq-item"><span class="e">💇‍♀️</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">✂️</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">🌸</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💁‍♀️</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">✨</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💇</span><span class="ph">スタイル写真</span></div>
+      <!-- 複製（シームレスループ用） -->
+      <div class="mq-item"><span class="e">💇‍♀️</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">✂️</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">🌸</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💁‍♀️</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">✨</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💇</span><span class="ph">スタイル写真</span></div>
+    </div>
+  </div>
+  <!-- 下段：右へ流れる -->
+  <div class="marquee">
+    <div class="mq-track right">
+      <div class="mq-item"><span class="e">🪞</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💆‍♀️</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">🎀</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💫</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">🌷</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💖</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">🪞</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💆‍♀️</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">🎀</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💫</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">🌷</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><span class="e">💖</span><span class="ph">スタイル写真</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO -->
+<section id="info">
+  <div class="wrap">
+    <p class="eyebrow-c reveal">Access</p>
+    <h2 class="title-c reveal d1">店舗<span class="hl">情報</span></h2>
+    <div class="info-grid" style="margin-top:48px">
+      <ul class="info-list reveal d1">
+        <li class="info-row"><span class="k">OPEN</span><span class="v">10:00 - 20:00（最終受付 19:00）</span></li>
+        <li class="info-row"><span class="k">CLOSED</span><span class="v">毎週火曜・第2水曜</span></li>
+        <li class="info-row"><span class="k">TEL</span><span class="v">000-0000-0000（※サンプル）</span></li>
+        <li class="info-row"><span class="k">ADDRESS</span><span class="v">〒000-0000　〇〇県〇〇市〇〇1-2-3（架空）</span></li>
+        <li class="info-row"><span class="k">PARKING</span><span class="v">提携駐車場あり</span></li>
+      </ul>
+      <div class="map-ph reveal d2"><span class="ico">📍</span><span class="t">地図（Googleマップ）が入ります</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVE -->
+<section class="resv" id="reserve">
+  <div class="wrap">
+    <p class="eyebrow-c">Reservation</p>
+    <h2 class="title-c">ご予約</h2>
+    <p>Web・お電話・LINEから24時間受付中。<br>当日予約もお気軽にどうぞ。</p>
+    <p class="phone">000-0000-0000</p>
+    <p style="font-size:12px;opacity:.85;margin-bottom:28px">受付 10:00 - 19:00（※サンプル番号）</p>
+    <a href="#top" class="btn-wht">かんたんWeb予約</a>
+  </div>
+</section>
+
+<footer>
+  <p class="f-brand">BL<i>OO</i>M</p>
+  <p style="font-size:12px;letter-spacing:1px;margin-top:8px">hair & beauty salon</p>
+  <p class="f-made">🎨 このサイトは <strong>CHIKAI</strong> の制作サンプルです（架空のサロン）。<br>あなたのサロンのホームページも作れます → <a href="../index.html">CHIKAIを見る</a></p>
+</footer>
+
+<a href="../index.html" class="back-cta">🎨 CHIKAIで作る</a>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const nav=document.getElementById('nav');addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>20)},{passive:true});
+</script>
+</body>
+</html>
