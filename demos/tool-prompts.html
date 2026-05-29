@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>コピペAIプロンプト集 ｜ 業務で使える指示文（CHIKAI 制作サンプル）</title>
+<meta name="description" content="CHIKAIの制作サンプル。仕事で使えるAIプロンプトを検索・コピーできる実働Webツールのデモです。">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--purple:#7C3AED;--cyan:#06B6D4;--cyan-d:#0E7490;--ink:#0E2230;--ink2:#5A6B76;--ink3:#9CB0BA;--line:#DCEAF0;--bg:#F4FBFD;--card:#fff;
+  --grad:linear-gradient(135deg,#06B6D4,#3B82F6);--shadow:0 14px 40px rgba(6,182,212,.12);--shadow-sm:0 3px 14px rgba(14,34,48,.06)}
+body{background:var(--bg);color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:-2;background:radial-gradient(55vw 55vw at 85% -10%,rgba(34,211,238,.14),transparent 60%),radial-gradient(45vw 45vw at -8% 25%,rgba(124,58,237,.1),transparent 60%),var(--bg)}
+.chikai-bar{background:linear-gradient(135deg,#7C3AED,#3B82F6,#06B6D4);color:#fff;font-size:12.5px;font-weight:700;text-align:center;padding:8px 16px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.chikai-bar a{color:#fff;text-decoration:underline}.chikai-bar .tag{background:rgba(255,255,255,.22);padding:2px 10px;border-radius:100px;font-size:11px}
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(26px,5vw,50px) clamp(16px,5vw,32px) 70px}
+.head{text-align:center;margin-bottom:30px}
+.head .eye{font-family:'Space Grotesk';font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--cyan-d);background:rgba(6,182,212,.1);border:1px solid var(--line);padding:7px 16px;border-radius:100px;display:inline-block;margin-bottom:16px}
+.head h1{font-size:clamp(26px,4.4vw,42px);font-weight:900;line-height:1.25;margin-bottom:10px}
+.head h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.head p{color:var(--ink2);font-size:14.5px}
+.toolbar{position:sticky;top:0;z-index:10;background:rgba(244,251,253,.92);backdrop-filter:blur(10px);padding:16px 0;margin-bottom:8px}
+.search{position:relative;max-width:520px;margin:0 auto 14px}
+.search input{width:100%;border:1px solid var(--line);border-radius:100px;padding:13px 18px 13px 44px;font-size:14.5px;font-family:inherit;background:#fff;box-shadow:var(--shadow-sm)}
+.search::before{content:'🔍';position:absolute;left:18px;top:50%;transform:translateY(-50%)}
+.cats{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.cat{background:#fff;border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:13px;font-weight:700;color:var(--ink2);cursor:pointer;transition:all .2s}
+.cat:hover{border-color:var(--cyan)}.cat.on{background:var(--grad);color:#fff;border-color:transparent}
+.count{text-align:center;font-size:12.5px;color:var(--ink3);margin:8px 0 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.pcard .tag{align-self:flex-start;font-size:11px;font-weight:700;padding:4px 12px;border-radius:100px;background:rgba(6,182,212,.1);color:var(--cyan-d);margin-bottom:10px}
+.pcard h3{font-size:17px;font-weight:800;margin-bottom:4px}
+.pcard .use{font-size:12.5px;color:var(--ink2);margin-bottom:14px}
+.pbox{background:#0E2230;border-radius:12px;padding:16px;font-family:'JetBrains Mono','Zen Kaku Gothic New',monospace;font-size:13px;line-height:1.7;color:#D7E6EE;white-space:pre-wrap;flex:1;margin-bottom:14px}
+.pbox .ph{color:#5A7585}
+.copy{align-self:flex-start;background:var(--grad);color:#fff;border:none;border-radius:100px;padding:10px 22px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:transform .15s,opacity .2s}
+.copy:hover{opacity:.92}.copy:active{transform:scale(.95)}
+.empty{grid-column:1/-1;text-align:center;padding:50px;color:var(--ink2)}
+.foot-note{margin-top:30px;text-align:center;font-size:13px;color:var(--ink2)}.foot-note a{color:var(--cyan-d);font-weight:700;text-decoration:none}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:#0E2230;color:#fff;padding:14px 24px;border-radius:100px;font-size:14px;font-weight:700;box-shadow:var(--shadow);z-index:50;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.back-cta{position:fixed;right:18px;bottom:18px;z-index:40;background:linear-gradient(135deg,#7C3AED,#06B6D4);color:#fff;padding:13px 20px;border-radius:100px;text-decoration:none;font-size:13px;font-weight:700;box-shadow:0 12px 30px rgba(124,58,237,.4)}
+</style>
+</head>
+<body>
+<div class="chikai-bar"><span class="tag">SAMPLE</span><span>これは <strong>CHIKAI の制作サンプル</strong>（実働Webツールのデモ）。「📋コピー」で指示文をそのまま使えます。</span><a href="index.html">→ 一覧へ</a></div>
+<div class="wrap">
+  <div class="head">
+    <span class="eye">Prompt Library</span>
+    <h1>コピペで使える <span class="g">AIプロンプト集</span></h1>
+    <p>仕事で効く指示文を検索・コピー。〇〇の部分を自分の言葉に変えるだけ。</p>
+  </div>
+  <div class="toolbar">
+    <div class="search"><input id="search" type="text" placeholder="やりたいこと・キーワードで検索（例：メール、要約）"></div>
+    <div class="cats" id="cats"></div>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+  <p class="foot-note">🎨 このツールは <strong>CHIKAI</strong> の制作サンプルです。御社の業務専用プロンプト集も作れます → <a href="../index.html#contact">LINEで相談する</a></p>
+</div>
+<div class="toast" id="toast"></div>
+<a href="index.html" class="back-cta">🎨 サンプル一覧へ</a>
+<script>
+const P=[
+ {cat:'メール',title:'角を立てずに断る',use:'依頼を丁寧にお断りしたい',text:'取引先に〇〇を丁寧に断るメールを作成して。今後も関係を続けたいので、感謝→理由→代替案の順で、柔らかい敬語で。3〜4文で。'},
+ {cat:'メール',title:'やんわり催促する',use:'返信や支払いを促したい',text:'〇〇の件、まだご返信をいただけていません。相手を責めず、確認をお願いする丁寧な催促メールを作成して。'},
+ {cat:'記録・要約',title:'メモを議事録に整える',use:'殴り書きを清書したい',text:'以下の会議メモを ①決定事項 ②宿題（担当者つき）③次回までの確認事項 の3つに整理して。誤字は直し、敬体で。\n---\n（メモを貼る）'},
+ {cat:'記録・要約',title:'長文を3行に要約',use:'長い資料を早く把握',text:'以下の文章を、要点だけ3つの箇条書きで各40字以内でまとめて。専門用語は使わず中学生でも分かる言葉で。\n---\n（文章を貼る）'},
+ {cat:'文書',title:'誤字・敬語をチェック',use:'送る前に確認したい',text:'以下の文章の誤字脱字・不自然な敬語・二重表現を直して。直した箇所は「前→後」で一覧にし、最後に整えた全文を載せて。\n---\n（文章を貼る）'},
+ {cat:'文書',title:'求人の募集文を作る',use:'スタッフを募集したい',text:'〇〇（職種）の求人募集文を作って。仕事内容・求める人物像・働く魅力・応募方法を、親しみやすい言葉で。長すぎず。'},
+ {cat:'SNS',title:'SNS投稿文を作る',use:'集客の投稿を作りたい',text:'〇〇（商品/サービス）について、Instagram投稿のキャプションを3案作って。最初の1行で惹きつけ、絵文字を程よく、最後に行動を促す一言とハッシュタグ5個を。'},
+ {cat:'接客・FAQ',title:'よくある質問の回答文',use:'問い合わせ対応を効率化',text:'「〇〇」というお客様からのよくある質問に、丁寧で分かりやすい回答文を作って。結論を先に、必要なら箇条書きで。'},
+ {cat:'接客・FAQ',title:'お詫び文の下書き',use:'クレームに丁寧に対応',text:'〇〇というご指摘をいただきました。誠実にお詫びしつつ今後の対応も伝える文章を作って。言い訳がましくならないように。'},
+ {cat:'アイデア',title:'悩みを壁打ちで整理',use:'考えがまとまらない',text:'私は今〇〇で悩んでいます。整理したいので、あなたから私に質問を1つずつ投げて。私が答えるたびに次の質問を。5往復したら要点をまとめて。'},
+ {cat:'アイデア',title:'企画のアイデア出し',use:'企画案がほしい',text:'〇〇（目的）のための企画アイデアを10個出して。それぞれ「ターゲット・内容・期待効果」を1行ずつ添えて。奇抜なものも混ぜて。'},
+ {cat:'分析',title:'売上データから打ち手',use:'数字から次の一手を',text:'以下の売上データを見て、①気づき3つ ②伸ばす点 ③改善点 ④次月の具体アクション3つ を出して。\n---\n（データを貼る）'}
+];
+const cats=['すべて',...[...new Set(P.map(p=>p.cat))]];
+let curCat='すべて',q='';
+const $=id=>document.getElementById(id);
+$('cats').innerHTML=cats.map((c,i)=>`<button class="cat ${i===0?'on':''}" data-c="${c}">${c}</button>`).join('');
+function esc(t){return t.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));}
+function hl(t){return esc(t).replace(/(〇〇|（[^）]+）|---)/g,'<span class="ph">$1</span>');}
+function render(){
+  let list=P.filter(p=>(curCat==='すべて'||p.cat===curCat)&&(!q||(p.title+p.use+p.text+p.cat).includes(q)));
+  $('count').textContent=`${list.length} 件のプロンプト`;
+  $('grid').innerHTML=list.length?list.map((p,i)=>`<div class="pcard">
+    <span class="tag">${p.cat}</span><h3>${esc(p.title)}</h3><p class="use">こんな時に：${esc(p.use)}</p>
+    <div class="pbox">${hl(p.text)}</div>
+    <button class="copy" data-t="${encodeURIComponent(p.text)}">📋 コピー</button></div>`).join(''):'<div class="empty">該当するプロンプトがありません</div>';
+}
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>t.classList.remove('show'),1800);}
+async function copyText(text,btn){
+  try{ await navigator.clipboard.writeText(text); }
+  catch(e){ const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy')}catch(_){}ta.remove(); }
+  toast('✅ コピーしました');const o=btn.textContent;btn.textContent='✓ コピー済み';setTimeout(()=>btn.textContent=o,1500);
+}
+$('grid').addEventListener('click',e=>{const b=e.target.closest('.copy');if(b)copyText(decodeURIComponent(b.dataset.t),b);});
+$('cats').addEventListener('click',e=>{const b=e.target.closest('.cat');if(!b)return;curCat=b.dataset.c;[...$('cats').children].forEach(x=>x.classList.toggle('on',x===b));render();});
+$('search').addEventListener('input',e=>{q=e.target.value.trim();render();});
+render();
+</script>
+</body>
+</html>
