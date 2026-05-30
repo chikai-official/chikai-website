@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+
+<title>SNS投稿のキャプションをAIに任せる完全フロー | CHIKAI ブログ</title>
+<meta name="description" content="SNS集客でキャプション作成に毎回30分〜1時間かけていませんか？ 目的設定→AIで3案生成→ハッシュタグ→改善まで、反応の取れる投稿文をAIで量産する完全フローとコピペプロンプトを公開します。">
+<meta property="og:title" content="SNS投稿のキャプションをAIに任せる完全フロー">
+<meta property="og:description" content="目的設定→AIで3案生成→ハッシュタグ→改善まで。反応の取れるSNS投稿文を5分で作る完全フローとプロンプトを公開。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-016.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-016.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SNS投稿のキャプションをAIに任せる完全フロー",
+  "description": "目的設定→AIで3案生成→ハッシュタグ→改善まで。反応の取れるSNS投稿文をAIで量産する完全フローとプロンプトを公開。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-05-30",
+  "dateModified": "2026-05-30",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-016.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --purple:#7C3AED; --blue:#3B82F6; --cyan:#06B6D4;
+  --dark:#04040C; --light:#F5F6FF; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(124,58,237,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Inter','Noto Sans JP',sans-serif; line-height:1.8; }
+
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#7C3AED,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--purple); }
+
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--purple); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); color:#0E7490; margin-bottom:14px; }
+h1.art-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:700; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #06B6D4; }
+.art-body h3 { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#0E7490; font-weight:700; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); border-left:3px solid #06B6D4; border-radius:6px; }
+
+.prompt-box { background:#0F172A; color:#E2E8F0; border-radius:12px; padding:20px 24px; margin:20px 0; font-family:'Inter','SF Mono',monospace; font-size:14px; line-height:1.7; white-space:pre-wrap; }
+.prompt-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#67E8F9; text-transform:uppercase; margin-bottom:10px; font-family:'Inter',sans-serif; }
+
+.step-box { background:#ECFEFF; border:1px solid #A5F3FC; border-radius:12px; padding:24px 28px; margin:20px 0; }
+.step-num {
+  display:inline-block;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:18px; font-weight:800;
+  padding:4px 12px;
+  background:#0891B2; color:white;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+.step-title { font-size:18px; font-weight:700; margin-bottom:10px; color:#0E7490; }
+
+.ba-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+.ba-card { padding:18px 20px; border-radius:12px; }
+.ba-bad { background:#FEF2F2; border:1px solid #FECACA; }
+.ba-good { background:#ECFDF5; border:1px solid #A7F3D0; }
+.ba-card-label { font-size:11px; font-weight:700; letter-spacing:1.5px; margin-bottom:8px; }
+.ba-bad .ba-card-label { color:#991B1B; }
+.ba-good .ba-card-label { color:#065F46; }
+.ba-card-body { font-size:14px; line-height:1.7; color:#1F2937; }
+
+.warn-box { background:#FEF2F2; border:1px solid #FECACA; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.warn-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#991B1B; text-transform:uppercase; margin-bottom:10px; }
+
+.tip-box { background:#ECFEFF; border:1px solid #A5F3FC; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#0E7490; text-transform:uppercase; margin-bottom:10px; }
+
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#7C3AED,#3B82F6); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(124,58,237,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#A78BFA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .ba-grid { grid-template-columns:1fr; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ プロンプト</p>
+
+  <span class="cat-tag">💬 プロンプト｜SNS集客</span>
+  <h1 class="art-title">SNS投稿のキャプションをAIに任せる完全フロー</h1>
+  <p class="art-meta">公開：2026年5月30日　／<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      地方の店舗・中小企業オーナーへ。<br>
+      InstagramやXでの集客、続けたいけど <strong>「キャプション（投稿文）を考えるのに毎回30分〜1時間」</strong> かかって止まっていませんか？<br>
+      目的設定 → AIで3案生成 → ハッシュタグ → 改善 の完全フローなら、反応の取れる投稿文が <strong>5分</strong> で作れます。<br>
+      そのままコピペで使えるプロンプト付きで解説します。
+    </p>
+
+    <h2>なぜキャプション作成で手が止まるのか</h2>
+
+    <p>写真や商品はある。なのに投稿が続かない。原因は <strong>「言葉にする工程」</strong> がボトルネックになっているからです。</p>
+
+    <ul>
+      <li>毎回ゼロから考えていて、<strong>ネタが思いつかない</strong></li>
+      <li>「映える」「惹きつける」言い回しが出てこない</li>
+      <li>ハッシュタグを毎回調べ直している</li>
+      <li>完璧を目指して、結局投稿できずに終わる</li>
+    </ul>
+
+    <p>裏を返せば、<strong>「言葉にする工程」だけAIに任せれば</strong>、投稿のハードルは一気に下がります。</p>
+
+    <h2>BEFORE / AFTER：投稿1本にかかる時間</h2>
+
+    <div class="ba-grid">
+      <div class="ba-card ba-bad">
+        <div class="ba-card-label">❌ BEFORE</div>
+        <div class="ba-card-body">
+          ネタを考える → 言い回しに悩む → ハッシュタグを調べる → 1本45分 → 週1回で力尽きる
+        </div>
+      </div>
+      <div class="ba-card ba-good">
+        <div class="ba-card-label">○ AFTER</div>
+        <div class="ba-card-body">
+          写真と要点をAIに渡す → 3案から選んで微調整 → 1本5分 → 週5投稿も続く
+        </div>
+      </div>
+    </div>
+
+    <p>投稿は <strong>「質 × 量 × 継続」</strong>。1本のハードルが下がれば、続けられて、結果も出始めます。</p>
+
+    <h2>反応が取れる投稿文 完全フロー5ステップ</h2>
+
+    <div class="step-box">
+      <div class="step-num">STEP 01</div>
+      <div class="step-title">この投稿の「目的」を1つだけ決める</div>
+      <p>集客 / ファン化 / 教育 / 販売 のどれか<strong>1つ</strong>に絞ります。「全部入り」はぼやけて刺さりません。例：「新メニューを知ってもらう＝教育」。</p>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">STEP 02</div>
+      <div class="step-title">AIに「型」でキャプションを3案出させる</div>
+      <p>1案だけだと選べない。<strong>3案出させて選ぶ</strong>のがコツです。</p>
+
+      <div class="prompt-box"><span class="prompt-label">キャプション3案生成プロンプト</span>あなたは [業種・例：カフェ] のSNS運用担当です。
+以下の投稿のキャプションを3案つくってください。
+
+【投稿の目的】（集客/ファン化/教育/販売 から1つ）
+【写真・内容】（例：新作の季節限定ラテ）
+【伝えたい一言】（例：今だけの味）
+【お店の雰囲気】（例：親しみやすく、ゆるめ）
+
+──条件──
+・最初の1行で必ず惹きつける
+・絵文字は1〜2個まで（盛りすぎない）
+・最後にお客さんへの「ひと押し（CTA）」を1文
+・3案はそれぞれ違うトーンで（例：共感型/数字型/質問型）</div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">STEP 03</div>
+      <div class="step-title">1案選んで、自分の言葉を1割だけ混ぜる</div>
+      <p>AIの文章をそのまま出すと「AIっぽさ」が出ます。<strong>お店ならではの一言・実体験を1割だけ足す</strong>と、一気に"人の言葉"になります。例：「実は試作で10回失敗しました（笑）」。</p>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">STEP 04</div>
+      <div class="step-title">ハッシュタグを業種に合わせて選ぶ（5個まで）</div>
+      <p>タグは多ければいいわけではありません。<strong>関連性の高い5個</strong>に絞る方が、狙った人に届きます。</p>
+
+      <div class="prompt-box"><span class="prompt-label">ハッシュタグ選定プロンプト</span>[業種・地域・投稿内容] に合うInstagramのハッシュタグを、
+以下の3層から合計5個だけ選んでください。
+
+・大（投稿数が多い・広く届く）：1個
+・中（業種・ジャンル）：2個
+・小（地域名・ニッチ・ファンが探す）：2個
+
+各タグの「だいたいの投稿数の規模感」も添えて。</div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">STEP 05</div>
+      <div class="step-title">反応を見て、勝ちパターンをAIに覚えさせる</div>
+      <p>反応がよかった投稿を3〜5本、AIに見せて<strong>「この投稿たちの共通点を分析して、次の投稿に活かして」</strong>と頼むと、あなたのお店専用の"型"が育っていきます。</p>
+    </div>
+
+    <h2>おまけ：1ヶ月分のネタを一気に出すプロンプト</h2>
+
+    <p>「毎日何を投稿するか」で止まる人へ。1ヶ月分の<strong>ネタ出し</strong>もAIに任せられます。</p>
+
+    <div class="prompt-box"><span class="prompt-label">月間投稿ネタ出しプロンプト</span>[業種・地域] のSNS集客のため、
+1ヶ月分（30日）の投稿ネタを表で出してください。
+
+・列：日付の目安／投稿の目的／ネタ（タイトル）／写真の例
+・集客・ファン化・教育・販売をバランスよく配分
+・季節やイベント（来月の行事）も織り込む
+・初心者でもすぐ撮れる・書けるネタにする</div>
+
+    <h2>反応を落とす NGパターン4つ</h2>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ これをやると伸びない</div>
+      ・<strong>AIっぽさ丸出し</strong>（きれいすぎる・自分の言葉ゼロ）<br>
+      ・絵文字の盛りすぎ（読みにくく、安っぽく見える）<br>
+      ・<strong>誇大表現</strong>（「絶対」「地域No.1」など根拠なしの断定は景品表示法のリスク）<br>
+      ・毎回まったく同じ型（フォロワーが飽きる）
+    </div>
+
+    <p>とくに <strong>「効果・効能・No.1」系の断定</strong> は、業種によっては法律に触れます。AIは平気で誇張してくるので、<strong>最後は必ず人の目でチェック</strong>してください。</p>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ "人の言葉"に戻す3つのコツ</div>
+      <strong>①</strong> 実体験・失敗談を1つ混ぜる<br>
+      <strong>②</strong> お店・お客さんの「実際のセリフ」を入れる<br>
+      <strong>③</strong> 完璧な敬語より、普段の話し言葉を1割
+    </div>
+
+    <h2>まとめ：考えるのをやめて、選ぶだけにする</h2>
+
+    <p>SNSが続かない最大の理由は「毎回ゼロから考えるのがしんどい」から。AIに3案出させて<strong>「選んで、1割だけ自分の言葉を足す」</strong>だけにすれば、投稿は驚くほどラクに、そして続きます。</p>
+
+    <p>「うちの業種・お店の雰囲気に合わせたキャプションの型を作ってほしい」というご相談は、CHIKAIのLINEで無料受付中です。あなたのお店専用の<strong>投稿テンプレ＆ネタ出しプロンプト</strong>を一緒にお作りします。</p>
+
+    <div class="cta-box">
+      <h3>あなたのお店専用の<br>SNS投稿テンプレ、15分で設計します</h3>
+      <p>15-20分のZoomで、業種・客層・発信したいことを伺い、すぐ使える投稿の"型"とネタ出しの仕組みをご提案。<br>強引な営業はしません。「話を聞いてみる」感覚で大丈夫です。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
