@@ -135,6 +135,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:50px clamp(20px
 .back-cta:hover{transform:translateY(-3px)}
 @media(max-width:560px){.back-cta{padding:12px 16px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}.mq-track{animation:none!important}}
+
+/* ===== 実写画像 対応 ===== */
+.hv-img:has(img){background:transparent;font-size:0}
+.hv-img:has(img) .ph{display:none}
+.mq-item:has(img){background:transparent !important;font-size:0;color:transparent}
+.mq-item:has(img) .e,.mq-item:has(img) .ph{display:none}
+.hv-img img,.mq-item img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;
+}
 </style>
 </head>
 <body>
@@ -169,7 +178,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:50px clamp(20px
     </div>
     <div class="hero-visual reveal d1">
       <div class="hv-blob"></div>
-      <div class="hv-img">💇‍♀️<span class="ph">サロン・スタイルの写真が入ります</span></div>
+      <div class="hv-img"><img src="img/salon-bloom/01-hero.png" alt="hair & beauty BLOOM" loading="eager"></div>
       <div class="hv-badge"><span class="star">4.9</span><span class="lbl"><b>口コミ高評価</b><br>多数のご来店</span></div>
     </div>
   </div>
@@ -214,36 +223,36 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:50px clamp(20px
   <!-- 上段：左へ流れる -->
   <div class="marquee">
     <div class="mq-track left">
-      <div class="mq-item"><span class="e">💇‍♀️</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">✂️</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">🌸</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💁‍♀️</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">✨</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💇</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><img src="img/salon-bloom/02-style-long.png" alt="ロングカラースタイル" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/03-style-bob.png" alt="ボブスタイル" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/04-style-highlight.png" alt="ハイトーンカラー" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/05-headspa.png" alt="ヘッドスパ" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/06-arrange.png" alt="ヘアアレンジ" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/07-interior.png" alt="サロン内装" loading="lazy"></div>
       <!-- 複製（シームレスループ用） -->
-      <div class="mq-item"><span class="e">💇‍♀️</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">✂️</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">🌸</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💁‍♀️</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">✨</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💇</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><img src="img/salon-bloom/02-style-long.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/03-style-bob.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/04-style-highlight.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/05-headspa.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/06-arrange.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/07-interior.png" alt="" loading="lazy"></div>
     </div>
   </div>
-  <!-- 下段：右へ流れる -->
+  <!-- 下段：右へ流れる（順序入替で見飽きさせない）-->
   <div class="marquee">
     <div class="mq-track right">
-      <div class="mq-item"><span class="e">🪞</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💆‍♀️</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">🎀</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💫</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">🌷</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💖</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">🪞</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💆‍♀️</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">🎀</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💫</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">🌷</span><span class="ph">スタイル写真</span></div>
-      <div class="mq-item"><span class="e">💖</span><span class="ph">スタイル写真</span></div>
+      <div class="mq-item"><img src="img/salon-bloom/07-interior.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/04-style-highlight.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/06-arrange.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/02-style-long.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/05-headspa.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/03-style-bob.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/07-interior.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/04-style-highlight.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/06-arrange.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/02-style-long.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/05-headspa.png" alt="" loading="lazy"></div>
+      <div class="mq-item"><img src="img/salon-bloom/03-style-bob.png" alt="" loading="lazy"></div>
     </div>
   </div>
 </section>
