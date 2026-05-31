@@ -26,7 +26,9 @@
 <meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
 <link rel="canonical" href="https://chikai-official.github.io/chikai-website/lp/lp-chikai.html">
 
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Serif+JP:wght@500;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -59,10 +61,11 @@ html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
 body {
   background:var(--bg);
   color:var(--text);
-  font-family:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN',sans-serif;
+  font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif;
   line-height:1.85;
   overflow-x:hidden;
   letter-spacing:.02em;
+  font-feature-settings:"palt" 1;
 }
 
 /* ==================== mesh背景・装飾blob ==================== */
@@ -157,9 +160,9 @@ body {
   letter-spacing:-2.2px;
   line-height:1.28;
   margin-bottom:14px;
-  font-family:'Noto Serif JP','Zen Kaku Gothic New',serif;
+  font-family:'Noto Sans JP',sans-serif;
 }
-.hero h1 .normal { font-weight:700; font-family:'Zen Kaku Gothic New',sans-serif; }
+.hero h1 .normal { font-weight:700; font-family:'Noto Sans JP',sans-serif; }
 .hero h1 .accent {
   background:linear-gradient(90deg,#7C3AED 0%,#FF6B6B 50%,#F59E0B 100%);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
@@ -171,7 +174,7 @@ body {
   color:var(--text2);
   letter-spacing:1.2px;
   margin:10px 0 22px;
-  font-family:'Zen Kaku Gothic New',sans-serif;
+  font-family:'Noto Sans JP',sans-serif;
 }
 
 .hero .sub {
@@ -262,7 +265,7 @@ body {
 .section { padding:100px 24px; max-width:1140px; margin:0 auto; position:relative; }
 .section-eyebrow {
   display:block; text-align:center;
-  font-family:'Playfair Display','Noto Serif JP',serif;
+  font-family:'Noto Sans JP',sans-serif;
   font-size:13px; font-weight:700; letter-spacing:4px;
   color:var(--purple); margin-bottom:14px;
   text-transform:uppercase;
@@ -274,7 +277,7 @@ body {
   margin:0 14px; vertical-align:middle;
 }
 .section h2 {
-  font-family:'Noto Serif JP','Zen Kaku Gothic New',serif;
+  font-family:'Noto Sans JP',sans-serif;
   font-size:clamp(28px,4vw,44px);
   font-weight:900; letter-spacing:-1.5px;
   text-align:center; margin-bottom:18px;
@@ -333,7 +336,7 @@ body {
 .pain-content { padding:8px; }
 .pain-num {
   display:inline-block;
-  font-family:'Playfair Display',serif;
+  font-family:'Space Grotesk','Noto Sans JP',sans-serif;
   font-size:48px; font-weight:900;
   background:linear-gradient(135deg,#7C3AED,#FF6B6B);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
@@ -517,7 +520,7 @@ body {
 }
 .campaign-eyebrow {
   display:inline-block;
-  font-family:'Noto Serif JP',serif;
+  font-family:'Noto Sans JP',sans-serif;
   font-size:13px; font-weight:700; letter-spacing:3px;
   color:#92400E;
   padding:10px 24px;
@@ -528,7 +531,7 @@ body {
   position:relative; z-index:1;
 }
 .campaign-title {
-  font-family:'Noto Serif JP',serif;
+  font-family:'Noto Sans JP',sans-serif;
   font-size:clamp(30px,4.6vw,48px);
   font-weight:900; letter-spacing:-1.5px;
   color:#78350F;
@@ -542,7 +545,7 @@ body {
   flex-wrap:wrap;
 }
 .campaign-headline {
-  font-family:'Playfair Display',serif;
+  font-family:'Space Grotesk','Noto Sans JP',sans-serif;
   font-size:clamp(72px,12vw,140px);
   font-weight:900;
   background:linear-gradient(135deg,#F59E0B 0%,#D97706 50%,#92400E 100%);
@@ -550,13 +553,13 @@ body {
   letter-spacing:-4px; line-height:.95;
 }
 .campaign-headline-unit {
-  font-family:'Noto Serif JP',serif;
+  font-family:'Noto Sans JP',sans-serif;
   font-size:clamp(24px,3.5vw,36px);
   font-weight:900;
   color:#92400E;
 }
 .campaign-subhead {
-  font-family:'Noto Serif JP',serif;
+  font-family:'Noto Sans JP',sans-serif;
   font-size:clamp(20px,3vw,28px);
   font-weight:700;
   color:#78350F;
@@ -625,7 +628,7 @@ body {
 .offer-wrap h2 {
   color:#fff; margin-bottom:18px;
   position:relative; z-index:1;
-  font-family:'Noto Serif JP',serif;
+  font-family:'Noto Sans JP',sans-serif;
 }
 .offer-wrap h2 .accent {
   background:linear-gradient(90deg,#FFF7ED,#FFFFFF);
@@ -653,7 +656,7 @@ body {
   box-shadow:0 16px 50px rgba(0,0,0,.15);
 }
 .benefit-num {
-  font-family:'Playfair Display',serif;
+  font-family:'Space Grotesk','Noto Sans JP',sans-serif;
   font-size:42px; font-weight:900;
   color:#fff;
   line-height:1; margin-bottom:14px;
@@ -761,7 +764,7 @@ body {
   font-size:clamp(28px,4.5vw,46px);
   position:relative; z-index:1;
   font-weight:900; letter-spacing:-1.5px;
-  font-family:'Noto Serif JP',serif;
+  font-family:'Noto Sans JP',sans-serif;
 }
 .final-cta p { color:rgba(255,255,255,.94); font-size:16px; margin-bottom:40px; line-height:1.95; position:relative; z-index:1; }
 .final-cta .cta-line {
