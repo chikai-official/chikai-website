@@ -217,6 +217,22 @@ body {
 }
 .photo-desc { font-size:13px; max-width:80%; text-align:center; position:relative; z-index:1; line-height:1.8; font-weight:600; }
 
+/* 画像が入った時はplaceholder装飾を消す */
+.hero-photo:has(img), .pain-photo:has(img), .demo-ai-photo:has(img) {
+  background:transparent;
+  border:none;
+  padding:0;
+}
+.hero-photo:has(img)::before, .pain-photo:has(img)::before, .demo-ai-photo:has(img)::before {
+  display:none;
+}
+.hero-photo img, .pain-photo img, .demo-ai-photo img {
+  width:100%; height:100%;
+  object-fit:cover;
+  border-radius:inherit;
+  display:block;
+}
+
 /* === CTAボタン（強化版） === */
 .cta-line {
   display:inline-flex; align-items:center; gap:14px;
@@ -842,14 +858,9 @@ footer {
     最新AI（Claude／ChatGPT 等）を、業務に合う形で取り入れます。
   </p>
 
-  <!-- 📸 PHOTO PLACEHOLDER #1（Hero メインビジュアル）-->
+  <!-- Hero メインビジュアル -->
   <div class="hero-photo reveal reveal-d2">
-    <span class="photo-tag">📸 PHOTO #1</span>
-    <span class="photo-desc">
-      Hero メインビジュアル<br>
-      推奨：広島・岡山のシンボル景観（瀬戸内海／後楽園／平和記念公園 等）<br>or 商業エリアの活気ある風景<br>
-      <strong>サイズ：横長16:9・1600×900px推奨</strong>
-    </span>
+    <img src="img/lp-01-hero.png" alt="広島・岡山の中小企業の皆さんへ｜CHIKAI" loading="eager">
   </div>
 
   <div class="reveal reveal-d3">
@@ -873,14 +884,9 @@ footer {
   <div class="pain-list">
     <!-- 悩み1 -->
     <div class="pain-row reveal">
-      <!-- 📸 PHOTO PLACEHOLDER #3（事務作業の悩み）-->
+      <!-- 悩み「事務作業」 -->
       <div class="pain-photo">
-        <span class="photo-tag">📸 PHOTO #3</span>
-        <span class="photo-desc">
-          悩み「事務作業」イメージ<br>
-          候補：書類山積みのデスク／PC前で集中する手元／請求書/帳簿類<br>
-          <strong>4:3・1200×900px</strong>
-        </span>
+        <img src="img/lp-03-pain-office.png" alt="同じ事務作業を毎日繰り返してる悩み" loading="lazy">
       </div>
       <div class="pain-content">
         <div class="pain-num">01</div>
@@ -897,14 +903,9 @@ footer {
 
     <!-- 悩み2 -->
     <div class="pain-row reveal">
-      <!-- 📸 PHOTO PLACEHOLDER #4（HP・SNS放置の悩み）-->
+      <!-- 悩み「HP・SNS放置」 -->
       <div class="pain-photo">
-        <span class="photo-tag">📸 PHOTO #4</span>
-        <span class="photo-desc">
-          悩み「HP・SNS放置」イメージ<br>
-          候補：古い看板／スマホ画面（更新が止まったSNS）／空のWebサイト<br>
-          <strong>4:3・1200×900px</strong>
-        </span>
+        <img src="img/lp-04-pain-website.png" alt="HP・SNSが何ヶ月も放置のままの悩み" loading="lazy">
       </div>
       <div class="pain-content">
         <div class="pain-num">02</div>
@@ -920,14 +921,9 @@ footer {
 
     <!-- 悩み3 -->
     <div class="pain-row reveal">
-      <!-- 📸 PHOTO PLACEHOLDER #5（AI何から）-->
+      <!-- 悩み「AI何から」 -->
       <div class="pain-photo">
-        <span class="photo-tag">📸 PHOTO #5</span>
-        <span class="photo-desc">
-          悩み「AI何から」イメージ<br>
-          候補：PCの前で考え込む後ろ姿／ChatGPT画面／本やノートでメモ<br>
-          <strong>4:3・1200×900px</strong>
-        </span>
+        <img src="img/lp-05-pain-ai.png" alt="AI使った方がいいと聞くけど何からの悩み" loading="lazy">
       </div>
       <div class="pain-content">
         <div class="pain-num">03</div>
@@ -1000,14 +996,9 @@ footer {
         <span class="demo-ai-tag">即体験</span>
       </div>
     </div>
-    <!-- 📸 PHOTO PLACEHOLDER #6（AI実演スクショ）-->
+    <!-- AI実演スクショ -->
     <div class="demo-ai-photo">
-      <span class="photo-tag">📸 PHOTO #6</span>
-      <span class="photo-desc">
-        AI実演スクショ<br>
-        候補：Claude Code 画面 ／ ChatGPT 利用画面 ／ Zoom画面共有のモック<br>
-        <strong>4:3・1200×900px</strong>
-      </span>
+      <img src="img/lp-06-ai-demo.png" alt="Zoom画面共有でClaude Code・ChatGPTをその場実演" loading="lazy">
     </div>
   </div>
 </section>
@@ -1160,16 +1151,9 @@ footer {
   <h2 class="reveal">安心して<span class="accent">ご相談ください</span></h2>
   <p class="lead reveal reveal-d2">CHIKAIは"広島・岡山対応のAI×制作パートナー"です。お客様一人ひとりに丁寧に向き合います</p>
 
-  <!-- 📸 PHOTO PLACEHOLDER #2（Trust大型）-->
+  <!-- Trust ブロック用ビジュアル -->
   <div class="hero-photo reveal" style="aspect-ratio:21/9; margin-bottom:40px;">
-    <span class="photo-tag">📸 PHOTO #2</span>
-    <span class="photo-desc">
-      Trust ブロック用ビジュアル<br>
-      候補：(A) オーナー作業風景（後ろ姿/手元のみ）<br>
-      (B) 広島・岡山の対応エリア地図<br>
-      (C) Zoomでお客様と話してるイメージ<br>
-      <strong>横長21:9・2100×900px推奨</strong>
-    </span>
+    <img src="img/lp-02-trust.png" alt="広島・岡山に通って、密に向き合うパートナー" loading="lazy">
   </div>
 
   <div class="assure-grid">
