@@ -167,6 +167,20 @@ footer{background:var(--ink);color:rgba(255,253,248,.7);padding:60px clamp(20px,
 @media(max-width:560px){.back-cta{padding:12px 16px;font-size:12px}}
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* ===== 実写画像 対応 ===== */
+.hero-visual:has(img){background:#1a1208}
+.hero-visual:has(img)::before{display:none}
+.hero-visual:has(img) .moon-big,.hero-visual:has(img) .glass,.hero-visual:has(img) .ph-label{display:none}
+.concept-visual:has(img){background:transparent}
+.concept-visual:has(img) .ico,.concept-visual:has(img) .ph{display:none}
+.dish:has(img) .dish-img{background:#1a1208 !important;font-size:0}
+.dish:has(img) .dish-img .ph{display:none}
+.gal-item:has(img){background:#1a1208 !important;font-size:0;color:transparent}
+.gal-item:has(img) .ph{display:none}
+.hero-visual img,.concept-visual img,.dish-img img,.gal-item img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;
+}
 </style>
 </head>
 <body>
@@ -203,9 +217,7 @@ footer{background:var(--ink);color:rgba(255,253,248,.7);padding:60px clamp(20px,
       </div>
     </div>
     <div class="hero-visual reveal d2">
-      <div class="moon-big"></div>
-      <div class="glass">🍷</div>
-      <div class="ph-label">店舗写真が入ります</div>
+      <img src="img/cafe-luna/01-hero.png" alt="BISTRO LUNA 店内の夜景" loading="eager">
     </div>
   </div>
 </header>
@@ -216,7 +228,7 @@ footer{background:var(--ink);color:rgba(255,253,248,.7);padding:60px clamp(20px,
     <p class="sec-eyebrow reveal">Concept</p>
     <h2 class="sec-title reveal d1">肩の力を、ぬく場所。</h2>
     <div class="concept-grid" style="margin-top:50px">
-      <div class="concept-visual reveal d1"><span class="ico">🍽️</span><span class="ph">店内・お料理の写真が入ります</span></div>
+      <div class="concept-visual reveal d1"><img src="img/cafe-luna/02-concept.png" alt="地元食材のディスプレイ" loading="lazy"></div>
       <div class="reveal d2">
         <h2>素材は地のもの。<br>火入れは、ていねいに。</h2>
         <p>近くの畑や港から届いた、その日いちばんの食材だけ。気どらないけれど、ちゃんとおいしい。そんなビストロを目指しています。</p>
@@ -233,9 +245,9 @@ footer{background:var(--ink);color:rgba(255,253,248,.7);padding:60px clamp(20px,
     <h2 class="sec-title reveal d1">本日のおすすめ</h2>
     <p class="sec-lead reveal d1">仕入れによって内容が変わります。季節の一皿をおたのしみください。</p>
     <div class="menu-grid">
-      <div class="dish reveal d1"><div class="dish-img">🥩<span class="ph">料理写真が入ります</span></div><div class="dish-body"><p class="dish-name">和牛の赤ワイン煮込み<span class="en">Bœuf Bourguignon</span></p><p class="dish-desc">ほろりと崩れるやわらかさ。じっくり3日間。</p><p class="dish-price">¥1,980 <small>税込</small></p></div></div>
-      <div class="dish reveal d2"><div class="dish-img">🥗<span class="ph">料理写真が入ります</span></div><div class="dish-body"><p class="dish-name">季節野菜のバーニャカウダ<span class="en">Bagna càuda</span></p><p class="dish-desc">朝採れ野菜を、あつあつソースで。</p><p class="dish-price">¥1,280 <small>税込</small></p></div></div>
-      <div class="dish reveal d3"><div class="dish-img">🍤<span class="ph">料理写真が入ります</span></div><div class="dish-body"><p class="dish-name">海老と帆立のアヒージョ<span class="en">Ajillo</span></p><p class="dish-desc">バゲットまで、最後の一滴まで。</p><p class="dish-price">¥1,480 <small>税込</small></p></div></div>
+      <div class="dish reveal d1"><div class="dish-img"><img src="img/cafe-luna/03-menu-beef.png" alt="和牛の赤ワイン煮込み" loading="lazy"></div><div class="dish-body"><p class="dish-name">和牛の赤ワイン煮込み<span class="en">Bœuf Bourguignon</span></p><p class="dish-desc">ほろりと崩れるやわらかさ。じっくり3日間。</p><p class="dish-price">¥1,980 <small>税込</small></p></div></div>
+      <div class="dish reveal d2"><div class="dish-img"><img src="img/cafe-luna/04-menu-veggie.png" alt="季節野菜のバーニャカウダ" loading="lazy"></div><div class="dish-body"><p class="dish-name">季節野菜のバーニャカウダ<span class="en">Bagna càuda</span></p><p class="dish-desc">朝採れ野菜を、あつあつソースで。</p><p class="dish-price">¥1,280 <small>税込</small></p></div></div>
+      <div class="dish reveal d3"><div class="dish-img"><img src="img/cafe-luna/05-menu-ajillo.png" alt="海老と帆立のアヒージョ" loading="lazy"></div><div class="dish-body"><p class="dish-name">海老と帆立のアヒージョ<span class="en">Ajillo</span></p><p class="dish-desc">バゲットまで、最後の一滴まで。</p><p class="dish-price">¥1,480 <small>税込</small></p></div></div>
     </div>
   </div>
 </section>
@@ -247,11 +259,11 @@ footer{background:var(--ink);color:rgba(255,253,248,.7);padding:60px clamp(20px,
     <h2 class="sec-title reveal d1">店内のようす</h2>
     <p class="sec-lead reveal d1">※ このエリアには実際のお店の写真が入ります（サンプルのため色面で表示）。</p>
     <div class="gal-grid reveal d1">
-      <div class="gal-item">🕯️<span class="ph">メイン写真</span></div>
-      <div class="gal-item">🍷<span class="ph">写真</span></div>
-      <div class="gal-item">🍝<span class="ph">写真</span></div>
-      <div class="gal-item">☕<span class="ph">写真</span></div>
-      <div class="gal-item">🌙<span class="ph">写真</span></div>
+      <div class="gal-item"><img src="img/cafe-luna/06-gallery-main.png" alt="BISTRO LUNA 店内全景" loading="lazy"></div>
+      <div class="gal-item"><img src="img/cafe-luna/07-wine.png" alt="グラスワイン" loading="lazy"></div>
+      <div class="gal-item"><img src="img/cafe-luna/08-pasta.png" alt="パスタ" loading="lazy"></div>
+      <div class="gal-item"><img src="img/cafe-luna/09-dessert.png" alt="エスプレッソとデザート" loading="lazy"></div>
+      <div class="gal-item"><img src="img/cafe-luna/10-moon.png" alt="月夜の窓辺" loading="lazy"></div>
     </div>
   </div>
 </section>
