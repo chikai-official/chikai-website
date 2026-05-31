@@ -218,7 +218,7 @@ body {
 .photo-desc { font-size:13px; max-width:80%; text-align:center; position:relative; z-index:1; line-height:1.8; font-weight:600; }
 
 /* 画像が入った時はplaceholder装飾を消す */
-.hero-photo:has(img), .pain-photo:has(img), .demo-ai-photo:has(img) {
+.hero-photo:has(img), .pain-photo:has(img), .demo-ai-photo:has(img), .demo-card-img:has(img) {
   background:transparent;
   border:none;
   padding:0;
@@ -226,7 +226,7 @@ body {
 .hero-photo:has(img)::before, .pain-photo:has(img)::before, .demo-ai-photo:has(img)::before {
   display:none;
 }
-.hero-photo img, .pain-photo img, .demo-ai-photo img {
+.hero-photo img, .pain-photo img, .demo-ai-photo img, .demo-card-img img {
   width:100%; height:100%;
   object-fit:cover;
   border-radius:inherit;
@@ -1012,10 +1012,8 @@ footer {
   <div class="demo-wrap reveal">
     <div class="demo-grid">
       <a href="../demos/realestate-grandview.html" class="demo-card">
-        <!-- 📸 PHOTO #7 -->
         <div class="demo-card-img">
-          <span class="photo-tag">📸 #7</span>
-          <span class="photo-desc">不動産フルサイト<br>スクショ</span>
+          <img src="img/lp-07-realestate-grandview.png" alt="不動産フルサイト デモ" loading="lazy">
         </div>
         <div class="demo-card-body">
           <div class="demo-card-title">🏠 不動産フルサイト</div>
@@ -1023,10 +1021,8 @@ footer {
         </div>
       </a>
       <a href="../demos/cafe-luna.html" class="demo-card">
-        <!-- 📸 PHOTO #8 -->
         <div class="demo-card-img">
-          <span class="photo-tag">📸 #8</span>
-          <span class="photo-desc">カフェLP<br>スクショ</span>
+          <img src="img/lp-08-cafe-luna.png" alt="カフェ&ビストロLP デモ" loading="lazy">
         </div>
         <div class="demo-card-body">
           <div class="demo-card-title">☕ カフェ＆ビストロLP</div>
@@ -1034,10 +1030,8 @@ footer {
         </div>
       </a>
       <a href="../demos/salon-bloom.html" class="demo-card">
-        <!-- 📸 PHOTO #9 -->
         <div class="demo-card-img">
-          <span class="photo-tag">📸 #9</span>
-          <span class="photo-desc">美容室サイト<br>スクショ</span>
+          <img src="img/lp-09-salon-bloom.png" alt="美容室サイト＋予約管理 デモ" loading="lazy">
         </div>
         <div class="demo-card-body">
           <div class="demo-card-title">💄 美容室＋予約管理</div>
@@ -1045,10 +1039,8 @@ footer {
         </div>
       </a>
       <a href="../demos/tool-kintai.html" class="demo-card">
-        <!-- 📸 PHOTO #10 -->
         <div class="demo-card-img">
-          <span class="photo-tag">📸 #10</span>
-          <span class="photo-desc">建設業勤怠<br>スクショ</span>
+          <img src="img/lp-10-tool-kintai.png" alt="建設業勤怠ツール デモ" loading="lazy">
         </div>
         <div class="demo-card-body">
           <div class="demo-card-title">🏗️ 建設業 勤怠ツール</div>
@@ -1056,10 +1048,8 @@ footer {
         </div>
       </a>
       <a href="../demos/tool-roi.html" class="demo-card">
-        <!-- 📸 PHOTO #11 -->
         <div class="demo-card-img">
-          <span class="photo-tag">📸 #11</span>
-          <span class="photo-desc">ROI試算<br>スクショ</span>
+          <img src="img/lp-11-tool-roi.png" alt="AI削減シミュレーター デモ" loading="lazy">
         </div>
         <div class="demo-card-body">
           <div class="demo-card-title">📊 AI削減シミュ</div>
@@ -1067,10 +1057,8 @@ footer {
         </div>
       </a>
       <a href="../demos/ec-tumugu.html" class="demo-card">
-        <!-- 📸 PHOTO #12 -->
         <div class="demo-card-img">
-          <span class="photo-tag">📸 #12</span>
-          <span class="photo-desc">EC<br>スクショ</span>
+          <img src="img/lp-12-ec-tumugu.png" alt="ECサイト＋カート機能 デモ" loading="lazy">
         </div>
         <div class="demo-card-body">
           <div class="demo-card-title">🛍️ EC＋カート</div>
