@@ -122,6 +122,15 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:54px clamp(20p
 .back-cta:hover{transform:translateY(-3px)}
 @media(max-width:560px){.back-cta{padding:12px 16px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* ===== 実写画像 対応 ===== */
+.msg-visual:has(img){background:transparent}
+.msg-visual:has(img) .ico,.msg-visual:has(img) .ph{display:none}
+.biz-top:has(img){font-size:0}
+.msg-visual img,.biz-top img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;
+}
+.biz-top{position:relative;overflow:hidden}
 </style>
 </head>
 <body>
@@ -160,7 +169,7 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:54px clamp(20p
     <p class="eyebrow-c reveal">Message</p>
     <h2 class="title-c reveal d1">代表メッセージ</h2>
     <div class="msg-grid" style="margin-top:50px">
-      <div class="msg-visual reveal d1"><span class="ico">👤</span><span class="ph">代表者の写真が入ります</span></div>
+      <div class="msg-visual reveal d1"><img src="img/corp-minato/01-message.png" alt="代表取締役" loading="lazy"></div>
       <div class="reveal d2">
         <h2>変わりゆく時代だからこそ、<br><span class="hl">変わらない誠実さ</span>を。</h2>
         <p>創業から半世紀。時代や技術がどれだけ移り変わっても、わたしたちが大切にしてきたのは「目の前の一人に、誠実であること」でした。</p>
@@ -178,9 +187,9 @@ footer{background:var(--navy);color:rgba(255,255,255,.65);padding:54px clamp(20p
     <h2 class="title-c reveal d1">事業内容</h2>
     <p class="lead-c reveal d1">3つの事業領域で、地域の暮らしと産業を支えています。</p>
     <div class="biz-grid">
-      <div class="biz reveal d1"><div class="biz-top">⚙️</div><div class="biz-body"><p class="biz-no">01</p><h3>ものづくり事業</h3><p>精密部品の設計・製造。確かな品質管理で、お客様の「つくりたい」を形にします。</p></div></div>
-      <div class="biz reveal d2"><div class="biz-top">🚚</div><div class="biz-body"><p class="biz-no">02</p><h3>流通・物流事業</h3><p>地域に密着した物流ネットワーク。必要なものを、必要な場所へ、確実にお届けします。</p></div></div>
-      <div class="biz reveal d3"><div class="biz-top">🌱</div><div class="biz-body"><p class="biz-no">03</p><h3>地域共創事業</h3><p>地域の企業・自治体と連携し、まちの課題解決と新しい価値づくりに取り組みます。</p></div></div>
+      <div class="biz reveal d1"><div class="biz-top"><img src="img/corp-minato/02-business-mono.png" alt="ものづくり事業" loading="lazy"></div><div class="biz-body"><p class="biz-no">01</p><h3>ものづくり事業</h3><p>精密部品の設計・製造。確かな品質管理で、お客様の「つくりたい」を形にします。</p></div></div>
+      <div class="biz reveal d2"><div class="biz-top"><img src="img/corp-minato/03-business-logistics.png" alt="流通・物流事業" loading="lazy"></div><div class="biz-body"><p class="biz-no">02</p><h3>流通・物流事業</h3><p>地域に密着した物流ネットワーク。必要なものを、必要な場所へ、確実にお届けします。</p></div></div>
+      <div class="biz reveal d3"><div class="biz-top"><img src="img/corp-minato/04-business-local.png" alt="地域共創事業" loading="lazy"></div><div class="biz-body"><p class="biz-no">03</p><h3>地域共創事業</h3><p>地域の企業・自治体と連携し、まちの課題解決と新しい価値づくりに取り組みます。</p></div></div>
     </div>
   </div>
 </section>
