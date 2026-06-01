@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+
+<title>不動産業がAIで物件説明文を量産するプロンプト | CHIKAI ブログ</title>
+<meta name="description" content="物件説明文を1件ずつ書くのに時間がかかっていませんか？ 物件情報を渡すだけで、ポータル用・SNS用・ターゲット別の説明文をAIで量産。そのまま使えるプロンプトと、宅建業法・不当表示を避ける注意点を解説します。">
+<meta property="og:title" content="不動産業がAIで物件説明文を量産するプロンプト">
+<meta property="og:description" content="物件情報を渡すだけで、ポータル用・SNS用の物件説明文をAIで量産。コピペプロンプトと法的注意点つき。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-019.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-019.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "不動産業がAIで物件説明文を量産するプロンプト",
+  "description": "物件情報を渡すだけで、ポータル用・SNS用の物件説明文をAIで量産。コピペプロンプトと法的注意点つき。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-06-02",
+  "dateModified": "2026-06-02",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-019.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --blue:#2563EB; --blue-d:#1E40AF; --cyan:#06B6D4; --cta:#F97316;
+  --dark:#04040C; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(37,99,235,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Noto Sans JP',sans-serif; line-height:1.8; }
+
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#2563EB,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--blue); }
+
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--blue); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#DBEAFE,#BFDBFE); color:#1E40AF; margin-bottom:14px; }
+h1.art-title { font-family:'Noto Sans JP',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:900; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Noto Sans JP',sans-serif; font-size:26px; font-weight:900; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #2563EB; }
+.art-body h3 { font-family:'Noto Sans JP',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#1E40AF; font-weight:900; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#DBEAFE,#BFDBFE); border-left:3px solid #2563EB; border-radius:6px; }
+
+.prompt-box { background:#0F172A; color:#E2E8F0; border-radius:12px; padding:20px 24px; margin:20px 0; font-family:'Space Grotesk','SF Mono',monospace; font-size:14px; line-height:1.7; white-space:pre-wrap; }
+.prompt-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#93C5FD; text-transform:uppercase; margin-bottom:10px; font-family:'Noto Sans JP',sans-serif; }
+
+.step-box { background:#EFF6FF; border:1px solid #BFDBFE; border-radius:12px; padding:24px 28px; margin:20px 0; }
+.step-num {
+  display:inline-block;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:18px; font-weight:800;
+  padding:4px 12px;
+  background:#2563EB; color:white;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+.step-title { font-size:18px; font-weight:700; margin-bottom:10px; color:#1E40AF; }
+
+.ba-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:20px 0; }
+.ba-card { padding:18px 20px; border-radius:12px; }
+.ba-bad { background:#FEF2F2; border:1px solid #FECACA; }
+.ba-good { background:#ECFDF5; border:1px solid #A7F3D0; }
+.ba-card-label { font-size:11px; font-weight:700; letter-spacing:1.5px; margin-bottom:8px; }
+.ba-bad .ba-card-label { color:#991B1B; }
+.ba-good .ba-card-label { color:#065F46; }
+.ba-card-body { font-size:14px; line-height:1.7; color:#1F2937; }
+
+.warn-box { background:#FEF2F2; border:1px solid #FECACA; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.warn-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#991B1B; text-transform:uppercase; margin-bottom:10px; }
+
+.tip-box { background:#EFF6FF; border:1px solid #BFDBFE; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#1E40AF; text-transform:uppercase; margin-bottom:10px; }
+
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Noto Sans JP',sans-serif; font-size:24px; font-weight:900; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#F97316,#EA580C); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(249,115,22,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#60A5FA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .art-body h3 { font-size:18px; }
+  .ba-grid { grid-template-columns:1fr; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ 業種別Tips</p>
+
+  <span class="cat-tag">🏠 業種別Tips｜不動産</span>
+  <h1 class="art-title">不動産業がAIで物件説明文を量産するプロンプト</h1>
+  <p class="art-meta">公開：2026年6月2日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      物件が増えるたびに、<strong>説明文を1件ずつ書く</strong>のに時間を取られていませんか？<br>
+      物件の基本情報をAIに渡すだけで、ポータルサイト用・SNS用・ターゲット別の説明文が<strong>数分</strong>で作れます。<br>
+      そのままコピペで使えるプロンプトと、宅建業法・不当表示を避ける注意点をセットで解説します。
+    </p>
+
+    <h2>なぜ物件説明文の作成に時間がかかるのか</h2>
+
+    <p>物件1件ごとに、ポータル掲載・自社サイト・SNS…と<strong>媒体ごとに書き分け</strong>が必要。さらに、</p>
+
+    <ul>
+      <li>「日当たり良好」「閑静な住宅街」など<strong>毎回同じ言い回し</strong>になりがち</li>
+      <li>ファミリー向け・単身向けで<strong>刺さるポイントが違う</strong>のに書き分けられない</li>
+      <li>魅力的に書こうとすると<strong>誇大表現のリスク</strong>が出る</li>
+      <li>1物件で30分〜1時間 → 物件数が増えるほど追いつかない</li>
+    </ul>
+
+    <p>裏を返せば、<strong>「基本情報から文章を起こす工程」だけAIに任せれば</strong>、説明文づくりは一気にラクになります。担当者は「事実確認と最終チェック」に集中できます。</p>
+
+    <h2>BEFORE / AFTER：物件説明文1件</h2>
+
+    <div class="ba-grid">
+      <div class="ba-card ba-bad">
+        <div class="ba-card-label">❌ BEFORE</div>
+        <div class="ba-card-body">
+          物件ごとにゼロから執筆 → 媒体別に書き直し → 言い回しに悩む → 1件45分
+        </div>
+      </div>
+      <div class="ba-card ba-good">
+        <div class="ba-card-label">○ AFTER</div>
+        <div class="ba-card-body">
+          物件情報を貼る → 媒体別・ターゲット別に一括生成 → 事実確認 → 1件5分
+        </div>
+      </div>
+    </div>
+
+    <h2>物件説明文を量産する3ステップ</h2>
+
+    <div class="step-box">
+      <div class="step-num">STEP 01</div>
+      <div class="step-title">物件の基本情報をそのままAIに渡す</div>
+      <p>間取り・広さ・築年数・駅徒歩・周辺環境など、手元の情報を箇条書きで貼るだけ。下のプロンプトがそのまま使えます。</p>
+
+      <div class="prompt-box"><span class="prompt-label">物件説明文 生成プロンプト</span>あなたは不動産の物件紹介のプロです。
+以下の物件情報から、ポータルサイト掲載用の
+物件説明文を作ってください。
+
+【物件種別】（例：中古マンション/賃貸アパート）
+【間取り・広さ】（例：2LDK・55㎡）
+【築年数】【最寄駅・徒歩分数】
+【周辺環境】（例：スーパー徒歩3分、小学校近い）
+【おすすめポイント】（例：南向き・角部屋・リフォーム済）
+
+──条件──
+・誇大表現や断定（「絶対」「最高」等）は使わない
+・事実に基づいた魅力の伝え方で
+・250〜350字程度
+・最後に「内見のお問い合わせはお気軽に」で締める</div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">STEP 02</div>
+      <div class="step-title">ターゲット別に書き分けさせる</div>
+      <p>同じ物件でも、ファミリーと単身者では刺さるポイントが違います。<strong>「誰向けか」を指定するだけ</strong>でAIが書き分けます。</p>
+
+      <div class="prompt-box"><span class="prompt-label">ターゲット別 書き分けプロンプト</span>さきほどの物件説明文を、
+次の3パターンに書き分けてください。
+
+①ファミリー向け（学区・公園・収納を重視）
+②単身・カップル向け（駅近・利便性・セキュリティ）
+③投資家向け（利回り・周辺賃貸需要・管理状態）
+
+それぞれ200字程度。事実に反する誇張はしないこと。</div>
+    </div>
+
+    <div class="step-box">
+      <div class="step-num">STEP 03</div>
+      <div class="step-title">SNS・問い合わせ返信にも展開する</div>
+      <p>説明文ができたら、SNS投稿や問い合わせ返信にも使い回せます。媒体に合わせてAIに整えてもらいましょう。</p>
+
+      <div class="prompt-box"><span class="prompt-label">SNS投稿への展開プロンプト</span>この物件を、Instagram投稿用の短い文章にしてください。
+
+・最初の1行で惹きつける
+・写真が映える雰囲気で
+・ハッシュタグを5個（地域名・間取り・物件種別）
+・「詳細はプロフィールのリンクから」で締める</div>
+    </div>
+
+    <h2>⚠ 不動産広告で絶対に守るべき表示ルール</h2>
+
+    <p>不動産の広告・説明文は<strong>法律と公正競争規約で表示が厳しく定められています</strong>。AIは平気で誇張や不正確な表現を出すことがあるので、<strong>最後は必ず人がチェック</strong>してください。</p>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ これはAI任せにせず必ず確認</div>
+      ・<strong>「徒歩○分」</strong>は道路距離80m＝1分換算（実測ベース／盛らない）<br>
+      ・<strong>「新築」</strong>は建築後1年未満かつ未入居のみ使用可<br>
+      ・<strong>「完全」「絶対」「日本一」「最高級」</strong>等の断定・最上級表現は原則NG<br>
+      ・実在しない好条件で誘う<strong>「おとり広告」は違法</strong><br>
+      ・<strong>「閑静」「人気エリア」</strong>等も客観的根拠なく多用しない
+    </div>
+
+    <p>これらは <strong>宅地建物取引業法</strong> と <strong>不動産の表示に関する公正競争規約</strong> で定められています。AIが生成した文章は「下書き」と考え、<strong>数字・条件・最上級表現を必ず人の目で精査</strong>してから掲載しましょう。</p>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ AIに"守らせる"コツ</div>
+      プロンプトに <strong>「宅建業法・不当表示に触れる表現（最上級・断定・おとり）は使わないで」</strong> と一文加えるだけで、リスクの低い文章が出やすくなります。それでも最終チェックは人が行うのが鉄則です。
+    </div>
+
+    <h2>まとめ：書くのをやめて、整える側に回る</h2>
+
+    <p>物件説明文に時間がかかるのは「毎回ゼロから書いている」から。<strong>AIに下書きを作らせて、担当者は"事実確認と表示チェック"に集中する</strong>。これだけで、1件45分が5分になり、物件が増えても回せます。</p>
+
+    <p>「うちの物件データに合わせた説明文の型を作ってほしい」「ポータル・SNS・自社サイトの書き分けを仕組み化したい」というご相談は、CHIKAIのLINEで無料受付中です。あなたの会社専用の<strong>物件説明文テンプレ＆チェックリスト</strong>を一緒にお作りします。</p>
+
+    <div class="cta-box">
+      <h3>あなたの会社の物件説明文、<br>AIで量産する仕組みを作りませんか</h3>
+      <p>15-20分のZoomで、扱う物件の種別を伺い、その場で説明文のたたき台をAIで作成。宅建業法に配慮したチェックの仕方までご提案します。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
