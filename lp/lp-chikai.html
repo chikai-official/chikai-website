@@ -41,7 +41,7 @@
   /* 装飾色（金/コーラル/ミント/ピンク）は廃止 — 60-30-10：白＋紫青＋CTA緑のみ */
   /* Base */
   --dark:#04040C; --dark2:#1A1A2E; --dark3:#0F172A;
-  --bg:#FCFBFF; --white:#FFFFFF; --glass:rgba(255,255,255,.72);
+  --bg:#FFFFFF; --white:#FFFFFF; --glass:rgba(255,255,255,.72);
   --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
   --border:rgba(37,99,235,.12);
   --line:#F97316; --line-d:#EA580C;
@@ -71,6 +71,8 @@ body {
   position:fixed; inset:0; z-index:-2;
   background:#FFFFFF;
 }
+/* アピール強調：白背景セクションの強調語は濃い青＋極太でメリハリ */
+.hero .sub strong, .pain-desc strong, .solve-body strong, .lead strong, .offer-sub strong { color:#1E40AF; font-weight:900; }
 
 /* ==================== 追従ロゴ ==================== */
 .float-logo {
@@ -327,7 +329,7 @@ body {
   display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
 }
 .solve-card {
-  background:linear-gradient(160deg,#F5F3FF 0%,#EFF6FF 60%,#ECFEFF 100%);
+  background:linear-gradient(160deg,#F7F9FD 0%,#F7F9FD 60%,#F7F9FD 100%);
   border:1px solid var(--border);
   border-radius:28px; padding:42px 32px;
   position:relative; overflow:hidden;
@@ -425,7 +427,7 @@ body {
   border-radius:18px;
   overflow:hidden;
   text-decoration:none;
-  background:#F5F3FF;
+  background:#F7F9FD;
   border:1px solid var(--border);
   transition:all .4s cubic-bezier(.4,0,.2,1);
   display:flex; flex-direction:column;
@@ -469,7 +471,7 @@ body {
 /* ==================== 🆕 キャンペーンセクション（シンプル化＋大型）==================== */
 .campaign-wrap {
   background:
-    linear-gradient(135deg,#FFFFFF 0%,#F5F3FF 60%,#EDE9FE 100%);
+    linear-gradient(135deg,#FFFFFF 0%,#F7F9FD 60%,#EDE9FE 100%);
   border:2px solid rgba(37,99,235,.22);
   border-radius:36px;
   padding:70px 40px;
