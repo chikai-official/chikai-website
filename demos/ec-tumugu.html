@@ -125,6 +125,14 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:50px clamp(18px
 .back-cta{position:fixed;right:18px;bottom:84px;z-index:150;background:linear-gradient(135deg,#7C3AED,#06B6D4);color:#fff;padding:13px 20px;border-radius:100px;text-decoration:none;font-size:13px;font-weight:700;box-shadow:0 12px 30px rgba(124,58,237,.4);transition:transform .2s}
 .back-cta:hover{transform:translateY(-3px)}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+/* ===== 実写画像 対応 ===== */
+.hero-visual:has(img){background:transparent;font-size:0;position:relative;overflow:hidden}
+.hero-visual:has(img) .ph{display:none}
+.prod-img{overflow:hidden}
+.prod-img:has(img){background:#fff !important;font-size:0}
+.hero-visual img,.prod-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit}
+.prod-img:has(img) .prod-badge{z-index:2;font-size:11px}
 </style>
 </head>
 <body>
@@ -156,7 +164,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:50px clamp(18px
       <p>毎日つかうものだから、お気に入りを。作り手のぬくもりが伝わる、暮らしの道具を集めました。</p>
       <a href="#products" class="btn-fill">商品を見る →</a>
     </div>
-    <div class="hero-visual">🧺<span class="ph">特集バナー画像が入ります</span></div>
+    <div class="hero-visual"><img src="img/ec-tumugu/01-hero.png" alt="TUMUGU STORE 特集バナー" loading="eager"></div>
   </div>
 </header>
 
@@ -179,14 +187,14 @@ footer{background:var(--ink);color:rgba(255,255,255,.65);padding:50px clamp(18px
       <a href="#products">すべて見る →</a>
     </div>
     <div class="prod-grid">
-      <div class="prod reveal d1"><div class="prod-img">☕<span class="prod-badge b-new">NEW</span></div><div class="prod-body"><span class="prod-cat">キッチン</span><p class="prod-name">波佐見焼のマグカップ</p><p class="prod-price"><span class="now">¥2,400</span></p><button class="add-btn" data-name="波佐見焼のマグカップ">🛒 カートに入れる</button></div></div>
-      <div class="prod reveal d2"><div class="prod-img">🧺<span class="prod-badge b-pop">人気</span></div><div class="prod-body"><span class="prod-cat">ファブリック</span><p class="prod-name">リネン100% トートバッグ</p><p class="prod-price"><span class="now">¥3,800</span></p><button class="add-btn" data-name="リネン100% トートバッグ">🛒 カートに入れる</button></div></div>
-      <div class="prod reveal d3"><div class="prod-img">🕯️</div><div class="prod-body"><span class="prod-cat">癒し・香り</span><p class="prod-name">大豆ワックスのアロマキャンドル</p><p class="prod-price"><span class="now">¥2,200</span></p><button class="add-btn" data-name="アロマキャンドル">🛒 カートに入れる</button></div></div>
-      <div class="prod reveal d4"><div class="prod-img">🍶<span class="prod-badge b-sale">SALE</span></div><div class="prod-body"><span class="prod-cat">キッチン</span><p class="prod-name">ステンレス保温ボトル 500ml</p><p class="prod-price"><span class="old">¥3,600</span><span class="now sale">¥2,880</span></p><button class="add-btn" data-name="保温ボトル">🛒 カートに入れる</button></div></div>
-      <div class="prod reveal d1"><div class="prod-img">🧣</div><div class="prod-body"><span class="prod-cat">ファブリック</span><p class="prod-name">オーガニックコットンブランケット</p><p class="prod-price"><span class="now">¥5,400</span></p><button class="add-btn" data-name="コットンブランケット">🛒 カートに入れる</button></div></div>
-      <div class="prod reveal d2"><div class="prod-img">🥄</div><div class="prod-body"><span class="prod-cat">キッチン</span><p class="prod-name">天然木のカトラリー3点セット</p><p class="prod-price"><span class="now">¥2,900</span></p><button class="add-btn" data-name="木のカトラリーセット">🛒 カートに入れる</button></div></div>
-      <div class="prod reveal d3"><div class="prod-img">🧴<span class="prod-badge b-pop">人気</span></div><div class="prod-body"><span class="prod-cat">癒し・香り</span><p class="prod-name">国産ハーブのハンドクリーム</p><p class="prod-price"><span class="now">¥1,650</span></p><button class="add-btn" data-name="ハンドクリーム">🛒 カートに入れる</button></div></div>
-      <div class="prod reveal d4"><div class="prod-img">💐</div><div class="prod-body"><span class="prod-cat">ギフト</span><p class="prod-name">吹きガラスのフラワーベース</p><p class="prod-price"><span class="now">¥4,200</span></p><button class="add-btn" data-name="フラワーベース">🛒 カートに入れる</button></div></div>
+      <div class="prod reveal d1"><div class="prod-img"><img src="img/ec-tumugu/02-mug.png" alt="波佐見焼のマグカップ" loading="lazy"><span class="prod-badge b-new">NEW</span></div><div class="prod-body"><span class="prod-cat">キッチン</span><p class="prod-name">波佐見焼のマグカップ</p><p class="prod-price"><span class="now">¥2,400</span></p><button class="add-btn" data-name="波佐見焼のマグカップ">🛒 カートに入れる</button></div></div>
+      <div class="prod reveal d2"><div class="prod-img"><img src="img/ec-tumugu/03-totebag.png" alt="リネン100% トートバッグ" loading="lazy"><span class="prod-badge b-pop">人気</span></div><div class="prod-body"><span class="prod-cat">ファブリック</span><p class="prod-name">リネン100% トートバッグ</p><p class="prod-price"><span class="now">¥3,800</span></p><button class="add-btn" data-name="リネン100% トートバッグ">🛒 カートに入れる</button></div></div>
+      <div class="prod reveal d3"><div class="prod-img"><img src="img/ec-tumugu/04-candle.png" alt="大豆ワックスのアロマキャンドル" loading="lazy"></div><div class="prod-body"><span class="prod-cat">癒し・香り</span><p class="prod-name">大豆ワックスのアロマキャンドル</p><p class="prod-price"><span class="now">¥2,200</span></p><button class="add-btn" data-name="アロマキャンドル">🛒 カートに入れる</button></div></div>
+      <div class="prod reveal d4"><div class="prod-img"><img src="img/ec-tumugu/05-bottle.png" alt="ステンレス保温ボトル 500ml" loading="lazy"><span class="prod-badge b-sale">SALE</span></div><div class="prod-body"><span class="prod-cat">キッチン</span><p class="prod-name">ステンレス保温ボトル 500ml</p><p class="prod-price"><span class="old">¥3,600</span><span class="now sale">¥2,880</span></p><button class="add-btn" data-name="保温ボトル">🛒 カートに入れる</button></div></div>
+      <div class="prod reveal d1"><div class="prod-img"><img src="img/ec-tumugu/06-blanket.png" alt="オーガニックコットンブランケット" loading="lazy"></div><div class="prod-body"><span class="prod-cat">ファブリック</span><p class="prod-name">オーガニックコットンブランケット</p><p class="prod-price"><span class="now">¥5,400</span></p><button class="add-btn" data-name="コットンブランケット">🛒 カートに入れる</button></div></div>
+      <div class="prod reveal d2"><div class="prod-img"><img src="img/ec-tumugu/07-cutlery.png" alt="天然木のカトラリー3点セット" loading="lazy"></div><div class="prod-body"><span class="prod-cat">キッチン</span><p class="prod-name">天然木のカトラリー3点セット</p><p class="prod-price"><span class="now">¥2,900</span></p><button class="add-btn" data-name="木のカトラリーセット">🛒 カートに入れる</button></div></div>
+      <div class="prod reveal d3"><div class="prod-img"><img src="img/ec-tumugu/08-handcream.png" alt="国産ハーブのハンドクリーム" loading="lazy"><span class="prod-badge b-pop">人気</span></div><div class="prod-body"><span class="prod-cat">癒し・香り</span><p class="prod-name">国産ハーブのハンドクリーム</p><p class="prod-price"><span class="now">¥1,650</span></p><button class="add-btn" data-name="ハンドクリーム">🛒 カートに入れる</button></div></div>
+      <div class="prod reveal d4"><div class="prod-img"><img src="img/ec-tumugu/09-vase.png" alt="吹きガラスのフラワーベース" loading="lazy"></div><div class="prod-body"><span class="prod-cat">ギフト</span><p class="prod-name">吹きガラスのフラワーベース</p><p class="prod-price"><span class="now">¥4,200</span></p><button class="add-btn" data-name="フラワーベース">🛒 カートに入れる</button></div></div>
     </div>
   </div>
 </section>
