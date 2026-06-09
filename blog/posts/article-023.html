@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+<title>整体・治療院がAIで予約リマインドと口コミ返信を効率化する方法 | CHIKAI ブログ</title>
+<meta name="description" content="整体・治療院のリピート率に直結する「予約前日リマインド」と「口コミ返信」。AIを使えばそれぞれ5〜10分で準備できます。キャンセルフォローを含む4種のコピペプロンプトを公開。">
+<meta property="og:title" content="整体・治療院がAIで予約リマインドと口コミ返信を効率化する方法">
+<meta property="og:description" content="整体・治療院のリピート率に直結する予約リマインドと口コミ返信をAIで効率化。コピペできる4種のプロンプト付き。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-023.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-023.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "整体・治療院がAIで予約リマインドと口コミ返信を効率化する方法",
+  "description": "整体・治療院のリピート率に直結する予約リマインドと口コミ返信をAIで効率化。コピペできる4種のプロンプト付き。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-06-09",
+  "dateModified": "2026-06-09",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-023.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --blue:#2563EB; --blue-d:#1E40AF; --green:#10B981; --green-d:#059669;
+  --cta:#F97316;
+  --dark:#04040C; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(37,99,235,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Noto Sans JP',sans-serif; line-height:1.8; }
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#2563EB,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--blue); }
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--blue); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#D1FAE5,#A7F3D0); color:#065F46; margin-bottom:14px; }
+h1.art-title { font-family:'Noto Sans JP',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:900; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Noto Sans JP',sans-serif; font-size:26px; font-weight:900; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #10B981; }
+.art-body h3 { font-family:'Noto Sans JP',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#065F46; font-weight:900; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#D1FAE5,#A7F3D0); border-left:3px solid #10B981; border-radius:6px; }
+.step-box { background:#ECFDF5; border:1px solid #A7F3D0; border-left:4px solid #10B981; border-radius:12px; padding:24px 28px; margin:20px 0; }
+.step-num { display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:800; letter-spacing:1px; padding:4px 12px; background:#059669; color:white; border-radius:8px; margin-bottom:12px; }
+.step-title { font-size:19px; font-weight:900; margin-bottom:10px; color:#065F46; }
+.fix-line { margin-top:14px; padding-top:14px; border-top:1px dashed #A7F3D0; font-size:14px; color:#1F2937; }
+.fix-line b { color:#1E40AF; }
+.prompt-box { background:#0F172A; border:1px solid #1E293B; border-radius:12px; padding:22px 24px; margin:20px 0; }
+.prompt-box .pb-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#6EE7B7; margin-bottom:14px; font-family:'Space Grotesk',sans-serif; }
+.prompt-box .pb-body { font-size:14.5px; line-height:1.85; color:#E2E8F0; white-space:pre-wrap; }
+.prompt-box .pb-body .v { color:#FCD34D; }
+.tip-box { background:#F0FDF4; border:1px solid #A7F3D0; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#065F46; text-transform:uppercase; margin-bottom:10px; }
+.warn-box { background:#FFF7ED; border:1px solid #FED7AA; border-left:4px solid #F97316; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.warn-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#C2410C; text-transform:uppercase; margin-bottom:10px; }
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Noto Sans JP',sans-serif; font-size:24px; font-weight:900; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#F97316,#EA580C); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(249,115,22,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#60A5FA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .prompt-box .pb-body { font-size:13.5px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ 業種別Tips</p>
+
+  <span class="cat-tag">🏥 業種別Tips｜整体・治療院</span>
+  <h1 class="art-title">整体・治療院がAIで予約リマインドと口コミ返信を効率化する方法</h1>
+  <p class="art-meta">公開：2026年6月9日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      「せっかく来てもらったのにリピートが続かない」「Googleマップの口コミ、返信できていない」——整体・治療院でよく聞く悩みの根っこには、<strong>施術後のフォロー不足</strong>があります。<br>
+      予約リマインドも口コミ返信も、やるべきとわかっていても手が回らないのが現実。AIを使えば、それぞれ<strong>5〜10分で準備</strong>できます。コピペできるプロンプト4種と一緒に解説します。
+    </p>
+
+    <h2>リピートが途切れる原因は施術ではなく「その後」にある</h2>
+
+    <p>整体や鍼灸院で「初回体験は悪くなかったのに2回目が来ない」という現象が多くの院で起きています。施術の質が問題ではなく、施術後に何のアクションもないまま時間が経つことで、患者側の「また行こう」という気持ちが薄れていくのです。</p>
+
+    <p>特に<strong>予約前日のリマインド</strong>は効果が高い施策です。「明日〇時にお待ちしています」の一文があるだけで、当日キャンセル率が下がり、患者のスタンバイ意識も高まります。とはいえ、毎日手打ちでメッセージを送り続けるのは現実的ではありません。AIを使えばこの作業を大幅に短縮できます。</p>
+
+    <h2>STEP1：予約前日リマインドをAIで量産する</h2>
+
+    <div class="step-box">
+      <span class="step-num">STEP 01</span>
+      <div class="step-title">院の情報を渡してリマインド文を作らせる</div>
+      <p>基本は「患者情報の型をAIに渡す→下書きを作らせる→微調整して送る」の3ステップ。まずリマインド文の雛形をAIで量産するところから始めましょう。LINEやメール、ステップ配信ツールに組み合わせれば、さらに自動化できます。</p>
+      <div class="fix-line"><b>✓ コツ：</b>「200字以内」「親しみやすく」など出力条件を明示すると、そのまま使えるクオリティで出てきます。</div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 プロンプト例（コピペOK）</div>
+      <div class="pb-body">以下の情報をもとに、整体院からの予約前日リマインドLINEメッセージを作成してください。
+
+・施設名：<span class="v">（院名）</span>
+・施術日時：<span class="v">（日付・時間）</span>
+・担当スタッフ：<span class="v">（省略してもOK）</span>
+・持ち物・注意事項：<span class="v">（あれば）</span>
+
+条件：
+・200字以内
+・親しみやすい丁寧な口調
+・次回予約を急かさない
+・キャンセル/変更の連絡先を最後に添える</div>
+    </div>
+
+    <h2>STEP2：キャンセル後のフォロー文もAIで準備する</h2>
+
+    <div class="step-box">
+      <span class="step-num">STEP 02</span>
+      <div class="step-title">やんわり気にかける文面で再来院を促す</div>
+      <p>キャンセルが出たあと何も連絡しなければ、そのまま離脱につながります。かといって「またご予約を」と直球で送るのも押しつけ感が出る。AIに依頼すると、<strong>相手に圧力をかけずに気にかける文面</strong>をすぐに用意してくれます。</p>
+      <div class="fix-line"><b>✓ ポイント：</b>「返信しやすいトーン」と指定するだけで、患者が反応しやすい文体になります。</div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 プロンプト例（コピペOK）</div>
+      <div class="pb-body">整体院でキャンセルされた方へ送るフォローメッセージを作成してください。
+
+条件：
+・お体を気にかける一文から始める
+・再予約の案内を柔らかく添える（押しつけ感なし）
+・返信しやすい温かいトーン
+・150字以内
+・院名は「<span class="v">（院名）</span>」</div>
+    </div>
+
+    <p>丁寧なキャンセルフォローは<strong>印象に残りやすく、口コミにもつながります</strong>。「キャンセルしたのに気にかけてもらった」という体験は、リピーターに転換する大きなきっかけになります。</p>
+
+    <h2>STEP3：Googleマップの口コミ返信をAIで整える</h2>
+
+    <div class="step-box">
+      <span class="step-num">STEP 03</span>
+      <div class="step-title">口コミを貼るだけで返信文が出てくる</div>
+      <p>Googleマップの口コミは、新規患者が来院を決める重要な判断材料です。返信があるお店とないお店では信頼感に大きな差が生まれます。しかし口コミ返信は後回しになりがち。AIを使えば<strong>1件2〜3分で返信文が完成</strong>します。</p>
+      <div class="fix-line"><b>✓ 低評価への対応も同じ手順で。</b>怒りや防衛心が入ると返信が硬くなりがちなので、冷静な下書き役としてAIが特に力を発揮します。</div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 プロンプト例（コピペOK）</div>
+      <div class="pb-body">以下のGoogleマップの口コミに対する返信文を作成してください。
+
+【口コミ内容】
+<span class="v">（ここに口コミをそのまま貼り付け）</span>
+
+条件：
+・感謝と共感を最初に伝える
+・院名は「<span class="v">（院名）</span>」
+・200字前後
+・また来ていただけるような前向きな結び
+・特定の患者情報は含めない</div>
+    </div>
+
+    <h2>STEP4：施術後のリピート促進フォローを自動化する</h2>
+
+    <p>施術から1〜2週間後に「体の調子はいかがですか？」と一言送るだけで、リピート率が大きく変わります。この<strong>「気にかけ連絡」</strong>もAIで雛形を作っておけば、送るたびに一から文章を考えずに済みます。</p>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 プロンプト例（コピペOK）</div>
+      <div class="pb-body">整体院の施術から1〜2週間後に送る「体調確認＋次回ご案内」のLINEメッセージを作成してください。
+
+条件：
+・押しつけがましくなく、自然に次回を促す
+・「お体の調子はいかがですか」から始める
+・次回予約の導線（電話・LINE）を最後に記載
+・150〜200字
+・院名は「<span class="v">（院名）</span>」</div>
+    </div>
+
+    <h2>注意点：個人情報とテンプレ感への配慮</h2>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ 注意</div>
+      <strong>①個人情報は渡さない</strong><br>
+      患者名・症状・連絡先などをそのままAIに貼り付けるのは避けましょう。「首の痛みで来院の方」「60代女性の方」など、個人が特定できない形に置き換えてからプロンプトに渡すことが重要です。<br><br>
+      <strong>②テンプレ感を出しすぎない</strong><br>
+      AIが生成した文章を毎回同じ形で送ると、患者側に「機械的だな」と感じさせることがあります。院のキャラクターや担当スタッフの口調を反映する一言を追加するだけで、温かみが戻ります。
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ うまく使うためのポイント</div>
+      AIの文章は<strong>「8割完成の下書き」</strong>として受け取る。残り2割を自分の言葉で整えることで、テンプレ感が消えて患者に伝わる文章になります。
+    </div>
+
+    <h2>まとめ：フォローの仕組みがリピートを作る</h2>
+
+    <p>予約リマインド・キャンセルフォロー・口コミ返信・施術後の気にかけ連絡——この4つを毎回手打ちで対応しようとすると、時間も気力も消耗します。AIを使えばそれぞれ数分で下書きが揃い、<strong>送ることのハードルが大幅に下がります</strong>。施術の質はそのままに、来院前後のフォローを整えることで、リピート率と口コミ評価の両方が上がっていきます。</p>
+
+    <p>「自院に合ったリマインド文を作りたい」「口コミへの返信パターンをストックしたい」というご相談は、CHIKAIの公式LINEで無料受付中です。業種・院の雰囲気に合わせた<strong>"そのまま使えるプロンプト"</strong>を一緒に設計します。</p>
+
+    <div class="cta-box">
+      <h3>院に合ったAIプロンプト、<br>一緒に作りませんか</h3>
+      <p>15〜20分のZoomで、実際の業務を伺いながら「そのまま使えるプロンプト」をご提案。リマインド・口コミ返信・フォロー文など、日常の"手間"から減らしていきます。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
