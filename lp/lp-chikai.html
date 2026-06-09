@@ -101,23 +101,33 @@ body {
 
 /* ==================== Hero ==================== */
 .hero {
-  padding:130px 24px 90px;
-  max-width:1140px; margin:0 auto;
-  text-align:center;
   position:relative;
+  min-height:90vh;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+  overflow:hidden;
 }
+.hero-bg { position:absolute; inset:0; z-index:0; }
+.hero-bg img { width:100%; height:100%; object-fit:cover; display:block; }
+.hero-bg::after {
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(4,8,22,.50) 0%, rgba(4,8,22,.42) 38%, rgba(4,8,22,.74) 100%);
+}
+.hero-inner { position:relative; z-index:2; max-width:900px; margin:0 auto; }
 .eyebrow {
   display:inline-flex; align-items:center; gap:8px;
   font-size:11px; font-weight:700; letter-spacing:2.5px;
-  color:var(--purple); margin-bottom:28px;
+  color:#fff; margin-bottom:28px;
   padding:10px 22px; border-radius:100px;
-  background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(59,130,246,.10));
-  border:1px solid rgba(37,99,235,.15);
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.32);
+  backdrop-filter:blur(6px);
   text-transform:uppercase;
 }
 .eyebrow::before {
   content:""; width:6px; height:6px; border-radius:50%;
-  background:var(--purple); box-shadow:0 0 12px var(--purple);
+  background:#fff; box-shadow:0 0 12px rgba(255,255,255,.85);
   animation:pulse 1.8s ease-in-out infinite;
 }
 @keyframes pulse {
@@ -132,31 +142,39 @@ body {
   line-height:1.28;
   margin-bottom:14px;
   font-family:'Noto Sans JP',sans-serif;
+  color:#fff;
+  text-shadow:0 2px 30px rgba(0,0,0,.55);
 }
 .hero h1 .normal { font-weight:700; font-family:'Noto Sans JP',sans-serif; }
 .hero h1 .accent {
-  background:linear-gradient(90deg,#2563EB,#3B82F6);
-  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-  display:inline-block; padding:0 4px;
+  background:linear-gradient(135deg,#2563EB,#3B82F6);
+  color:#fff; -webkit-text-fill-color:#fff;
+  display:inline-block;
+  padding:6px 20px; margin-top:8px;
+  border-radius:14px;
+  font-size:1.06em;
+  box-shadow:0 10px 34px rgba(37,99,235,.55), inset 0 1px 0 rgba(255,255,255,.25);
 }
 .hero h1 .sub-target {
   display:block;
   font-size:.4em; font-weight:500;
-  color:var(--text2);
+  color:rgba(255,255,255,.88);
   letter-spacing:1.2px;
   margin:10px 0 22px;
   font-family:'Noto Sans JP',sans-serif;
+  text-shadow:0 1px 10px rgba(0,0,0,.5);
 }
 
 .hero .sub {
   font-size:clamp(15px,2.3vw,19px);
-  color:var(--text2); line-height:1.95;
+  color:rgba(255,255,255,.95); line-height:1.95;
   margin:32px auto 52px;
   max-width:640px;
+  text-shadow:0 2px 16px rgba(0,0,0,.5);
 }
 .hero .sub strong {
-  color:var(--purple-d);
-  background:linear-gradient(transparent 60%, rgba(59,130,246,.32) 60%);
+  color:#fff;
+  background:linear-gradient(transparent 60%, rgba(96,165,250,.45) 60%);
   padding:0 3px;
 }
 
@@ -230,7 +248,7 @@ body {
 }
 .cta-line:hover::before { transform:translateX(100%); }
 .cta-line svg { width:28px; height:28px; flex-shrink:0; }
-.cta-note { display:block; margin-top:20px; font-size:13px; color:var(--text3); }
+.cta-note { display:block; margin-top:20px; font-size:13px; color:rgba(255,255,255,.85); text-shadow:0 1px 8px rgba(0,0,0,.5); }
 
 /* ==================== Section 共通 ==================== */
 .section { padding:100px 24px; max-width:1140px; margin:0 auto; position:relative; }
@@ -822,31 +840,32 @@ footer {
 <!-- ===================== Hero ===================== -->
 <section class="hero">
 
-  <span class="eyebrow">広島・岡山限定 ／ AI×制作 パートナー</span>
-
-  <h1 class="reveal">
-    <span class="normal">広島・岡山の経営者へ。</span><br>
-    <span class="normal">その「毎日の作業」、</span>
-    <span class="accent">AIで2時間減らす。</span>
-  </h1>
-
-  <p class="sub reveal reveal-d2">
-    AI導入も、HP・ツール制作も。<strong>広島・岡山対応のパートナー</strong>として、近くで伴走します。<br>
-    「何から始めればいいか分からない」段階からOK。最新AI（Claude／ChatGPT 等）を業務に合う形で。<br>
-    <span class="sub-target">個人事業主の方も歓迎です。</span>
-  </p>
-
-  <!-- Hero メインビジュアル -->
-  <div class="hero-photo reveal reveal-d2">
+  <div class="hero-bg">
     <img src="img/lp-01-hero.png" alt="広島・岡山の中小企業の皆さんへ｜CHIKAI" loading="eager">
   </div>
 
-  <div class="reveal reveal-d3">
-    <a href="https://lin.ee/XQzNi2y" class="cta-line" onclick="gtag('event','lp_cta_click_hero')">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.5 4.5h-15A2.5 2.5 0 0 0 2 7v10a2.5 2.5 0 0 0 2.5 2.5H7l3 3 3-3h6.5A2.5 2.5 0 0 0 22 17V7a2.5 2.5 0 0 0-2.5-2.5z"/></svg>
-      無料で特典を受け取る →
-    </a>
-    <small class="cta-note">登録だけで特典PDF＋6月限定キャンペーン最大23%オフ</small>
+  <div class="hero-inner">
+    <span class="eyebrow reveal">広島・岡山限定 ／ AI×制作 パートナー</span>
+
+    <h1 class="reveal">
+      <span class="normal">広島・岡山の経営者へ。</span><br>
+      <span class="normal">その「毎日の作業」、</span>
+      <span class="accent">AIで2時間減らす。</span>
+    </h1>
+
+    <p class="sub reveal reveal-d2">
+      AI導入も、HP・ツール制作も。<strong>広島・岡山対応のパートナー</strong>として、近くで伴走します。<br>
+      「何から始めればいいか分からない」段階からOK。<br>
+      <span class="sub-target">個人事業主の方も歓迎です。</span>
+    </p>
+
+    <div class="reveal reveal-d3">
+      <a href="https://lin.ee/XQzNi2y" class="cta-line" onclick="gtag('event','lp_cta_click_hero')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.5 4.5h-15A2.5 2.5 0 0 0 2 7v10a2.5 2.5 0 0 0 2.5 2.5H7l3 3 3-3h6.5A2.5 2.5 0 0 0 22 17V7a2.5 2.5 0 0 0-2.5-2.5z"/></svg>
+        無料で特典を受け取る →
+      </a>
+      <small class="cta-note">登録だけで特典PDF＋6月限定キャンペーン最大23%オフ</small>
+    </div>
   </div>
 </section>
 
