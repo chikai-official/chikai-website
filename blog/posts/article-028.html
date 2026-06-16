@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+<title>学習塾・教室がAIで保護者向けお便りを時短する方法 | CHIKAI ブログ</title>
+<meta name="description" content="月謝の案内、イベント告知、面談のお願い、毎月の様子報告——学習塾・教室は「保護者へのお便り」に時間を取られがち。AIに下書きを任せれば5分で。コピペで使える月次お便りプロンプト＋用途別の追い指示つきで解説します。">
+<meta property="og:title" content="学習塾・教室がAIで保護者向けお便りを時短する方法">
+<meta property="og:description" content="保護者へのお便り作成を、AIで30分から5分に。月次お便りのコピペプロンプト＋イベント・面談・お休み連絡への展開つき。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-028.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-028.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "学習塾・教室がAIで保護者向けお便りを時短する方法",
+  "description": "保護者へのお便り作成を、AIで30分から5分に。月次お便りのコピペプロンプト＋イベント・面談・お休み連絡への展開つき。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-06-16",
+  "dateModified": "2026-06-16",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-028.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --blue:#2563EB; --blue-d:#1E40AF; --cyan:#06B6D4; --cyan-d:#0E7490; --cta:#F97316;
+  --dark:#04040C; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(37,99,235,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Noto Sans JP',sans-serif; line-height:1.8; }
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#2563EB,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--blue); }
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--blue); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#DCFCE7,#BBF7D0); color:#166534; margin-bottom:14px; }
+h1.art-title { font-family:'Noto Sans JP',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:900; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Noto Sans JP',sans-serif; font-size:26px; font-weight:900; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #06B6D4; }
+.art-body h3 { font-family:'Noto Sans JP',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#0E7490; font-weight:900; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); border-left:3px solid #06B6D4; border-radius:6px; }
+.step-box { background:#ECFEFF; border:1px solid #A5F3FC; border-left:4px solid #06B6D4; border-radius:12px; padding:24px 28px; margin:20px 0; }
+.step-num { display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:800; letter-spacing:1px; padding:4px 12px; background:#0891B2; color:white; border-radius:8px; margin-bottom:12px; }
+.step-title { font-size:19px; font-weight:900; margin-bottom:10px; color:#155E75; }
+.fix-line { margin-top:14px; padding-top:14px; border-top:1px dashed #A5F3FC; font-size:14px; color:#1F2937; }
+.fix-line b { color:#1E40AF; }
+.prompt-box { background:#0F172A; border:1px solid #1E293B; border-radius:12px; padding:22px 24px; margin:20px 0; }
+.prompt-box .pb-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#22D3EE; margin-bottom:14px; font-family:'Space Grotesk',sans-serif; }
+.prompt-box .pb-body { font-size:14.5px; line-height:1.85; color:#E2E8F0; white-space:pre-wrap; }
+.prompt-box .pb-body .v { color:#FCD34D; }
+.tip-box { background:#F0FDFF; border:1px solid #A5F3FC; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#0E7490; text-transform:uppercase; margin-bottom:10px; }
+.warn-box { background:#FEF6F6; border:1px solid #FECACA; border-left:4px solid #EF4444; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.warn-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#991B1B; margin-bottom:10px; }
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Noto Sans JP',sans-serif; font-size:24px; font-weight:900; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#F97316,#EA580C); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(249,115,22,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#60A5FA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .prompt-box .pb-body { font-size:13.5px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ 業種別Tips</p>
+
+  <span class="cat-tag">🎓 業種別Tips｜学習塾・教室</span>
+  <h1 class="art-title">学習塾・教室がAIで保護者向けお便りを時短する方法</h1>
+  <p class="art-meta">公開：2026年6月16日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      学習塾・教室の運営で、地味に時間を奪うのが<strong>保護者へのお便り・連絡</strong>。<br>
+      月謝の案内、イベント告知、面談のお願い、毎月の教室の様子…。一つひとつは短くても、「保護者に失礼がないように」と気を使うと、あっという間に時間が溶けます。<br>
+      これ、<strong>AIに下書きを任せれば5分</strong>で整います。コピペで使えるプロンプト付きで解説します。
+    </p>
+
+    <h2>なぜ「お便り」に時間がかかるのか</h2>
+
+    <p>保護者向けの文章は、<strong>トーンが命</strong>です。事務的すぎると冷たく、くだけすぎると頼りない。さらに、月謝・イベント・面談・お休み連絡…と用途も多い。毎月似ているようで、少しずつ内容が違う。</p>
+
+    <p>だから「ゼロから書く」と毎回悩むわけです。そこを<strong>AIに下書きさせる</strong>と、ぐっと楽になります。先生は「事実を渡して、最後に整える」だけになります。</p>
+
+    <h2>STEP1：お便りの「材料」を箇条書きにする</h2>
+
+    <div class="step-box">
+      <span class="step-num">STEP 01</span>
+      <div class="step-title">きれいな文章より、正確な"材料"が先</div>
+      <p>いきなり「お便り書いて」と頼むと、当たり障りのない文章しか出ません。先に<strong>今月の事実を箇条書き</strong>に。文章にする必要はありません。</p>
+      <div class="fix-line"><b>✓ 用意する材料：</b>今月あった出来事（行事・がんばり）／来月の予定・締切／家庭へのお願い／季節の話題</div>
+    </div>
+
+    <h2>STEP2：コピペで使える「月次お便り」プロンプト</h2>
+
+    <p>上の材料を、次のプロンプトの下に貼り付けるだけです。</p>
+
+    <div class="prompt-box">
+      <div class="pb-label">🎓 月次お便り 生成プロンプト（コピペOK）</div>
+      <div class="pb-body">あなたは学習塾・教室の先生です。保護者向けの月次お便りを作成してください。
+トーンは丁寧で温かく、保護者が安心できる文章で。
+
+構成：
+①季節のあいさつ ②今月の教室の様子 ③来月の予定・お知らせ
+④家庭へのお願い ⑤結びのあいさつ
+
+【今月の情報】
+<span class="v">（ここにSTEP1の箇条書きを貼り付け）</span></div>
+    </div>
+
+    <h2>STEP3：用途に合わせて「追い指示」</h2>
+
+    <div class="step-box">
+      <span class="step-num">STEP 02</span>
+      <div class="step-title">同じ土台から、各お便りへ展開</div>
+      <p>一度できた文章に<strong>追い指示</strong>を重ねれば、用途別のお便りに早変わりします。</p>
+      <div class="fix-line"><b>✓ 追い指示の例：</b>「◯月◯日の発表会の告知を追加。持ち物と申込期限も明記して」／「個人面談の案内に。希望日を3つから選ぶ形式で」／「教室お休みのお知らせとお詫びを、簡潔に」</div>
+    </div>
+
+    <h2>注意：名前・日付・金額は人が最終確認</h2>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ ここだけは人が確認</div>
+      AIは"それっぽい"文章が得意な反面、<strong>固有名詞・日付・金額を取り違える</strong>ことがあります。生徒さんの名前、行事の日時、月謝の金額などは、必ず人が事実と照合してから配布を。保護者の信頼に関わる部分は、最後は人の目で確認しましょう。
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ この記事のまとめ</div>
+      <strong>①</strong> 今月の事実を箇条書きでメモ<br>
+      <strong>②</strong> プロンプトに貼って月次お便りを生成<br>
+      <strong>③</strong> 追い指示でイベント・面談・お休み連絡に展開<br>
+      <strong>④</strong> 名前・日付・金額は人が最終確認<br>
+      → お便り作成が30分から5分に。空いた時間は、子どもと向き合う時間に。
+    </div>
+
+    <h2>まとめ：お便りは"先生の時間"を取り戻す入口</h2>
+
+    <p>保護者とのコミュニケーションは、学習塾・教室の信頼の土台。でも、その文章づくりに毎回30分かけるのはもったいない。AIに下書きを任せれば、温かいお便りを数分で用意でき、空いた時間を<strong>授業の準備や子どもたちと向き合う時間</strong>に回せます。</p>
+
+    <p>「うちの教室だと、どんな使い方ができる？」「お便り以外もAIで楽にしたい」というご相談は、CHIKAIの公式LINEで無料受付中です。教室の実際の業務に合わせて、<strong>今日から使えるAI活用</strong>を一緒に見つけます。</p>
+
+    <div class="cta-box">
+      <h3>お便りも連絡も、<br>AIで"先生の時間"を取り戻す</h3>
+      <p>15-20分のZoomで、教室の実際の業務を伺いながら「今日から使えるAI活用」をご提案。保護者対応も、日々の準備も、AIで軽くしていきます。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
