@@ -1,5 +1,5 @@
 /* Hibi PWA Service Worker — アプリシェルをキャッシュしてオフライン起動 */
-const CACHE = 'hibi-v4';
+const CACHE = 'hibi-v5';
 const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon-180.png'];
 
 self.addEventListener('install', e => {

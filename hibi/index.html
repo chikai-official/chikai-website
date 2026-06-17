@@ -69,6 +69,9 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdro
 .task.is-done{opacity:.5;padding-top:9px;padding-bottom:9px;}
 .task.is-done .memo,.task.is-done .badges{display:none;}
 .del{border:none;background:transparent;color:var(--text3);font-size:17px;cursor:pointer;padding:2px 4px;flex-shrink:0;}
+.t-actions{display:flex;flex-direction:column;gap:2px;align-items:center;flex-shrink:0;}
+.cal-btn{border:none;background:transparent;font-size:15px;cursor:pointer;padding:2px 4px;line-height:1;opacity:.9;}
+.task.is-done .t-actions .cal-btn{display:none;}
 .empty{text-align:center;color:var(--text3);padding:40px 20px;font-size:14px;}.empty .ic{font-size:40px;margin-bottom:10px;}
 /* calendar */
 .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
@@ -82,7 +85,8 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdro
 .cal-cell{aspect-ratio:1/1.05;border:1px solid var(--border);border-radius:11px;background:#fff;padding:5px 0 0;display:flex;flex-direction:column;align-items:center;cursor:pointer;position:relative;}
 .cal-cell.blank{border:none;background:transparent;cursor:default;}
 .cal-cell .d{font-size:13px;font-weight:700;color:var(--text2);font-family:'Space Grotesk';}
-.cal-cell.today{background:var(--blue-l);border-color:#BFDBFE;}.cal-cell.today .d{color:var(--blue);}
+.cal-cell.today{background:var(--blue-l);border-color:#BFDBFE;}
+.cal-cell .d.sat{color:#2563EB;}.cal-cell .d.sun{color:#DC2626;}
 .cal-cell.sel{outline:2px solid var(--blue);outline-offset:-1px;}
 .cal-dots{display:flex;gap:2px;margin-top:3px;flex-wrap:wrap;justify-content:center;max-width:90%;}
 .cal-dots i{width:6px;height:6px;border-radius:50%;display:block;}
@@ -227,6 +231,8 @@ const notiSupported=('Notification' in window);
 function standaloneNow(){ return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone; }
 function dueDiffDays(ds){ return Math.round((new Date(ds)-new Date(todayStr()))/86400000); }
 function mdShort(ds){ const a=ds.split('-'); return `${+a[1]}/${+a[2]}`; }
+/* 日本の祝日（2026-2027・振替休日/国民の休日込み。年が変わったら追記する）*/
+const HOLIDAYS=new Set(['2026-01-01','2026-01-12','2026-02-11','2026-02-23','2026-03-20','2026-04-29','2026-05-03','2026-05-04','2026-05-05','2026-05-06','2026-07-20','2026-08-11','2026-09-21','2026-09-22','2026-09-23','2026-10-12','2026-11-03','2026-11-23','2027-01-01','2027-01-11','2027-02-11','2027-02-23','2027-03-21','2027-03-22','2027-04-29','2027-05-03','2027-05-04','2027-05-05','2027-07-19','2027-08-11','2027-09-20','2027-09-23','2027-10-11','2027-11-03','2027-11-23']);
 
 /* ===== 自然言語パース ===== */
 function parseNL(text){
@@ -267,7 +273,7 @@ function taskHTML(t){
     <div class="time">${timeLabel}</div>
     <div class="tick ${t.done?'done':''}" data-act="done">${t.done?'✓':''}</div>
     <div class="body" data-act="edit"><div class="ttl">${esc(t.title)}</div>${t.memo?`<div class="memo" data-act="memo">${esc(t.memo)}</div>`:''}<div class="badges">${badges}</div></div>
-    <button class="del" data-act="del">✕</button></div>`;
+    <div class="t-actions"><button class="cal-btn" data-act="cal" title="iOSカレンダーに追加（通知つき）">📅</button><button class="del" data-act="del">✕</button></div></div>`;
 }
 function emptyHTML(m){ return `<div class="empty"><div class="ic">🗓️</div>${m}</div>`; }
 function renderHome(){
@@ -284,10 +290,11 @@ function renderCal(){
   document.getElementById('calTitle').textContent=`${calY}年 ${calM+1}月`;
   let html=['日','月','火','水','木','金','土'].map((w,i)=>`<div class="cal-wd ${i===0?'sun':i===6?'sat':''}">${w}</div>`).join('');
   for(let i=0;i<startWd;i++) html+=`<div class="cal-cell blank"></div>`;
-  for(let d=1;d<=days;d++){ const ds=fmt(new Date(calY,calM,d)); const dl=tasksOf(ds);
+  for(let d=1;d<=days;d++){ const cellDate=new Date(calY,calM,d); const ds=fmt(cellDate); const wd=cellDate.getDay(); const dl=tasksOf(ds);
+    const dCls=(wd===0||HOLIDAYS.has(ds))?'sun':(wd===6?'sat':'');
     const dots=dl.slice(0,4).map(t=>`<i style="background:${CATS[t.cat]?CATS[t.cat].color:'#93C5FD'}"></i>`).join('');
     const more=dl.length>4?`<span class="cal-more">+${dl.length-4}</span>`:'';
-    html+=`<div class="cal-cell ${ds===todayStr()?'today':''} ${ds===selDate?'sel':''}" data-date="${ds}"><span class="d">${d}</span><div class="cal-dots">${dots}${more}</div></div>`; }
+    html+=`<div class="cal-cell ${ds===todayStr()?'today':''} ${ds===selDate?'sel':''}" data-date="${ds}"><span class="d ${dCls}">${d}</span><div class="cal-dots">${dots}${more}</div></div>`; }
   document.getElementById('calGrid').innerHTML=html;
   document.getElementById('calLegend').innerHTML=Object.values(CATS).map(c=>`<span><i style="background:${c.color}"></i>${c.label}</span>`).join('');
   renderCalDetail();
@@ -304,6 +311,28 @@ function renderAll(){ renderHome(); if(typeof calY==='number') renderCal(); }
 /* ===== タスク操作 ===== */
 function advance(ds,rep){ const [y,m,d]=ds.split('-').map(Number); const dt=new Date(y,m-1,d);
   if(rep==='daily')dt.setDate(dt.getDate()+1); else if(rep==='weekly')dt.setDate(dt.getDate()+7); else if(rep==='monthly')dt.setMonth(dt.getMonth()+1); return fmt(dt); }
+
+/* ===== iOSカレンダー連携（.ics・通知つき。閉じていても純正カレンダーが鳴らす）===== */
+function icsEsc(s){ return (s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n'); }
+function buildICS(t){
+  const p=n=>String(n).padStart(2,'0'); const ds=t.date.replace(/-/g,''); const now=new Date();
+  const stamp=`${now.getUTCFullYear()}${p(now.getUTCMonth()+1)}${p(now.getUTCDate())}T${p(now.getUTCHours())}${p(now.getUTCMinutes())}${p(now.getUTCSeconds())}Z`;
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Hibi//Task//JP','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:hibi-'+t.id+'@hibi.app','DTSTAMP:'+stamp];
+  if(t.time){ const [hh,mm]=t.time.split(':'); L.push('DTSTART:'+ds+'T'+p(+hh)+p(+mm)+'00','DURATION:PT30M'); }
+  else { L.push('DTSTART;VALUE=DATE:'+ds); }
+  L.push('SUMMARY:'+icsEsc(t.title));
+  if(t.memo) L.push('DESCRIPTION:'+icsEsc(t.memo));
+  if(t.time){ const trig=(t.notify&&t.notify!=='none')?('-PT'+t.notify+'M'):'PT0M';
+    L.push('BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(t.title),'TRIGGER:'+trig,'END:VALARM'); }
+  L.push('END:VEVENT','END:VCALENDAR'); return L.join('\r\n');
+}
+function addToCalendar(t){
+  const ics=buildICS(t);
+  if(isiOSdev){ window.location.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics); }
+  else { const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'}); const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download=(t.title||'task').replace(/[\\/:*?"<>|]/g,'_').slice(0,24)+'.ics';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),8000); }
+}
 document.body.addEventListener('click',e=>{
   const el=e.target.closest('.task'); if(!el)return;
   const id=el.dataset.id, act=e.target.closest('[data-act]')?.dataset.act, t=tasks.find(x=>x.id===id); if(!t)return;
@@ -312,6 +341,7 @@ document.body.addEventListener('click',e=>{
     saveTasks(); renderAll(); }
   else if(act==='del'){ tasks=tasks.filter(x=>x.id!==id); saveTasks(); renderAll(); }
   else if(act==='memo'){ e.target.closest('.memo').classList.toggle('expanded'); return; }
+  else if(act==='cal'){ addToCalendar(t); return; }
   else if(act==='edit'){ openSheet(t); }
 });
 
