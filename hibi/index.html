@@ -58,6 +58,11 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdro
 .badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:100px;background:var(--blue-l);color:var(--blue-d);}
 .badge.notify{background:#FFF7ED;color:#C2410C;}
 .badge.rep{background:#F1F5F9;color:#475569;}
+.badge.due{background:#EEF2FF;color:#3730A3;}
+.badge.due.soon{background:#FFF7ED;color:#C2410C;}
+.badge.due.overdue{background:#FEF2F2;color:#B91C1C;}
+.due-toggle{border:1px solid var(--border);background:#fff;border-radius:11px;padding:12px 16px;font-family:inherit;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;width:100%;text-align:left;}
+.due-toggle.on{background:#EEF2FF;border-color:#C7D2FE;color:#3730A3;}
 .cat-dot{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:100px;color:#fff;}
 .task.is-done .ttl{text-decoration:line-through;color:var(--done);}
 .task.is-done .time b{color:var(--done);}
@@ -190,8 +195,12 @@ input:focus,select:focus,.sheet textarea:focus{outline:none;border-color:var(--b
   <div class="field"><label>繰り返し</label>
     <select id="fRepeat"><option value="none">なし</option><option value="daily">毎日</option><option value="weekly">毎週</option><option value="monthly">毎月</option></select>
   </div>
+  <div class="field"><label>期限（○日までに完了）</label>
+    <button type="button" class="due-toggle" id="dueToggle">📌 期限を付ける</button>
+    <input type="date" id="fDue" style="display:none;margin-top:8px;">
+  </div>
   <div class="sheet-actions"><button class="btn btn-ghost" id="sheetCancel">閉じる</button><button class="btn btn-primary" id="sheetSave">保存</button></div>
-  <div class="hint" id="micHint">🎤で音声入力（Chrome推奨）。通知はアプリを開いている間に届きます。</div>
+  <div class="hint" id="micHint">🎤＝Android/PC Chromeの音声入力。iPhoneは入力欄→キーボードの🎤（音声入力）が確実です。通知はアプリを開いている間に届きます。</div>
 </div>
 
 <script>
@@ -211,6 +220,13 @@ function fmt(d){ return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,
 function jp(ds){ const [y,m,d]=ds.split('-').map(Number); const dt=new Date(y,m-1,d); return `${m}月${d}日(${WD[dt.getDay()]})`; }
 function sortTasks(a){ return a.slice().sort((x,y)=>(x.time||'99:99').localeCompare(y.time||'99:99')||x.createdAt-y.createdAt); }
 function tasksOf(ds){ return sortTasks(tasks.filter(t=>t.date===ds)); }
+
+/* ===== 環境判定・期限ヘルパ ===== */
+const isiOSdev=/iphone|ipad|ipod/i.test(navigator.userAgent);
+const notiSupported=('Notification' in window);
+function standaloneNow(){ return window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone; }
+function dueDiffDays(ds){ return Math.round((new Date(ds)-new Date(todayStr()))/86400000); }
+function mdShort(ds){ const a=ds.split('-'); return `${+a[1]}/${+a[2]}`; }
 
 /* ===== 自然言語パース ===== */
 function parseNL(text){
@@ -238,7 +254,12 @@ function parseNL(text){
 function esc(s){ return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function taskHTML(t){
   const cat=CATS[t.cat];
-  const badges=[ t.notify!=='none'?`<span class="badge notify">🔔${t.notify}分前</span>`:'',
+  let dueBadge='';
+  if(t.due){ const diff=dueDiffDays(t.due); const cls=diff<0?'overdue':(diff<=3?'soon':'');
+    const lbl=diff<0?('期限切れ '+mdShort(t.due)):(diff===0?'本日締切':(mdShort(t.due)+'まで'));
+    dueBadge=`<span class="badge due ${cls}">🚩${lbl}</span>`; }
+  const badges=[ dueBadge,
+    t.notify!=='none'?`<span class="badge notify">🔔${t.notify}分前</span>`:'',
     t.repeat&&t.repeat!=='none'?`<span class="badge rep">🔁${({daily:'毎日',weekly:'毎週',monthly:'毎月'})[t.repeat]}</span>`:'',
     cat?`<span class="cat-dot" style="background:${cat.color}">${cat.label}</span>`:'' ].join('');
   const timeLabel=t.time?`<b>${t.time}</b><small>${t.notify!=='none'?'通知':''}</small>`:`<b>—</b><small>終日</small>`;
@@ -296,10 +317,13 @@ document.body.addEventListener('click',e=>{
 
 /* ===== シート ===== */
 const overlay=document.getElementById('overlay'), sheet=document.getElementById('sheet');
-let editingId=null, selNotify='none', selCat='';
+let editingId=null, selNotify='none', selCat='', selDue='';
 function renderChips(){ document.getElementById('catChips').innerHTML=
   `<button data-c="" class="${selCat===''?'sel':''}" style="${selCat===''?'background:#64748B;':''}">なし</button>`+
   Object.entries(CATS).map(([k,c])=>`<button data-c="${k}" class="${selCat===k?'sel':''}" style="${selCat===k?'background:'+c.color:''}">${c.label}</button>`).join(''); }
+function renderDue(){ const btn=document.getElementById('dueToggle'), inp=document.getElementById('fDue');
+  if(selDue){ btn.classList.add('on'); btn.textContent='📌 期限あり：'+mdShort(selDue)+'まで（タップで解除）'; inp.style.display='block'; inp.value=selDue; }
+  else { btn.classList.remove('on'); btn.textContent='📌 期限を付ける'; inp.style.display='none'; } }
 function openSheet(t){
   editingId=t?t.id:null;
   document.getElementById('sheetTitle').textContent=t?'タスクを編集':'タスクを追加';
@@ -307,10 +331,10 @@ function openSheet(t){
   document.getElementById('fMemo').value=t?(t.memo||''):'';
   document.getElementById('fDate').value=t?t.date:(currentTab==='cal'?selDate:todayStr());
   document.getElementById('fTime').value=t?(t.time||''):'';
-  selNotify=t?t.notify:'none'; selCat=t?(t.cat||''):'';
+  selNotify=t?t.notify:'none'; selCat=t?(t.cat||''):''; selDue=t?(t.due||''):'';
   document.getElementById('fRepeat').value=t?(t.repeat||'none'):'none';
   [...document.querySelectorAll('#notifyOpts button')].forEach(b=>b.classList.toggle('sel',b.dataset.n===selNotify));
-  renderChips(); document.getElementById('nlHint').textContent='';
+  renderChips(); renderDue(); document.getElementById('nlHint').textContent='';
   overlay.classList.add('show'); sheet.classList.add('show');
   setTimeout(()=>document.getElementById('fTitle').focus(),250);
 }
@@ -321,6 +345,8 @@ overlay.onclick=closeSheet;
 document.getElementById('notifyOpts').onclick=e=>{ const b=e.target.closest('button'); if(!b)return; selNotify=b.dataset.n;
   [...document.querySelectorAll('#notifyOpts button')].forEach(x=>x.classList.toggle('sel',x===b)); };
 document.getElementById('catChips').onclick=e=>{ const b=e.target.closest('button'); if(!b)return; selCat=b.dataset.c; renderChips(); };
+document.getElementById('dueToggle').onclick=()=>{ selDue = selDue ? '' : (document.getElementById('fDue').value||document.getElementById('fDate').value||todayStr()); renderDue(); };
+document.getElementById('fDue').onchange=e=>{ selDue=e.target.value; renderDue(); };
 document.getElementById('fTitle').addEventListener('input',e=>{
   const p=parseNL(e.target.value); const h=document.getElementById('nlHint');
   h.textContent=(p.date||p.time)?'📅 認識: '+(p.date?jp(p.date):'日付なし')+(p.time?' '+p.time:'')+(p.title?'｜'+p.title:''):'';
@@ -335,8 +361,9 @@ document.getElementById('sheetSave').onclick=()=>{
   if(selNotify!=='none'&&!time){ alert('通知を使うには時間を入れてください（例：「15時」と話すか時間欄に入力）。'); return; }
   if(selNotify!=='none') ensureNotifyPermission();
   const repeat=document.getElementById('fRepeat').value;
-  if(editingId){ Object.assign(tasks.find(x=>x.id===editingId),{title,memo,date,time,notify:selNotify,cat:selCat,repeat,notified:false}); }
-  else tasks.push({id:'t'+Date.now()+Math.random().toString(36).slice(2,6),title,memo,date,time,notify:selNotify,cat:selCat,repeat,done:false,notified:false,createdAt:Date.now()});
+  const due=selDue||'';
+  if(editingId){ Object.assign(tasks.find(x=>x.id===editingId),{title,memo,date,time,notify:selNotify,cat:selCat,repeat,due,notified:false}); }
+  else tasks.push({id:'t'+Date.now()+Math.random().toString(36).slice(2,6),title,memo,date,time,notify:selNotify,cat:selCat,repeat,due,done:false,notified:false,createdAt:Date.now()});
   saveTasks(); closeSheet();
   if(currentTab==='cal'){ selDate=date; calY=+date.slice(0,4); calM=+date.slice(5,7)-1; }
   renderAll();
@@ -361,24 +388,44 @@ document.getElementById('calNext').onclick=()=>{ calM++; if(calM>11){calM=0;calY
 document.getElementById('calToday').onclick=()=>{ const d=new Date(); calY=d.getFullYear(); calM=d.getMonth(); selDate=todayStr(); renderCal(); };
 document.getElementById('calGrid').onclick=e=>{ const c=e.target.closest('.cal-cell'); if(!c||!c.dataset.date)return; selDate=c.dataset.date; renderCal(); };
 
-/* ===== 音声入力 ===== */
+/* ===== 音声入力（iOSはキーボード音声入力へ誘導）===== */
 const micBtn=document.getElementById('micBtn');
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition; let recog=null;
-if(SR){ recog=new SR(); recog.lang='ja-JP'; recog.interimResults=false; recog.maxAlternatives=1;
+if(SR && !isiOSdev){
+  recog=new SR(); recog.lang='ja-JP'; recog.interimResults=false; recog.maxAlternatives=1;
   recog.onresult=e=>{ const txt=e.results[0][0].transcript; const inp=document.getElementById('fTitle');
     inp.value=(inp.value?inp.value+' ':'')+txt; inp.dispatchEvent(new Event('input')); };
-  recog.onend=()=>micBtn.classList.remove('recording'); recog.onerror=()=>micBtn.classList.remove('recording');
-} else { micBtn.style.opacity=.4; document.getElementById('micHint').textContent='※このブラウザは音声入力に非対応です（Chrome推奨）。'; }
-micBtn.onclick=()=>{ if(!recog){ alert('このブラウザは音声入力に非対応です。Chromeでお試しください。'); return; } try{ recog.start(); micBtn.classList.add('recording'); }catch(e){} };
+  recog.onend=()=>micBtn.classList.remove('recording');
+  recog.onerror=ev=>{ micBtn.classList.remove('recording');
+    const m={'not-allowed':'マイクの使用が許可されていません。ブラウザ設定でマイクを許可してください。','service-not-allowed':'この端末は音声認識に未対応です。キーボードの🎤をお使いください。','no-speech':'声が聞き取れませんでした。もう一度どうぞ。','audio-capture':'マイクが見つかりません。','network':'ネットワークエラーです。通信状況を確認してください。'}[ev.error];
+    if(m) alert(m); }; }
+micBtn.onclick=()=>{
+  if(!recog){ document.getElementById('fTitle').focus();
+    alert(isiOSdev?'iPhoneはアプリ内音声入力が使えません。\n入力欄をタップ →キーボードの🎤（マイク）ボタンで声入力できます。':'この端末は音声入力に未対応です。\nキーボードの🎤（音声入力）をお使いください。'); return; }
+  try{ recog.start(); micBtn.classList.add('recording'); }catch(e){ micBtn.classList.remove('recording'); } };
 
-/* ===== 通知 ===== */
+/* ===== 通知（iOSはインストール後に有効化）===== */
 const bellBtn=document.getElementById('bellBtn');
-function refreshBell(){ const ok=('Notification'in window)&&Notification.permission==='granted';
-  bellBtn.classList.toggle('on',ok); document.getElementById('notice').style.display=(('Notification'in window)&&Notification.permission==='default')?'flex':'none'; }
-function ensureNotifyPermission(){ if(('Notification'in window)&&Notification.permission==='default') Notification.requestPermission().then(refreshBell); }
-bellBtn.onclick=()=>{ if(!('Notification'in window)){alert('このブラウザは通知に非対応です。');return;}
-  Notification.requestPermission().then(p=>{ refreshBell(); if(p==='granted') new Notification('Hibi',{body:'通知をオンにしました ✅'}); }); };
-document.getElementById('enableNotif').onclick=()=>bellBtn.click();
+const noticeEl=document.getElementById('notice');
+function refreshBell(){
+  const granted=notiSupported && Notification.permission==='granted';
+  bellBtn.classList.toggle('on',granted);
+  const span=noticeEl.querySelector('span'), btn=noticeEl.querySelector('button');
+  if(granted){ noticeEl.style.display='none'; }
+  else if(notiSupported && Notification.permission==='default'){ span.textContent='通知（5・15・30分前）を使うには許可が必要です。'; btn.textContent='通知を許可'; noticeEl.style.display='flex'; }
+  else if(!notiSupported && isiOSdev && !standaloneNow()){ span.textContent='iPhoneは「ホーム画面に追加」してアプリで開くと通知が使えます。'; btn.textContent='手順を見る'; noticeEl.style.display='flex'; }
+  else { noticeEl.style.display='none'; }
+}
+function ensureNotifyPermission(){ if(notiSupported && Notification.permission==='default') Notification.requestPermission().then(refreshBell); }
+function enableNotify(){
+  if(notiSupported){ Notification.requestPermission().then(p=>{ refreshBell();
+    if(p==='granted'){ try{ new Notification('Hibi',{body:'通知をオンにしました ✅'}); }catch(e){} }
+    else if(p==='denied'){ alert('通知がブロックされています。ブラウザ/端末の設定で、このサイトの通知を許可してください。'); } }); }
+  else if(isiOSdev && !standaloneNow()){ alert('iPhoneで通知を使う手順：\n① Safari下の共有ボタン（□に↑）→「ホーム画面に追加」\n② 追加されたHibiアイコンから開く\n③ もう一度🔔を押して「許可」\n（iOS 16.4以降が必要です）'); }
+  else { alert('この端末・ブラウザは通知に未対応です。'); }
+}
+bellBtn.onclick=enableNotify;
+document.getElementById('enableNotif').onclick=enableNotify;
 function checkNotifications(){ if(!('Notification'in window)||Notification.permission!=='granted')return;
   const now=Date.now(); let ch=false;
   tasks.forEach(t=>{ if(t.done||t.notify==='none'||t.notified||!t.time)return;
