@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+<title>AIに「自社らしい文章」を覚えさせる文体学習のコツ | CHIKAI ブログ</title>
+<meta name="description" content="AIに文章を書かせると「自社らしくない無難な文」になりがち。過去の文章をお手本に「自社の文体」を学習させれば、メール・お知らせ・SNSが「うちらしく」なります。文体を分析・再現するコピペプロンプト付きで解説します。">
+<meta property="og:title" content="AIに「自社らしい文章」を覚えさせる文体学習のコツ">
+<meta property="og:description" content="AIの文章が「無難」から「うちらしい」に。自社の文体を分析・再現するコピペプロンプト付き。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-029.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-029.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "AIに「自社らしい文章」を覚えさせる文体学習のコツ",
+  "description": "AIの文章が「無難」から「うちらしい」に。自社の文体を分析・再現するコピペプロンプト付き。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-06-17",
+  "dateModified": "2026-06-17",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-029.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --blue:#2563EB; --blue-d:#1E40AF; --cyan:#06B6D4; --cyan-d:#0E7490; --cta:#F97316;
+  --dark:#04040C; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(37,99,235,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Noto Sans JP',sans-serif; line-height:1.8; }
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#2563EB,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--blue); }
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--blue); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); color:#155E75; margin-bottom:14px; }
+h1.art-title { font-family:'Noto Sans JP',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:900; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Noto Sans JP',sans-serif; font-size:26px; font-weight:900; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #06B6D4; }
+.art-body h3 { font-family:'Noto Sans JP',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#0E7490; font-weight:900; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); border-left:3px solid #06B6D4; border-radius:6px; }
+.step-box { background:#ECFEFF; border:1px solid #A5F3FC; border-left:4px solid #06B6D4; border-radius:12px; padding:24px 28px; margin:20px 0; }
+.step-num { display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:800; letter-spacing:1px; padding:4px 12px; background:#0891B2; color:white; border-radius:8px; margin-bottom:12px; }
+.step-title { font-size:19px; font-weight:900; margin-bottom:10px; color:#155E75; }
+.fix-line { margin-top:14px; padding-top:14px; border-top:1px dashed #A5F3FC; font-size:14px; color:#1F2937; }
+.fix-line b { color:#1E40AF; }
+.prompt-box { background:#0F172A; border:1px solid #1E293B; border-radius:12px; padding:22px 24px; margin:20px 0; }
+.prompt-box .pb-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#22D3EE; margin-bottom:14px; font-family:'Space Grotesk',sans-serif; }
+.prompt-box .pb-body { font-size:14.5px; line-height:1.85; color:#E2E8F0; white-space:pre-wrap; }
+.prompt-box .pb-body .v { color:#FCD34D; }
+.tip-box { background:#F0FDFF; border:1px solid #A5F3FC; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#0E7490; text-transform:uppercase; margin-bottom:10px; }
+.warn-box { background:#FEF6F6; border:1px solid #FECACA; border-left:4px solid #EF4444; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.warn-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#991B1B; margin-bottom:10px; }
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Noto Sans JP',sans-serif; font-size:24px; font-weight:900; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#F97316,#EA580C); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(249,115,22,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#60A5FA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .prompt-box .pb-body { font-size:13.5px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ プロンプト</p>
+
+  <span class="cat-tag">📋 プロンプト｜文体学習</span>
+  <h1 class="art-title">AIに「自社らしい文章」を覚えさせる文体学習のコツ</h1>
+  <p class="art-meta">公開：2026年6月17日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      AIにメールやお知らせを書かせると、速くて便利。<br>
+      でも、<strong>「なんだか自分の会社っぽくない」</strong>「他社でも通じそうな無難な文」になりがちです。<br>
+      実はこれ、<strong>自社の"文体"をAIに覚えさせるひと手間</strong>で大きく変わります。コピペで使えるプロンプトで解説します。
+    </p>
+
+    <h2>なぜAIの文章は「無難」になるのか</h2>
+
+    <p>AIは、世の中の平均的な文章をもとに"それっぽい"文を作ります。だから文法は正しくても、<strong>あなたの会社ならではの空気感</strong>——親しみやすさ、丁寧さ、専門性、テンポ——までは再現できません。お手本を見せていないからです。</p>
+
+    <p>逆に言えば、<strong>お手本さえ渡せば</strong>、文章はぐっと"らしく"なります。難しい作業ではありません。</p>
+
+    <h2>STEP1：自社の「お手本」を3つ用意する</h2>
+
+    <div class="step-box">
+      <span class="step-num">STEP 01</span>
+      <div class="step-title">過去の"自社らしい文章"が教材になる</div>
+      <p>これまで書いた中で<strong>「これは自社らしい」と思える文章を3つ</strong>選びます。完璧でなくてOK。種類はバラけていた方が、AIが特徴をつかみやすくなります。</p>
+      <div class="fix-line"><b>✓ お手本の例：</b>お客様へのお知らせ ／ 問い合わせへの返信メール ／ SNS投稿やブログの一節</div>
+    </div>
+
+    <h2>STEP2：文体の特徴をAIに分析させる</h2>
+
+    <p>まずはAIに、お手本の「クセ」を言葉にしてもらいます。</p>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 文体 分析プロンプト（コピペOK）</div>
+      <div class="pb-body">以下は当社が書いた文章です。この文章の「文体の特徴」を分析してください。
+トーン（丁寧／親しみやすい など）、一人称や語尾、よく使う言い回し、
+一文の長さ、読み手への距離感を、箇条書きで具体的にまとめてください。
+
+【お手本の文章】
+<span class="v">（ここにSTEP1の3つを貼り付け）</span></div>
+    </div>
+
+    <p>これでAIが<strong>「文体の特徴リスト」</strong>を作ってくれます。これがあなたの会社の"文章の設計図"です。</p>
+
+    <h2>STEP3：その文体で書かせる</h2>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 文体を再現して執筆プロンプト（コピペOK）</div>
+      <div class="pb-body">あなたは当社の文章担当です。次の「文体の特徴」を必ず守って文章を書いてください。
+
+【文体の特徴】
+<span class="v">（STEP2で出た分析結果を貼り付け）</span>
+
+【書いてほしいもの】
+<span class="v">（例：価格改定のお知らせ ／ 新商品の紹介メール など）</span></div>
+    </div>
+
+    <p>同じ内容でも、無難な文ではなく<strong>"うちらしい"文章</strong>で出てきます。</p>
+
+    <h2>一度作れば、ずっと使い回せる</h2>
+
+    <div class="step-box">
+      <span class="step-num">STEP 02</span>
+      <div class="step-title">「文体の設計図」を保存しておく</div>
+      <p>STEP2で出た「文体の特徴」は<strong>コピーして保存</strong>しておきましょう。次からはSTEP3に貼るだけ。</p>
+      <div class="fix-line"><b>✓ さらに楽に：</b>ChatGPTなら<strong>カスタム指示（Custom Instructions）</strong>に登録しておくと、毎回貼らなくても"自社の文体"で書いてくれます。</div>
+    </div>
+
+    <h2>注意：事実と固有名詞は人が確認</h2>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ ここだけは人が確認</div>
+      文体が自然になるほど、内容のミスは見逃しやすくなります。金額・日付・名前・約束事は、最後に必ず人が確認を。<strong>「らしさはAI、正しさは人」</strong>——この役割分担を忘れないでください。
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ この記事のまとめ</div>
+      <strong>①</strong> 自社らしい文章を3つ用意<br>
+      <strong>②</strong> AIに文体の特徴を分析させる<br>
+      <strong>③</strong> その特徴を渡して書かせる<br>
+      <strong>④</strong> 文体メモは保存・カスタム指示に登録して使い回す<br>
+      → AIの文章が「無難」から「うちらしい」に変わります。
+    </div>
+
+    <h2>まとめ：AIに「自社の声」で書かせる</h2>
+
+    <p>AIに丸投げすると無難になりますが、<strong>"お手本"と"文体の設計図"を渡せば</strong>、あなたの会社の声で書いてくれます。メール・お知らせ・SNS・ブログ——日々の文章が、速いだけでなく"らしく"なる。これがAI活用の一段上の使い方です。</p>
+
+    <p>「うちの文体って、どう言葉にすればいい？」というご相談は、CHIKAIの公式LINEで無料受付中。御社の文章を一緒に分析して、<strong>"自社の文体の設計図"</strong>を作ります。</p>
+
+    <div class="cta-box">
+      <h3>AIに「自社の声」で<br>書かせてみませんか</h3>
+      <p>15-20分のZoomで、御社の文章を一緒に分析し「文体の設計図」をご提案。日々の文章作成を、速く・"らしく"していきます。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
