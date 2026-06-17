@@ -139,6 +139,7 @@ input:focus,select:focus,.sheet textarea:focus{outline:none;border-color:var(--b
   <div class="brand"><div class="mark">日</div><h1>Hibi<small>TASK MANAGER</small></h1></div>
   <div style="display:flex;gap:8px;align-items:center;">
     <button class="bell" id="installBtn" title="ホーム画面に追加" style="display:none;font-size:13px;font-weight:700;">📲 追加</button>
+    <button class="bell" id="bkBtn" title="バックアップ">💾</button>
     <button class="bell" id="bellBtn" title="通知を有効化">🔔</button>
   </div>
 </header>
@@ -205,6 +206,23 @@ input:focus,select:focus,.sheet textarea:focus{outline:none;border-color:var(--b
   </div>
   <div class="sheet-actions"><button class="btn btn-ghost" id="sheetCancel">閉じる</button><button class="btn btn-primary" id="sheetSave">保存</button></div>
   <div class="hint" id="micHint">🎤＝Android/PC Chromeの音声入力。iPhoneは入力欄→キーボードの🎤（音声入力）が確実です。通知はアプリを開いている間に届きます。</div>
+</div>
+
+<!-- BACKUP SHEET -->
+<div class="sheet" id="backupSheet">
+  <h2>💾 バックアップ</h2>
+  <p style="font-size:12.5px;color:var(--text2);margin:-6px 0 16px;line-height:1.7;">タスクはこの端末の中だけに保存されています。ときどき書き出して保管しておくと、消えても元に戻せます（無料・端末内で完結）。</p>
+  <div class="field"><label>① 書き出す（バックアップを作る）</label>
+    <button class="btn btn-primary" id="bkExport" style="width:100%;">📤 書き出す（共有・保存）</button>
+    <textarea id="bkOut" readonly style="margin-top:8px;font-size:11px;min-height:64px;color:var(--text2);"></textarea>
+    <button class="due-toggle" id="bkCopy" style="margin-top:6px;text-align:center;">📋 内容をコピー</button>
+  </div>
+  <div class="field"><label>② 復元する（バックアップから戻す）</label>
+    <input type="file" id="bkFile" accept="application/json,.json,text/plain" style="margin-bottom:8px;font-size:13px;">
+    <textarea id="bkIn" placeholder="または、コピーしたバックアップをここに貼り付け" style="font-size:11px;min-height:64px;"></textarea>
+    <button class="btn" id="bkImport" style="width:100%;margin-top:8px;background:linear-gradient(135deg,#2563EB,#1E40AF);color:#fff;">↩️ この内容で復元する</button>
+  </div>
+  <button class="btn btn-ghost" id="bkClose" style="width:100%;flex:none;">閉じる</button>
 </div>
 
 <script>
@@ -371,7 +389,7 @@ function openSheet(t){
 function closeSheet(){ overlay.classList.remove('show'); sheet.classList.remove('show'); editingId=null; }
 document.getElementById('fab').onclick=()=>openSheet(null);
 document.getElementById('sheetCancel').onclick=closeSheet;
-overlay.onclick=closeSheet;
+overlay.onclick=()=>{ closeSheet(); closeBackup(); };
 document.getElementById('notifyOpts').onclick=e=>{ const b=e.target.closest('button'); if(!b)return; selNotify=b.dataset.n;
   [...document.querySelectorAll('#notifyOpts button')].forEach(x=>x.classList.toggle('sel',x===b)); };
 document.getElementById('catChips').onclick=e=>{ const b=e.target.closest('button'); if(!b)return; selCat=b.dataset.c; renderChips(); };
@@ -468,6 +486,33 @@ setInterval(checkNotifications,20000);
 function seedIfEmpty(){ if(tasks.length)return; const d=todayStr();
   tasks=[ {id:'demo1',title:'タップで編集・○で完了（例）',memo:'',date:d,time:'09:00',notify:'none',cat:'work1',repeat:'none',done:false,notified:false,createdAt:1},
           {id:'demo2',title:'「明日15時に会議」と話すと自動入力（例）',memo:'内容欄にメモも残せます',date:d,time:'13:30',notify:'15',cat:'life',repeat:'none',done:false,notified:false,createdAt:2} ]; saveTasks(); }
+/* ===== バックアップ（書き出し/復元・無料・端末内で完結）===== */
+function exportData(){ return JSON.stringify({app:'Hibi',v:3,exportedAt:new Date().toISOString(),tasks},null,0); }
+function doExport(){
+  const json=exportData(); document.getElementById('bkOut').value=json;
+  const fname='hibi-backup-'+todayStr()+'.json'; const blob=new Blob([json],{type:'application/json'});
+  try{ const file=new File([blob],fname,{type:'application/json'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){ navigator.share({files:[file],title:'Hibiバックアップ'}).catch(()=>{}); return; } }catch(e){}
+  const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=fname; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),8000);
+}
+function doImport(text){
+  let p; try{ p=JSON.parse(text); }catch(e){ alert('読み込めませんでした（バックアップの中身が正しくありません）。'); return; }
+  const arr=Array.isArray(p)?p:(p&&p.tasks); if(!Array.isArray(arr)){ alert('タスクのデータが見つかりませんでした。'); return; }
+  if(!confirm('今のタスクを、このバックアップの内容で置き換えます。よろしいですか？')) return;
+  tasks=arr.filter(t=>t&&t.id&&t.title).map(t=>({id:String(t.id),title:String(t.title),memo:t.memo||'',date:t.date||todayStr(),time:t.time||'',notify:t.notify||'none',cat:t.cat||'',repeat:t.repeat||'none',due:t.due||'',done:!!t.done,notified:!!t.notified,createdAt:t.createdAt||Date.now()}));
+  saveTasks(); renderAll(); closeBackup(); alert('復元しました（'+tasks.length+'件）。');
+}
+function openBackup(){ document.getElementById('bkOut').value=exportData(); document.getElementById('bkIn').value=''; overlay.classList.add('show'); document.getElementById('backupSheet').classList.add('show'); }
+function closeBackup(){ overlay.classList.remove('show'); document.getElementById('backupSheet').classList.remove('show'); }
+document.getElementById('bkBtn').onclick=openBackup;
+document.getElementById('bkClose').onclick=closeBackup;
+document.getElementById('bkExport').onclick=doExport;
+document.getElementById('bkImport').onclick=()=>doImport(document.getElementById('bkIn').value);
+document.getElementById('bkFile').onchange=e=>{ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>doImport(r.result); r.readAsText(f); e.target.value=''; };
+document.getElementById('bkCopy').onclick=()=>{ const ta=document.getElementById('bkOut'); ta.select(); ta.setSelectionRange(0,99999);
+  const done=()=>{ const b=document.getElementById('bkCopy'); b.textContent='✓ コピーしました'; setTimeout(()=>{b.textContent='📋 内容をコピー';},1500); };
+  try{ navigator.clipboard.writeText(ta.value).then(done,()=>{try{document.execCommand('copy');}catch(_){}done();}); }catch(e){ try{document.execCommand('copy');}catch(_){} done(); } };
+
 seedIfEmpty(); refreshBell(); renderAll(); checkNotifications();
 </script>
 <script>
