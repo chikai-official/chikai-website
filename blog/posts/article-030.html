@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+<title>歯科・クリニックがAIで予約案内と問診メモを効率化する方法 | CHIKAI ブログ</title>
+<meta name="description" content="予約リマインド・問診メモの清書・よくある質問への返信——クリニックの"文字仕事"はAIが得意な領域です。受付まわりを時短する3つの使い方を、コピペプロンプトつきで解説。患者さんの個人情報の扱いなど、医療現場ならではの注意点もまとめます。">
+<meta property="og:title" content="歯科・クリニックがAIで予約案内と問診メモを効率化する方法">
+<meta property="og:description" content="クリニックの受付・問診まわりの"文字仕事"をAIで時短。コピペプロンプト3種＋個人情報の注意点つき。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-030.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-030.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "歯科・クリニックがAIで予約案内と問診メモを効率化する方法",
+  "description": "クリニックの受付・問診まわりの"文字仕事"をAIで時短。コピペプロンプト3種＋個人情報の注意点つき。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-06-18",
+  "dateModified": "2026-06-18",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-030.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --blue:#2563EB; --blue-d:#1E40AF; --cyan:#06B6D4; --cyan-d:#0E7490; --cta:#F97316;
+  --dark:#04040C; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(37,99,235,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Noto Sans JP',sans-serif; line-height:1.8; }
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#2563EB,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--blue); }
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--blue); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#DCFCE7,#BBF7D0); color:#166534; margin-bottom:14px; }
+h1.art-title { font-family:'Noto Sans JP',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:900; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Noto Sans JP',sans-serif; font-size:26px; font-weight:900; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #06B6D4; }
+.art-body h3 { font-family:'Noto Sans JP',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#0E7490; font-weight:900; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); border-left:3px solid #06B6D4; border-radius:6px; }
+.step-box { background:#ECFEFF; border:1px solid #A5F3FC; border-left:4px solid #06B6D4; border-radius:12px; padding:24px 28px; margin:20px 0; }
+.step-num { display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:800; letter-spacing:1px; padding:4px 12px; background:#0891B2; color:white; border-radius:8px; margin-bottom:12px; }
+.fix-line { margin-top:14px; padding-top:14px; border-top:1px dashed #A5F3FC; font-size:14px; color:#1F2937; }
+.fix-line b { color:#1E40AF; }
+.prompt-box { background:#0F172A; border:1px solid #1E293B; border-radius:12px; padding:22px 24px; margin:20px 0; }
+.prompt-box .pb-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#22D3EE; margin-bottom:14px; font-family:'Space Grotesk',sans-serif; }
+.prompt-box .pb-body { font-size:14.5px; line-height:1.85; color:#E2E8F0; white-space:pre-wrap; }
+.prompt-box .pb-body .v { color:#FCD34D; }
+.tip-box { background:#F0FDFF; border:1px solid #A5F3FC; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#0E7490; text-transform:uppercase; margin-bottom:10px; }
+.warn-box { background:#FEF6F6; border:1px solid #FECACA; border-left:4px solid #EF4444; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.warn-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#991B1B; margin-bottom:10px; }
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Noto Sans JP',sans-serif; font-size:24px; font-weight:900; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#F97316,#EA580C); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(249,115,22,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#60A5FA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .prompt-box .pb-body { font-size:13.5px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ 業種別Tips</p>
+
+  <span class="cat-tag">🦷 業種別Tips｜歯科・クリニック</span>
+  <h1 class="art-title">歯科・クリニックがAIで予約案内と問診メモを効率化する方法</h1>
+  <p class="art-meta">公開：2026年6月18日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      予約のリマインド、問診メモの清書、よくある質問への返信——。<br>
+      診療そのものではないのに、<strong>地味に時間を取られる"文字仕事"</strong>がクリニックにはたくさんあります。<br>
+      実はこの部分こそ、<strong>AIがいちばん得意な領域</strong>。受付まわりを軽くする3つの使い方を、コピペプロンプト付きで紹介します。
+    </p>
+
+    <h2>なぜクリニックの「文字仕事」はAIと相性がいいのか</h2>
+
+    <p>診察や処置は、人にしかできません。でもその周りには、<strong>毎回似たような文章を書く作業</strong>がたくさんあります。予約の案内、来院前の注意事項、休診のお知らせ、口コミへの返信——。</p>
+
+    <p>これらは<strong>「型が決まっていて、ていねいさは要るけれど、頭はそんなに使わない」</strong>作業です。この「定型なのに手は止まる」タイプの仕事こそ、AIがもっとも時短できる部分。受付スタッフの負担を減らし、患者さんと向き合う時間を増やせます。</p>
+
+    <h2>活用①：予約リマインド・来院案内を「型」で作る</h2>
+
+    <p>SMSやLINEで送る予約確認・前日リマインド。毎回ゼロから打つと地味に手間です。AIに<strong>"型"を一度作らせて</strong>、あとは日付を差し替えるだけにしておきましょう。</p>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 予約リマインド作成プロンプト（コピペOK）</div>
+      <div class="pb-body">歯科クリニックの予約リマインドメッセージを作ってください。
+SMS用とLINE用の2パターン、それぞれ90字以内で。
+やわらかく丁寧なトーンで、来院前の持ち物（保険証）と、
+ご都合が悪い場合の連絡のお願いを一言添えてください。
+
+【診療内容】<span class="v">（例：定期検診 ／ 虫歯の治療 など）</span></div>
+    </div>
+
+    <p>できあがった型に、<strong>患者さんのお名前や日時は受付で差し込む</strong>だけ。「文章を考える時間」がまるごと消えます。</p>
+
+    <h2>活用②：問診メモを「読める形」に整える</h2>
+
+    <p>診察中に走り書きした問診メモ。あとでカルテや申し送りに清書するのが、地味に面倒……。<strong>箇条書きの断片をAIに渡せば</strong>、整理された文章にしてくれます。</p>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 問診メモ整理プロンプト（コピペOK）</div>
+      <div class="pb-body">以下は診察時の問診メモの断片です。
+要点が分かるように、簡潔な「ですます調」の文章に整えてください。
+医学的な判断や診断は加えず、書かれている内容だけを整理してください。
+
+【メモ】
+<span class="v">（箇条書きの断片を貼り付け／患者名は入れない）</span></div>
+    </div>
+
+    <p>ポイントは<strong>「診断は加えず、書かれた内容だけを整理」</strong>と必ず指示すること。AIに勝手な解釈をさせず、"清書係"に徹してもらうのがコツです。</p>
+
+    <h2>活用③：よくある質問の返信テンプレを用意する</h2>
+
+    <p>「予約の変更はできますか」「治療は何回かかりますか」「駐車場はありますか」——。よく聞かれる質問は、AIに<strong>返信テンプレをまとめて作らせて</strong>、受付で使い回しましょう。</p>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 FAQ返信テンプレ作成プロンプト（コピペOK）</div>
+      <div class="pb-body">歯科クリニックの受付で、患者さんからよく聞かれる質問への
+返信テンプレートを5つ作ってください。
+ていねいで安心感のある言葉づかいで、各100字程度でお願いします。
+
+【よくある質問】<span class="v">（例：予約変更／治療回数の目安／費用／駐車場／キャンセル）</span></div>
+    </div>
+
+    <h2>はじめ方：いちばん面倒な「1つ」から</h2>
+
+    <div class="step-box">
+      <span class="step-num">START</span>
+      <div class="step-title">全部やろうとせず、1業務だけ選ぶ</div>
+      <p>最初から3つ全部に手をつける必要はありません。<strong>「これがいちばん面倒」という作業を1つだけ</strong>選んで、AIに任せてみてください。予約リマインドの型を1回作るだけでも、毎日の手間がぐっと減るのを実感できます。</p>
+      <div class="fix-line"><b>✓ おすすめの最初の1つ：</b>毎日くり返す「予約リマインド」か、毎回書く「よくある質問への返信」。回数が多い作業ほど、時短の効果が大きく出ます。</div>
+    </div>
+
+    <h2>注意：患者さんの個人情報はAIに入れない</h2>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ 医療現場でいちばん大事な約束</div>
+      患者さんの<strong>名前・生年月日・連絡先・病歴などの個人情報は、AIに入力しないでください</strong>。とくに無料のAIは、入力した内容がサービス改善に使われる場合があります。AIに任せるのは<strong>"型づくり・清書"まで</strong>。個人情報の差し込みと、診断・医療的な判断は、必ず院内の有資格者が行ってください。「<strong>下書きはAI、最終確認は人</strong>」——この線引きを守れば、安心して使えます。
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ この記事のまとめ</div>
+      <strong>①</strong> 予約リマインド・案内文は"型"をAIに作らせる<br>
+      <strong>②</strong> 問診メモは「整理だけ」を指示して清書させる<br>
+      <strong>③</strong> よくある質問は返信テンプレをまとめて用意<br>
+      <strong>④</strong> 個人情報はAIに入れない・診断と最終確認は人が行う<br>
+      → 受付まわりの"文字仕事"が軽くなり、スタッフは患者対応に集中できます。
+    </div>
+
+    <h2>まとめ：AIは「受付の文字仕事」の相棒</h2>
+
+    <p>クリニックのAI活用は、診療を置きかえるものではありません。その周りにある<strong>「定型の文字仕事」を肩代わり</strong>させて、スタッフが患者さんと向き合う時間を増やすための道具です。むずかしく考えず、小さな1業務から気軽に試してみてください。</p>
+
+    <p>「うちのクリニックなら、どの作業から始めれば？」というご相談は、CHIKAIの公式LINEで無料受付中。受付・問診まわりの作業を一緒に棚卸しして、<strong>個人情報に配慮しながら</strong>最初の一歩をご提案します。</p>
+
+    <div class="cta-box">
+      <h3>受付まわりの"文字仕事"を<br>AIで軽くしませんか</h3>
+      <p>15-20分のZoomで、御院の受付・問診まわりの作業を一緒に棚卸し。個人情報に配慮しながら、AIで時短できるポイントをご提案します。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
