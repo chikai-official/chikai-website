@@ -22,6 +22,7 @@
 }
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;
   max-width:480px;margin:0 auto;min-height:100vh;position:relative;padding-bottom:128px;}
+@media(min-width:540px){ html{background:#E2E8F0;} body{box-shadow:0 0 0 1px var(--border),0 18px 60px rgba(13,27,42,.13);} }
 header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--border);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;}
 .brand{display:flex;align-items:center;gap:10px;}
@@ -61,6 +62,7 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdro
 .badge.due{background:#EEF2FF;color:#3730A3;}
 .badge.due.soon{background:#FFF7ED;color:#C2410C;}
 .badge.due.overdue{background:#FEF2F2;color:#B91C1C;}
+.badge.ev{background:#ECFEFF;color:#0E7490;}
 .due-toggle{border:1px solid var(--border);background:#fff;border-radius:11px;padding:12px 16px;font-family:inherit;font-size:13px;font-weight:700;color:var(--text2);cursor:pointer;width:100%;text-align:left;}
 .due-toggle.on{background:#EEF2FF;border-color:#C7D2FE;color:#3730A3;}
 .cat-dot{font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:100px;color:#fff;}
@@ -82,15 +84,15 @@ header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdro
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
 .cal-wd{text-align:center;font-size:11px;font-weight:700;color:var(--text3);padding:4px 0;}
 .cal-wd.sun{color:#DC2626;}.cal-wd.sat{color:#2563EB;}
-.cal-cell{aspect-ratio:1/1.05;border:1px solid var(--border);border-radius:11px;background:#fff;padding:5px 0 0;display:flex;flex-direction:column;align-items:center;cursor:pointer;position:relative;}
+.cal-cell{min-height:60px;border:1px solid var(--border);border-radius:8px;background:#fff;padding:3px;display:flex;flex-direction:column;align-items:stretch;cursor:pointer;overflow:hidden;}
 .cal-cell.blank{border:none;background:transparent;cursor:default;}
-.cal-cell .d{font-size:13px;font-weight:700;color:var(--text2);font-family:'Space Grotesk';}
+.cal-cell .d{font-size:11px;font-weight:700;color:var(--text2);font-family:'Space Grotesk';text-align:center;line-height:1.2;}
 .cal-cell.today{background:var(--blue-l);border-color:#BFDBFE;}
 .cal-cell .d.sat{color:#2563EB;}.cal-cell .d.sun{color:#DC2626;}
 .cal-cell.sel{outline:2px solid var(--blue);outline-offset:-1px;}
-.cal-dots{display:flex;gap:2px;margin-top:3px;flex-wrap:wrap;justify-content:center;max-width:90%;}
-.cal-dots i{width:6px;height:6px;border-radius:50%;display:block;}
-.cal-more{font-size:8px;color:var(--text3);}
+.cal-items{display:flex;flex-direction:column;gap:1px;margin-top:2px;overflow:hidden;}
+.cal-item{font-size:8.5px;line-height:1.3;text-align:left;background:#F1F5F9;border-left:2px solid #93C5FD;border-radius:2px;padding:0 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#334155;}
+.cal-more2{font-size:8px;color:var(--text3);text-align:left;padding-left:2px;}
 .cal-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;font-size:11px;color:var(--text2);}
 .cal-legend span{display:flex;align-items:center;gap:5px;}.cal-legend i{width:9px;height:9px;border-radius:50%;}
 .cal-detail{margin-top:20px;border-top:1px solid var(--border);padding-top:16px;}
@@ -126,6 +128,10 @@ input:focus,select:focus,.sheet textarea:focus{outline:none;border-color:var(--b
 .notify-opts{display:flex;gap:8px;}
 .notify-opts button{flex:1;border:1px solid var(--border);background:#fff;border-radius:11px;padding:11px 4px;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--text2);cursor:pointer;}
 .notify-opts button.sel{background:var(--blue);border-color:var(--blue);color:#fff;}
+.kind-seg{display:flex;gap:8px;margin-bottom:16px;}
+.kind-seg button{flex:1;border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px;font-family:inherit;font-size:14px;font-weight:800;color:var(--text2);cursor:pointer;}
+.kind-seg button.sel{background:var(--blue);border-color:var(--blue);color:#fff;}
+.kind-seg button[data-k="event"].sel{background:var(--cyan);border-color:var(--cyan);}
 .sheet-actions{display:flex;gap:10px;margin-top:8px;}
 .btn{flex:1;border:none;border-radius:13px;padding:15px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;}
 .btn-primary{background:linear-gradient(135deg,var(--cta),var(--cta-d));color:#fff;box-shadow:0 6px 20px rgba(249,115,22,.35);}
@@ -182,25 +188,30 @@ input:focus,select:focus,.sheet textarea:focus{outline:none;border-color:var(--b
 <!-- SHEET -->
 <div class="overlay" id="overlay"></div>
 <div class="sheet" id="sheet">
-  <h2 id="sheetTitle">タスクを追加</h2>
+  <h2 id="sheetTitle">追加</h2>
+  <div class="kind-seg" id="kindSeg">
+    <button type="button" data-k="task" class="sel">✓ タスク</button>
+    <button type="button" data-k="event">📅 予定</button>
+  </div>
   <div class="field">
-    <label>やること（「明日15時に会議」と話す/書くと日時を自動入力）</label>
+    <label id="titleLabel">やること（「明日15時に会議」と話す/書くと日時を自動入力）</label>
     <div class="title-row"><input type="text" id="fTitle" placeholder="例：明日15時に歯医者"><button class="mic" id="micBtn" title="音声入力">🎤</button></div>
     <div class="nl-hint" id="nlHint"></div>
   </div>
   <div class="field"><label>内容（メモ・任意）</label><textarea id="fMemo" placeholder="詳細・持ち物・場所・URLなど"></textarea></div>
+  <div class="field"><label>日付</label><input type="date" id="fDate"></div>
   <div class="row2">
-    <div class="field"><label>日付</label><input type="date" id="fDate"></div>
-    <div class="field"><label>時間</label><input type="time" id="fTime"></div>
+    <div class="field"><label id="startLabel">時間</label><input type="time" id="fTime"></div>
+    <div class="field" id="endField" style="display:none;"><label>終了</label><input type="time" id="fEndTime"></div>
   </div>
   <div class="field"><label>カテゴリ</label><div class="chips" id="catChips"></div></div>
   <div class="field"><label>通知</label><div class="notify-opts" id="notifyOpts">
     <button data-n="none" class="sel">なし</button><button data-n="5">5分前</button><button data-n="15">15分前</button><button data-n="30">30分前</button>
-  </div></div>
+  </div><div style="font-size:10.5px;color:var(--text3);margin-top:6px;line-height:1.5;">📱 iPhoneは、保存後に右上の<b>🔔ボタン</b>を押すと、通知ありの予定を<b>まとめてカレンダーに登録</b>（1タップ・閉じてても鳴る）。</div></div>
   <div class="field"><label>繰り返し</label>
     <select id="fRepeat"><option value="none">なし</option><option value="daily">毎日</option><option value="weekly">毎週</option><option value="monthly">毎月</option></select>
   </div>
-  <div class="field"><label>期限（○日までに完了）</label>
+  <div class="field" id="dueField"><label>期限（○日までに完了）</label>
     <button type="button" class="due-toggle" id="dueToggle">📌 期限を付ける</button>
     <input type="date" id="fDue" style="display:none;margin-top:8px;">
   </div>
@@ -210,9 +221,15 @@ input:focus,select:focus,.sheet textarea:focus{outline:none;border-color:var(--b
 
 <!-- BACKUP SHEET -->
 <div class="sheet" id="backupSheet">
-  <h2>💾 バックアップ</h2>
-  <p style="font-size:12.5px;color:var(--text2);margin:-6px 0 16px;line-height:1.7;">タスクはこの端末の中だけに保存されています。ときどき書き出して保管しておくと、消えても元に戻せます（無料・端末内で完結）。</p>
-  <div class="field"><label>① 書き出す（バックアップを作る）</label>
+  <h2>☁️ 同期・バックアップ</h2>
+  <div class="field"><label>自動保存（クラウド同期）</label>
+    <div id="syncState" style="font-size:13px;font-weight:700;color:var(--text3);margin-bottom:10px;">接続中…</div>
+    <label style="font-weight:400;color:var(--text3);font-size:11px;">この端末の「同期コード」。別の端末で同じコードを入れると、同じタスクを共有できます。大切に保管を。</label>
+    <div class="title-row"><input type="text" id="bkSyncCode" readonly style="font-family:monospace;letter-spacing:1px;font-size:13px;"><button class="mic" id="bkSyncCopy" title="コピー">📋</button></div>
+    <input type="text" id="bkSyncEnter" placeholder="別端末のコードに合わせる場合は入力" style="margin-top:8px;text-transform:uppercase;font-family:monospace;">
+    <button class="due-toggle" id="bkSyncApply" style="margin-top:6px;text-align:center;">🔗 入力したコードに切り替える</button>
+  </div>
+  <div class="field"><label>📤 手動バックアップ（書き出す）</label>
     <button class="btn btn-primary" id="bkExport" style="width:100%;">📤 書き出す（共有・保存）</button>
     <textarea id="bkOut" readonly style="margin-top:8px;font-size:11px;min-height:64px;color:var(--text2);"></textarea>
     <button class="due-toggle" id="bkCopy" style="margin-top:6px;text-align:center;">📋 内容をコピー</button>
@@ -233,7 +250,7 @@ const CATS={ work1:{label:'仕事1',color:'#2563EB'}, work2:{label:'仕事2',col
 const LS_TASKS='hibi_tasks_v3';
 let tasks=load(LS_TASKS,[]);
 function load(k,def){ try{return JSON.parse(localStorage.getItem(k))??def;}catch(e){return def;} }
-function saveTasks(){ localStorage.setItem(LS_TASKS,JSON.stringify(tasks)); }
+function saveTasks(){ localStorage.setItem(LS_TASKS,JSON.stringify(tasks)); if(window.hibiCloudSave) window.hibiCloudSave(tasks); }
 
 /* ===== 日付ヘルパ ===== */
 const WD=['日','月','火','水','木','金','土'];
@@ -278,15 +295,16 @@ function parseNL(text){
 function esc(s){ return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function taskHTML(t){
   const cat=CATS[t.cat];
+  const isEv=t.kind==='event';
   let dueBadge='';
-  if(t.due){ const diff=dueDiffDays(t.due); const cls=diff<0?'overdue':(diff<=3?'soon':'');
+  if(t.due && !isEv){ const diff=dueDiffDays(t.due); const cls=diff<0?'overdue':(diff<=3?'soon':'');
     const lbl=diff<0?('期限切れ '+mdShort(t.due)):(diff===0?'本日締切':(mdShort(t.due)+'まで'));
     dueBadge=`<span class="badge due ${cls}">🚩${lbl}</span>`; }
-  const badges=[ dueBadge,
+  const badges=[ isEv?'<span class="badge ev">📅予定</span>':'', dueBadge,
     t.notify!=='none'?`<span class="badge notify">🔔${t.notify}分前</span>`:'',
     t.repeat&&t.repeat!=='none'?`<span class="badge rep">🔁${({daily:'毎日',weekly:'毎週',monthly:'毎月'})[t.repeat]}</span>`:'',
     cat?`<span class="cat-dot" style="background:${cat.color}">${cat.label}</span>`:'' ].join('');
-  const timeLabel=t.time?`<b>${t.time}</b><small>${t.notify!=='none'?'通知':''}</small>`:`<b>—</b><small>終日</small>`;
+  const timeLabel=t.time?(isEv&&t.endTime?`<b>${t.time}</b><small>–${t.endTime}</small>`:`<b>${t.time}</b><small>${t.notify!=='none'?'通知':''}</small>`):`<b>—</b><small>終日</small>`;
   return `<div class="task ${t.done?'is-done':''}" data-id="${t.id}" style="border-left-color:${cat?cat.color:'var(--border)'}">
     <div class="time">${timeLabel}</div>
     <div class="tick ${t.done?'done':''}" data-act="done">${t.done?'✓':''}</div>
@@ -310,9 +328,9 @@ function renderCal(){
   for(let i=0;i<startWd;i++) html+=`<div class="cal-cell blank"></div>`;
   for(let d=1;d<=days;d++){ const cellDate=new Date(calY,calM,d); const ds=fmt(cellDate); const wd=cellDate.getDay(); const dl=tasksOf(ds);
     const dCls=(wd===0||HOLIDAYS.has(ds))?'sun':(wd===6?'sat':'');
-    const dots=dl.slice(0,4).map(t=>`<i style="background:${CATS[t.cat]?CATS[t.cat].color:'#93C5FD'}"></i>`).join('');
-    const more=dl.length>4?`<span class="cal-more">+${dl.length-4}</span>`:'';
-    html+=`<div class="cal-cell ${ds===todayStr()?'today':''} ${ds===selDate?'sel':''}" data-date="${ds}"><span class="d ${dCls}">${d}</span><div class="cal-dots">${dots}${more}</div></div>`; }
+    const items=dl.slice(0,3).map(t=>{ const c=CATS[t.cat]; const tm=t.time||'終日'; return `<div class="cal-item" style="border-left-color:${c?c.color:'#93C5FD'}">${tm} ${esc(t.title)}</div>`; }).join('');
+    const more=dl.length>3?`<div class="cal-more2">他${dl.length-3}件</div>`:'';
+    html+=`<div class="cal-cell ${ds===todayStr()?'today':''} ${ds===selDate?'sel':''}" data-date="${ds}"><span class="d ${dCls}">${d}</span><div class="cal-items">${items}${more}</div></div>`; }
   document.getElementById('calGrid').innerHTML=html;
   document.getElementById('calLegend').innerHTML=Object.values(CATS).map(c=>`<span><i style="background:${c.color}"></i>${c.label}</span>`).join('');
   renderCalDetail();
@@ -332,11 +350,15 @@ function advance(ds,rep){ const [y,m,d]=ds.split('-').map(Number); const dt=new 
 
 /* ===== iOSカレンダー連携（.ics・通知つき。閉じていても純正カレンダーが鳴らす）===== */
 function icsEsc(s){ return (s||'').replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\r?\n/g,'\\n'); }
+/* 端末ローカル時刻 → UTC(Zつき)。iOSがタイムゾーンを正しく解釈するため必須（floating時刻はUTC誤解釈で9hズレる）*/
+function icsUTC(date,time){ const dt=new Date(date+'T'+(time||'00:00')+':00'); const p=n=>String(n).padStart(2,'0');
+  return dt.getUTCFullYear()+p(dt.getUTCMonth()+1)+p(dt.getUTCDate())+'T'+p(dt.getUTCHours())+p(dt.getUTCMinutes())+p(dt.getUTCSeconds())+'Z'; }
 function buildICS(t){
   const p=n=>String(n).padStart(2,'0'); const ds=t.date.replace(/-/g,''); const now=new Date();
   const stamp=`${now.getUTCFullYear()}${p(now.getUTCMonth()+1)}${p(now.getUTCDate())}T${p(now.getUTCHours())}${p(now.getUTCMinutes())}${p(now.getUTCSeconds())}Z`;
   const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Hibi//Task//JP','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:hibi-'+t.id+'@hibi.app','DTSTAMP:'+stamp];
-  if(t.time){ const [hh,mm]=t.time.split(':'); L.push('DTSTART:'+ds+'T'+p(+hh)+p(+mm)+'00','DURATION:PT30M'); }
+  if(t.time){ L.push('DTSTART:'+icsUTC(t.date,t.time));
+    if(t.kind==='event'&&t.endTime) L.push('DTEND:'+icsUTC(t.date,t.endTime)); else L.push('DURATION:PT30M'); }
   else { L.push('DTSTART;VALUE=DATE:'+ds); }
   L.push('SUMMARY:'+icsEsc(t.title));
   if(t.memo) L.push('DESCRIPTION:'+icsEsc(t.memo));
@@ -350,6 +372,28 @@ function addToCalendar(t){
   else { const blob=new Blob([ics],{type:'text/calendar;charset=utf-8'}); const url=URL.createObjectURL(blob);
     const a=document.createElement('a'); a.href=url; a.download=(t.title||'task').replace(/[\\/:*?"<>|]/g,'_').slice(0,24)+'.ics';
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),8000); }
+}
+/* 通知あり予定をまとめて1ファイル化（🔔で一括カレンダー登録・UID固定なので再実行は更新＝二重登録なし）*/
+function buildICSBatch(){
+  const p=n=>String(n).padStart(2,'0'); const now=new Date();
+  const stamp=`${now.getUTCFullYear()}${p(now.getUTCMonth()+1)}${p(now.getUTCDate())}T${p(now.getUTCHours())}${p(now.getUTCMinutes())}${p(now.getUTCSeconds())}Z`;
+  const today=todayStr();
+  const targets=tasks.filter(t=>!t.done && t.time && t.notify && t.notify!=='none' && t.date>=today);
+  if(!targets.length) return null;
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Hibi//Task//JP','CALSCALE:GREGORIAN'];
+  targets.forEach(t=>{
+    L.push('BEGIN:VEVENT','UID:hibi-'+t.id+'@hibi.app','DTSTAMP:'+stamp,'DTSTART:'+icsUTC(t.date,t.time));
+    L.push((t.kind==='event'&&t.endTime)?('DTEND:'+icsUTC(t.date,t.endTime)):'DURATION:PT30M');
+    L.push('SUMMARY:'+icsEsc(t.title));
+    if(t.memo) L.push('DESCRIPTION:'+icsEsc(t.memo));
+    L.push('BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc(t.title),'TRIGGER:-PT'+t.notify+'M','END:VALARM','END:VEVENT'); });
+  L.push('END:VCALENDAR'); return {ics:L.join('\r\n'), count:targets.length};
+}
+function addBatchToCalendar(){
+  const r=buildICSBatch();
+  if(!r){ alert('「通知あり・時間あり」の予定がありません。\nタスクに時間＋通知（5/15/30分前）を設定すると、ここでまとめて登録できます。'); return; }
+  if(isiOSdev){ window.location.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(r.ics); }
+  else { const blob=new Blob([r.ics],{type:'text/calendar;charset=utf-8'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='hibi-reminders.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),8000); }
 }
 document.body.addEventListener('click',e=>{
   const el=e.target.closest('.task'); if(!el)return;
@@ -365,24 +409,36 @@ document.body.addEventListener('click',e=>{
 
 /* ===== シート ===== */
 const overlay=document.getElementById('overlay'), sheet=document.getElementById('sheet');
-let editingId=null, selNotify='none', selCat='', selDue='';
+let editingId=null, selNotify='none', selCat='', selDue='', selKind='task';
 function renderChips(){ document.getElementById('catChips').innerHTML=
   `<button data-c="" class="${selCat===''?'sel':''}" style="${selCat===''?'background:#64748B;':''}">なし</button>`+
   Object.entries(CATS).map(([k,c])=>`<button data-c="${k}" class="${selCat===k?'sel':''}" style="${selCat===k?'background:'+c.color:''}">${c.label}</button>`).join(''); }
 function renderDue(){ const btn=document.getElementById('dueToggle'), inp=document.getElementById('fDue');
   if(selDue){ btn.classList.add('on'); btn.textContent='📌 期限あり：'+mdShort(selDue)+'まで（タップで解除）'; inp.style.display='block'; inp.value=selDue; }
   else { btn.classList.remove('on'); btn.textContent='📌 期限を付ける'; inp.style.display='none'; } }
+/* 終了時刻を開始+1時間に（デフォルト1時間）。23時台は23:59にクランプ */
+function plusHour(hhmm){ const a=(hhmm||'').split(':'); if(a.length!==2)return ''; let t=(+a[0])*60+(+a[1])+60; if(t>=1440)t=1439; return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0'); }
+function syncEnd(){ if(selKind!=='event')return; const st=document.getElementById('fTime').value; const et=document.getElementById('fEndTime'); if(st && (!et.value||et.value<=st)) et.value=plusHour(st); }
+/* 種別（タスク/予定）に応じてシートの見た目を切替 */
+function applyKindUI(){ const ev=selKind==='event';
+  document.getElementById('sheetTitle').textContent=(editingId?'編集':'追加')+'：'+(ev?'予定':'タスク');
+  [...document.querySelectorAll('#kindSeg button')].forEach(b=>b.classList.toggle('sel',b.dataset.k===selKind));
+  document.getElementById('endField').style.display=ev?'block':'none';
+  document.getElementById('startLabel').textContent=ev?'開始':'時間';
+  document.getElementById('dueField').style.display=ev?'none':'block';
+}
 function openSheet(t){
   editingId=t?t.id:null;
-  document.getElementById('sheetTitle').textContent=t?'タスクを編集':'タスクを追加';
   document.getElementById('fTitle').value=t?t.title:'';
   document.getElementById('fMemo').value=t?(t.memo||''):'';
   document.getElementById('fDate').value=t?t.date:(currentTab==='cal'?selDate:todayStr());
   document.getElementById('fTime').value=t?(t.time||''):'';
+  document.getElementById('fEndTime').value=t?(t.endTime||''):'';
+  selKind=t?(t.kind||'task'):'task';
   selNotify=t?t.notify:'none'; selCat=t?(t.cat||''):''; selDue=t?(t.due||''):'';
   document.getElementById('fRepeat').value=t?(t.repeat||'none'):'none';
   [...document.querySelectorAll('#notifyOpts button')].forEach(b=>b.classList.toggle('sel',b.dataset.n===selNotify));
-  renderChips(); renderDue(); document.getElementById('nlHint').textContent='';
+  renderChips(); renderDue(); applyKindUI(); document.getElementById('nlHint').textContent='';
   overlay.classList.add('show'); sheet.classList.add('show');
   setTimeout(()=>document.getElementById('fTitle').focus(),250);
 }
@@ -395,6 +451,8 @@ document.getElementById('notifyOpts').onclick=e=>{ const b=e.target.closest('but
 document.getElementById('catChips').onclick=e=>{ const b=e.target.closest('button'); if(!b)return; selCat=b.dataset.c; renderChips(); };
 document.getElementById('dueToggle').onclick=()=>{ selDue = selDue ? '' : (document.getElementById('fDue').value||document.getElementById('fDate').value||todayStr()); renderDue(); };
 document.getElementById('fDue').onchange=e=>{ selDue=e.target.value; renderDue(); };
+document.getElementById('kindSeg').onclick=e=>{ const b=e.target.closest('button'); if(!b)return; selKind=b.dataset.k; syncEnd(); applyKindUI(); };
+document.getElementById('fTime').addEventListener('change',syncEnd);
 document.getElementById('fTitle').addEventListener('input',e=>{
   const p=parseNL(e.target.value); const h=document.getElementById('nlHint');
   h.textContent=(p.date||p.time)?'📅 認識: '+(p.date?jp(p.date):'日付なし')+(p.time?' '+p.time:'')+(p.title?'｜'+p.title:''):'';
@@ -406,12 +464,20 @@ document.getElementById('sheetSave').onclick=()=>{
   const memo=document.getElementById('fMemo').value.trim();
   const date=p.date||document.getElementById('fDate').value||todayStr();
   const time=p.time||document.getElementById('fTime').value;
+  const kind=selKind;
+  let endTime='';
+  if(kind==='event'){
+    if(!time){ alert('予定には開始時間が必要です（例：「15時」と話すか開始欄に入力）。'); return; }
+    endTime=document.getElementById('fEndTime').value||plusHour(time);
+    if(endTime<=time){ alert('終了時間は開始時間より後にしてください。'); return; }
+  }
   if(selNotify!=='none'&&!time){ alert('通知を使うには時間を入れてください（例：「15時」と話すか時間欄に入力）。'); return; }
   if(selNotify!=='none') ensureNotifyPermission();
   const repeat=document.getElementById('fRepeat').value;
-  const due=selDue||'';
-  if(editingId){ Object.assign(tasks.find(x=>x.id===editingId),{title,memo,date,time,notify:selNotify,cat:selCat,repeat,due,notified:false}); }
-  else tasks.push({id:'t'+Date.now()+Math.random().toString(36).slice(2,6),title,memo,date,time,notify:selNotify,cat:selCat,repeat,due,done:false,notified:false,createdAt:Date.now()});
+  const due=kind==='event'?'':(selDue||'');
+  let savedTask;
+  if(editingId){ savedTask=tasks.find(x=>x.id===editingId); Object.assign(savedTask,{title,memo,date,time,endTime,kind,notify:selNotify,cat:selCat,repeat,due,notified:false}); }
+  else { savedTask={id:'t'+Date.now()+Math.random().toString(36).slice(2,6),title,memo,date,time,endTime,kind,notify:selNotify,cat:selCat,repeat,due,done:false,notified:false,createdAt:Date.now()}; tasks.push(savedTask); }
   saveTasks(); closeSheet();
   if(currentTab==='cal'){ selDate=date; calY=+date.slice(0,4); calM=+date.slice(5,7)-1; }
   renderAll();
@@ -456,6 +522,7 @@ micBtn.onclick=()=>{
 const bellBtn=document.getElementById('bellBtn');
 const noticeEl=document.getElementById('notice');
 function refreshBell(){
+  if(isiOSdev){ bellBtn.classList.add('on'); bellBtn.title='通知あり予定をカレンダーにまとめて登録'; noticeEl.style.display='none'; return; }
   const granted=notiSupported && Notification.permission==='granted';
   bellBtn.classList.toggle('on',granted);
   const span=noticeEl.querySelector('span'), btn=noticeEl.querySelector('button');
@@ -472,8 +539,8 @@ function enableNotify(){
   else if(isiOSdev && !standaloneNow()){ alert('iPhoneで通知を使う手順：\n① Safari下の共有ボタン（□に↑）→「ホーム画面に追加」\n② 追加されたHibiアイコンから開く\n③ もう一度🔔を押して「許可」\n（iOS 16.4以降が必要です）'); }
   else { alert('この端末・ブラウザは通知に未対応です。'); }
 }
-bellBtn.onclick=enableNotify;
-document.getElementById('enableNotif').onclick=enableNotify;
+bellBtn.onclick=()=>{ if(isiOSdev) addBatchToCalendar(); else enableNotify(); };
+document.getElementById('enableNotif').onclick=()=>{ if(isiOSdev) addBatchToCalendar(); else enableNotify(); };
 function checkNotifications(){ if(!('Notification'in window)||Notification.permission!=='granted')return;
   const now=Date.now(); let ch=false;
   tasks.forEach(t=>{ if(t.done||t.notify==='none'||t.notified||!t.time)return;
@@ -499,10 +566,13 @@ function doImport(text){
   let p; try{ p=JSON.parse(text); }catch(e){ alert('読み込めませんでした（バックアップの中身が正しくありません）。'); return; }
   const arr=Array.isArray(p)?p:(p&&p.tasks); if(!Array.isArray(arr)){ alert('タスクのデータが見つかりませんでした。'); return; }
   if(!confirm('今のタスクを、このバックアップの内容で置き換えます。よろしいですか？')) return;
-  tasks=arr.filter(t=>t&&t.id&&t.title).map(t=>({id:String(t.id),title:String(t.title),memo:t.memo||'',date:t.date||todayStr(),time:t.time||'',notify:t.notify||'none',cat:t.cat||'',repeat:t.repeat||'none',due:t.due||'',done:!!t.done,notified:!!t.notified,createdAt:t.createdAt||Date.now()}));
+  tasks=arr.filter(t=>t&&t.id&&t.title).map(t=>({id:String(t.id),title:String(t.title),memo:t.memo||'',date:t.date||todayStr(),time:t.time||'',endTime:t.endTime||'',kind:t.kind||'task',notify:t.notify||'none',cat:t.cat||'',repeat:t.repeat||'none',due:t.due||'',done:!!t.done,notified:!!t.notified,createdAt:t.createdAt||Date.now()}));
   saveTasks(); renderAll(); closeBackup(); alert('復元しました（'+tasks.length+'件）。');
 }
-function openBackup(){ document.getElementById('bkOut').value=exportData(); document.getElementById('bkIn').value=''; overlay.classList.add('show'); document.getElementById('backupSheet').classList.add('show'); }
+function openBackup(){ document.getElementById('bkOut').value=exportData(); document.getElementById('bkIn').value='';
+  if(window.hibiGetSyncCode){ document.getElementById('bkSyncCode').value=window.hibiGetSyncCode(); }
+  const s=document.getElementById('syncState'); if(s) s.textContent=(window.hibiSyncStatus&&window.hibiSyncStatus())?'☁️ 自動保存オン・同期中':'接続中…（オンラインで自動保存されます）';
+  overlay.classList.add('show'); document.getElementById('backupSheet').classList.add('show'); }
 function closeBackup(){ overlay.classList.remove('show'); document.getElementById('backupSheet').classList.remove('show'); }
 document.getElementById('bkBtn').onclick=openBackup;
 document.getElementById('bkClose').onclick=closeBackup;
@@ -512,6 +582,16 @@ document.getElementById('bkFile').onchange=e=>{ const f=e.target.files[0]; if(!f
 document.getElementById('bkCopy').onclick=()=>{ const ta=document.getElementById('bkOut'); ta.select(); ta.setSelectionRange(0,99999);
   const done=()=>{ const b=document.getElementById('bkCopy'); b.textContent='✓ コピーしました'; setTimeout(()=>{b.textContent='📋 内容をコピー';},1500); };
   try{ navigator.clipboard.writeText(ta.value).then(done,()=>{try{document.execCommand('copy');}catch(_){}done();}); }catch(e){ try{document.execCommand('copy');}catch(_){} done(); } };
+document.getElementById('bkSyncCopy').onclick=()=>{ const ta=document.getElementById('bkSyncCode'); ta.select(); ta.setSelectionRange(0,99); try{navigator.clipboard.writeText(ta.value);}catch(e){try{document.execCommand('copy');}catch(_){}} const b=document.getElementById('bkSyncCopy'); b.textContent='✓'; setTimeout(()=>{b.textContent='📋';},1200); };
+document.getElementById('bkSyncApply').onclick=()=>{ const v=document.getElementById('bkSyncEnter').value.trim(); if(!v)return; if(!confirm('この端末を、入力したコードのタスクに切り替えます。今この端末のタスクは、そのコードの内容に置き換わります。よろしいですか？'))return; if(window.hibiSetSyncCode&&window.hibiSetSyncCode(v)){ document.getElementById('bkSyncCode').value=window.hibiGetSyncCode(); document.getElementById('bkSyncEnter').value=''; alert('切り替えました。クラウドから読み込みます。'); } else { alert('コードが正しくありません（英数字8文字以上）。'); } };
+
+/* ===== クラウド同期との連携フック（Firebaseモジュールから呼ばれる）===== */
+window.hibiGetTasks=()=>tasks;
+window.hibiApplyRemote=function(remoteTasks){ if(!Array.isArray(remoteTasks))return;
+  tasks=remoteTasks.map(t=>({id:String(t.id),title:String(t.title||''),memo:t.memo||'',date:t.date||todayStr(),time:t.time||'',endTime:t.endTime||'',kind:t.kind||'task',notify:t.notify||'none',cat:t.cat||'',repeat:t.repeat||'none',due:t.due||'',done:!!t.done,notified:!!t.notified,createdAt:t.createdAt||Date.now()}));
+  localStorage.setItem(LS_TASKS,JSON.stringify(tasks)); renderAll();
+  const s=document.getElementById('syncState'); if(s)s.textContent='☁️ 同期済み（'+tasks.length+'件）'; };
+window.hibiOnSyncReady=function(){ const s=document.getElementById('syncState'); if(s)s.textContent='☁️ 自動保存オン'; const c=document.getElementById('bkSyncCode'); if(c&&window.hibiGetSyncCode)c.value=window.hibiGetSyncCode(); };
 
 seedIfEmpty(); refreshBell(); renderAll(); checkNotifications();
 </script>
@@ -529,6 +609,31 @@ window.addEventListener('appinstalled',()=>{ if(installBtn) installBtn.style.dis
   const standalone=window.matchMedia('(display-mode: standalone)').matches||window.navigator.standalone;
   if(isiOS && !standalone && installBtn){ installBtn.style.display='inline-block';
     installBtn.onclick=()=>alert('iPhoneでホーム画面に追加：\n画面下の共有ボタン（□に↑）をタップ →「ホーム画面に追加」を選んでください。'); } })();
+</script>
+
+<!-- ===== Firebase クラウド同期（匿名認証＋Firestore・自動保存）===== -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+const firebaseConfig = { apiKey:"AIzaSyApW8mfJsFr1Hn_TLeui7_xEqRJacB9gpA", authDomain:"diary-task.firebaseapp.com", projectId:"diary-task", storageBucket:"diary-task.firebasestorage.app", messagingSenderId:"1087133737238", appId:"1:1087133737238:web:c770abcf1aecfa79d2f037" };
+const app=initializeApp(firebaseConfig); const auth=getAuth(app); const db=getFirestore(app);
+const LS_VAULT='hibi_vault';
+function genCode(){ const a='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; let s=''; for(let i=0;i<16;i++)s+=a[Math.floor(Math.random()*a.length)]; return s; }
+let vaultId=localStorage.getItem(LS_VAULT); if(!vaultId){ vaultId=genCode(); localStorage.setItem(LS_VAULT,vaultId); }
+let unsub=null, saveT=null, ready=false;
+function subscribe(){ if(unsub)unsub(); const ref=doc(db,'vaults',vaultId);
+  unsub=onSnapshot(ref, snap=>{ if(snap.metadata.hasPendingWrites)return;
+    if(!snap.exists()){ const local=window.hibiGetTasks&&window.hibiGetTasks(); if(local&&local.length)cloudSave(local); return; }
+    const d=snap.data(); if(d&&Array.isArray(d.tasks)&&window.hibiApplyRemote)window.hibiApplyRemote(d.tasks);
+  }, e=>console.warn('sync',e)); }
+function cloudSave(tasks){ if(!ready)return; clearTimeout(saveT); saveT=setTimeout(()=>{ setDoc(doc(db,'vaults',vaultId),{tasks,updatedAt:Date.now()}).catch(e=>console.warn('save',e)); },600); }
+window.hibiCloudSave=cloudSave;
+window.hibiGetSyncCode=()=>vaultId;
+window.hibiSetSyncCode=c=>{ c=(c||'').toUpperCase().replace(/[^A-Z0-9]/g,''); if(c.length<8)return false; vaultId=c; localStorage.setItem(LS_VAULT,vaultId); subscribe(); return true; };
+window.hibiSyncStatus=()=>ready;
+signInAnonymously(auth).catch(e=>console.warn('auth',e));
+onAuthStateChanged(auth,u=>{ if(u){ ready=true; subscribe(); if(window.hibiOnSyncReady)window.hibiOnSyncReady(); } });
 </script>
 </body>
 </html>

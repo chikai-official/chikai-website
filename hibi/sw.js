@@ -1,5 +1,5 @@
 /* Hibi PWA Service Worker — HTMLは network-first(常に最新)、静的アセットは cache-first */
-const CACHE = 'hibi-v6';
+const CACHE = 'hibi-v7';
 const CORE = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './apple-touch-icon-180.png'];
 
 self.addEventListener('install', e => {
