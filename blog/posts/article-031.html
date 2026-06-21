@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L29SM9C29T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L29SM9C29T');
+</script>
+<title>音声入力×AIで議事録を自動化する3つの方法 | CHIKAI ブログ</title>
+<meta name="description" content="会議のあとの議事録づくり、まだ手で書いていませんか？音声入力とAIを組み合わせれば、話すだけで議事録の下書きが完成します。スマホ音声入力・文字起こしアプリ・オンライン会議の自動文字起こしの3つの方法を、AIで整えるコピペプロンプト付きで解説します。">
+<meta property="og:title" content="音声入力×AIで議事録を自動化する3つの方法">
+<meta property="og:description" content="話すだけで議事録の下書きが完成。音声×AIの3つの方法を、整えるコピペプロンプト付きで解説。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://chikai-official.github.io/chikai-website/blog/posts/article-031.html">
+<meta property="og:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<meta property="og:site_name" content="CHIKAI">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://chikai-official.github.io/chikai-website/og-image.png">
+<link rel="canonical" href="https://chikai-official.github.io/chikai-website/blog/posts/article-031.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "音声入力×AIで議事録を自動化する3つの方法",
+  "description": "話すだけで議事録の下書きが完成。音声×AIの3つの方法を、整えるコピペプロンプト付きで解説。",
+  "image": "https://chikai-official.github.io/chikai-website/og-image.png",
+  "datePublished": "2026-06-18",
+  "dateModified": "2026-06-18",
+  "author": {"@type": "Organization", "name": "CHIKAI", "url": "https://chikai-official.github.io/chikai-website/"},
+  "publisher": {"@type": "Organization", "name": "CHIKAI", "logo": {"@type": "ImageObject", "url": "https://chikai-official.github.io/chikai-website/og-image.png"}},
+  "mainEntityOfPage": "https://chikai-official.github.io/chikai-website/blog/posts/article-031.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --blue:#2563EB; --blue-d:#1E40AF; --cyan:#06B6D4; --cyan-d:#0E7490; --cta:#F97316;
+  --dark:#04040C; --white:#FFFFFF;
+  --text:#0D0D1A; --text2:#4B5563; --text3:#9CA3AF;
+  --border:rgba(37,99,235,0.12);
+}
+body { background:#FFFFFF; color:var(--text); font-family:'Noto Sans JP',sans-serif; line-height:1.8; }
+nav { position:sticky; top:0; z-index:50; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:14px 56px; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); }
+.nav-logo-text { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; letter-spacing:-1px; }
+.nav-logo-text .ai { background:linear-gradient(90deg,#2563EB,#3B82F6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.nav-links { display:flex; gap:24px; }
+.nav-links a { color:var(--text2); text-decoration:none; font-size:13px; transition:color .2s; }
+.nav-links a:hover { color:var(--blue); }
+.article { max-width:780px; margin:0 auto; padding:56px 56px 100px; }
+.breadcrumb { font-size:12px; color:var(--text3); margin-bottom:14px; }
+.breadcrumb a { color:var(--text2); text-decoration:none; }
+.breadcrumb a:hover { color:var(--blue); }
+.cat-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:1.5px; padding:4px 10px; border-radius:100px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); color:#155E75; margin-bottom:14px; }
+h1.art-title { font-family:'Noto Sans JP',sans-serif; font-size:clamp(28px,3.6vw,42px); font-weight:900; letter-spacing:-1.5px; line-height:1.3; color:var(--text); margin-bottom:14px; }
+.art-meta { font-size:12px; color:var(--text3); margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid var(--border); }
+.art-meta .author { color:var(--text2); font-weight:600; }
+.art-body { color:#1F2937; font-size:16px; line-height:1.95; }
+.art-body p { margin-bottom:24px; }
+.art-body h2 { font-family:'Noto Sans JP',sans-serif; font-size:26px; font-weight:900; letter-spacing:-.5px; margin-top:48px; margin-bottom:20px; color:var(--text); padding-left:18px; border-left:4px solid #06B6D4; }
+.art-body h3 { font-family:'Noto Sans JP',sans-serif; font-size:20px; font-weight:700; letter-spacing:-.3px; margin-top:32px; margin-bottom:14px; color:var(--text); }
+.art-body strong { color:#0E7490; font-weight:900; }
+.art-body ul, .art-body ol { padding-left:28px; margin-bottom:24px; }
+.art-body li { margin-bottom:8px; }
+.art-body .lead { font-size:18px; color:var(--text2); line-height:1.85; margin-bottom:32px; padding:20px 24px; background:linear-gradient(135deg,#CFFAFE,#A5F3FC); border-left:3px solid #06B6D4; border-radius:6px; }
+.step-box { background:#ECFEFF; border:1px solid #A5F3FC; border-left:4px solid #06B6D4; border-radius:12px; padding:24px 28px; margin:20px 0; }
+.step-num { display:inline-block; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:800; letter-spacing:1px; padding:4px 12px; background:#0891B2; color:white; border-radius:8px; margin-bottom:12px; }
+.fix-line { margin-top:14px; padding-top:14px; border-top:1px dashed #A5F3FC; font-size:14px; color:#1F2937; }
+.fix-line b { color:#1E40AF; }
+.prompt-box { background:#0F172A; border:1px solid #1E293B; border-radius:12px; padding:22px 24px; margin:20px 0; }
+.prompt-box .pb-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#22D3EE; margin-bottom:14px; font-family:'Space Grotesk',sans-serif; }
+.prompt-box .pb-body { font-size:14.5px; line-height:1.85; color:#E2E8F0; white-space:pre-wrap; }
+.prompt-box .pb-body .v { color:#FCD34D; }
+.tip-box { background:#F0FDFF; border:1px solid #A5F3FC; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.tip-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#0E7490; text-transform:uppercase; margin-bottom:10px; }
+.warn-box { background:#FEF6F6; border:1px solid #FECACA; border-left:4px solid #EF4444; border-radius:12px; padding:20px 24px; margin:20px 0; }
+.warn-label { font-size:11px; font-weight:700; letter-spacing:1.5px; color:#991B1B; margin-bottom:10px; }
+.cta-box { margin-top:60px; padding:36px; background:linear-gradient(135deg,#04040C 0%,#1A1A2E 100%); border-radius:20px; text-align:center; color:#F1F5F9; }
+.cta-box h3 { font-family:'Noto Sans JP',sans-serif; font-size:24px; font-weight:900; letter-spacing:-.5px; color:#F1F5F9; margin-bottom:14px; padding:0; border:none; }
+.cta-box p { color:#94A3B8; font-size:15px; line-height:1.7; margin-bottom:24px; }
+.cta-btn { display:inline-block; background:linear-gradient(135deg,#F97316,#EA580C); color:#FFFFFF; padding:14px 32px; border-radius:12px; font-weight:600; text-decoration:none; font-size:15px; box-shadow:0 4px 24px rgba(249,115,22,.4); transition:transform .2s; }
+.cta-btn:hover { transform:translateY(-2px); }
+footer { background:var(--dark); padding:32px 56px; text-align:center; }
+.ft-logo { font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:700; color:#F1F5F9; }
+.ft-logo .ai { color:#60A5FA; }
+.ft-copy { font-size:12px; color:#475569; margin-top:8px; }
+@media (max-width:768px) {
+  nav { padding:12px 20px; }
+  .nav-links { display:none; }
+  .article { padding:36px 20px 60px; }
+  .art-body { font-size:15px; }
+  .art-body h2 { font-size:22px; margin-top:36px; }
+  .prompt-box .pb-body { font-size:13.5px; }
+  .cta-box { padding:28px 22px; margin-top:44px; }
+  .cta-box h3 { font-size:20px; }
+  footer { padding:24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../index.html" class="nav-logo">
+    <svg width="32" height="32" viewBox="0 0 200 200">
+      <defs>
+        <linearGradient id="nLa" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B5CF6"/><stop offset="100%" stop-color="#4F46E5"/></linearGradient>
+        <linearGradient id="nLb" x1="100%" y1="100%" x2="0%" y2="0%"><stop offset="0%" stop-color="#06B6D4"/><stop offset="100%" stop-color="#3B82F6"/></linearGradient>
+      </defs>
+      <path d="M 118,44 A 46,46 0 1,0 118,116" fill="none" stroke="url(#nLa)" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 82,84 A 46,46 0 1,1 82,156" fill="none" stroke="url(#nLb)" stroke-width="15" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-logo-text">CHIK<span class="ai">AI</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="../index.html">ブログ一覧</a>
+    <a href="../../index.html#contact">無料相談</a>
+  </div>
+</nav>
+
+<article class="article">
+
+  <p class="breadcrumb"><a href="../../index.html">トップ</a> ／ <a href="../index.html">ブログ</a> ／ プロンプト</p>
+
+  <span class="cat-tag">🎙 プロンプト｜音声×議事録</span>
+  <h1 class="art-title">音声入力×AIで議事録を自動化する3つの方法</h1>
+  <p class="art-meta">公開：2026年6月18日　／　<span class="author">CHIKAI</span></p>
+
+  <div class="art-body">
+
+    <p class="lead">
+      会議は終わったのに、<strong>そのあとの議事録づくりにまた30分</strong>——。<br>
+      録音を聞き直して、清書して、体裁を整えて…この作業、まるごと軽くできます。<br>
+      カギは<strong>「音声入力で文字にする」×「AIで整える」</strong>の組み合わせ。今日から使える3つの方法を、コピペできる整えプロンプト付きで紹介します。
+    </p>
+
+    <h2>なぜ「音声×AI」で議事録が一気に楽になるのか</h2>
+
+    <p>議事録が面倒なのは、<strong>「聞く」「書く」「整える」を全部ひとりでやる</strong>からです。ここを分担すると、一気に軽くなります。</p>
+
+    <p><strong>文字にするのは音声入力に、整えるのはAIに任せる</strong>。あなたがやるのは最後の確認だけ。話した内容さえ文字になっていれば、AIが「決定事項」「ToDo」「担当者」を整理した議事録の形にしてくれます。まずは"文字にする"方法から見ていきましょう。</p>
+
+    <h2>方法①：スマホの音声入力で、その場で文字にする</h2>
+
+    <div class="step-box">
+      <span class="step-num">METHOD 01</span>
+      <div class="step-title">いちばん手軽。会議の終わりに口頭でまとめる</div>
+      <p>会議の最後に、スマホのメモアプリを開いて<strong>キーボードの🎤（音声入力）</strong>をタップ。決まったこととやることを<strong>口頭で吹き込む</strong>だけで文字になります。特別なアプリは不要です。</p>
+      <div class="fix-line"><b>✓ 向いている場面：</b>少人数の打ち合わせ、外出先、サッと残したいとき。あとでその文字をAIに整えてもらいます。</div>
+    </div>
+
+    <h2>方法②：録音 → 文字起こし → AIで整える</h2>
+
+    <div class="step-box">
+      <span class="step-num">METHOD 02</span>
+      <div class="step-title">会議まるごと録って、文字起こしアプリにかける</div>
+      <p>スマホの録音アプリや文字起こしアプリ（音声を自動でテキスト化）で会議を録音。出てきた<strong>文字起こしテキストをそのままAIに貼り付け</strong>て、議事録の形に整えてもらいます。長い会議でも、要点だけきれいにまとまります。</p>
+      <div class="fix-line"><b>✓ 向いている場面：</b>議題が多い定例会議、あとから「言った言わない」を確認したい会議。</div>
+    </div>
+
+    <h2>方法③：オンライン会議の自動文字起こしを使う</h2>
+
+    <div class="step-box">
+      <span class="step-num">METHOD 03</span>
+      <div class="step-title">ZoomやTeamsの文字起こしを、そのままAIへ</div>
+      <p>オンライン会議ツールには<strong>自動で文字起こし（字幕）を残す機能</strong>があります。会議後にその記録をコピーして、AIに整えてもらえば議事録の完成。<strong>録音も入力も自動</strong>なので、いちばん手間がかかりません。</p>
+      <div class="fix-line"><b>✓ ひとこと注意：</b>参加者には「記録を取ります」と一声かけておくと安心です。</div>
+    </div>
+
+    <h2>共通の仕上げ：AIに渡す「議事録プロンプト」</h2>
+
+    <p>どの方法でも、最後は<strong>文字をAIに整えてもらう</strong>だけ。このプロンプトをコピーして、文字起こしを貼り付ければOKです。</p>
+
+    <div class="prompt-box">
+      <div class="pb-label">📋 議事録 整えプロンプト（コピペOK）</div>
+      <div class="pb-body">次の会議メモ（音声からの文字起こし）を、議事録に整えてください。
+誤変換らしき箇所は文脈から補ってかまいません。
+以下の形式で、簡潔にまとめてください。
+
+■ 日時・参加者（分かれば）
+■ 決定事項（箇条書き）
+■ ToDo（担当者・期限が分かれば併記）
+■ 次回までの確認事項
+
+【会議メモ】
+<span class="v">（ここに文字起こしを貼り付け）</span></div>
+    </div>
+
+    <p>これで、ダラダラした文字の塊が<strong>「決定事項」と「やること」が一目で分かる議事録</strong>に変わります。そのまま共有メールに貼っても使えます。</p>
+
+    <h2>注意：固有名詞・数字・機密は人が確認</h2>
+
+    <div class="warn-box">
+      <div class="warn-label">⚠ ここだけは人がチェック</div>
+      音声入力は<strong>社名・人名・金額・日付を聞き間違える</strong>ことがあります。AIが整えた議事録は便利ですが、<strong>固有名詞と数字は必ず人が確認</strong>を。また、取引先の機密や個人情報を含む会議は、入力するツールの取り扱い（特に無料サービス）に注意してください。<strong>「下書きはAI、最終確認は人」</strong>です。
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-label">✓ この記事のまとめ</div>
+      <strong>①</strong> 手軽に＝スマホの音声入力で口頭メモ<br>
+      <strong>②</strong> しっかり＝録音→文字起こし→AIで整える<br>
+      <strong>③</strong> 自動で＝オンライン会議の文字起こしをAIへ<br>
+      <strong>④</strong> 仕上げは共通の「議事録プロンプト」1本<br>
+      → 議事録づくりの30分が、確認の5分に変わります。
+    </div>
+
+    <h2>まとめ：会議の"あとしまつ"をAIに任せる</h2>
+
+    <p>議事録は、会社にとって大事だけれど時間のかかる「あとしまつ」です。<strong>文字にするのは音声入力、整えるのはAI</strong>に任せれば、あなたは中身の確認に集中できます。まずは次の会議で、スマホの音声入力からひとつ試してみてください。</p>
+
+    <p>「うちの会議、どの方法が合う？」「AIの整えプロンプトを自社用にしたい」というご相談は、CHIKAIの公式LINEで無料受付中。御社の会議のやり方に合わせて、いちばんラクな型をご提案します。</p>
+
+    <div class="cta-box">
+      <h3>会議の議事録を<br>AIで自動化しませんか</h3>
+      <p>15-20分のZoomで、御社の会議スタイルに合った「音声×AI」の進め方をご提案。議事録づくりの手間を、まるごと軽くします。</p>
+      <a href="../../index.html#contact" class="cta-btn">LINEで無料相談する →</a>
+    </div>
+
+  </div>
+</article>
+
+<footer>
+  <p class="ft-logo">CHIK<span class="ai">AI</span></p>
+  <p class="ft-copy">© 2026 CHIKAI. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
