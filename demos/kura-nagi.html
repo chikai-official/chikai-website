@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>凪 -NAGI- 醸造所｜静けさを、醸す。（CHIKAI制作サンプル・架空）</title>
+<meta name="description" content="CHIKAIの制作サンプル。架空の酒蔵「凪醸造所」。数千の光の粒子が漢字を組み・砕け・再生するインタラクティブなスクロール体験デモ。写真不使用・コードのみ。">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,300&family=Zen+Kaku+Gothic+New:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   凪 -NAGI- v2 “PARTICLE KURA”
+   CHIKAI production sample (fictional) — no photos, no libs
+============================================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#07060A; --ink2:#0E0C12;
+  --paper:#F5EFE2; --paper2:#CFC7B4;
+  --gold:#E8C87A; --gold-d:#B08D4A;
+  --mizu:#8FD8D0; --toki:#E0A672;
+  --mist:#7A7264;
+  --serif:'Shippori Mincho B1',serif;
+  --latin:'Cormorant Garamond',serif;
+  --sans:'Zen Kaku Gothic New',sans-serif;
+}
+html{scroll-behavior:auto;}
+html.lock,html.lock body{overflow:hidden;}
+body{background:var(--ink); color:var(--paper); font-family:var(--serif); line-height:1.9;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+::selection{background:var(--gold); color:var(--ink);}
+a{color:inherit; text-decoration:none;}
+
+/* ---- atmosphere ---- */
+#stage{position:fixed; inset:0; z-index:1; pointer-events:none;}
+.glowbg{position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:radial-gradient(60% 50% at 50% 42%, rgba(232,200,122,.07), transparent 70%),
+             radial-gradient(120% 90% at 50% 110%, rgba(20,16,28,.9), transparent 60%);}
+.grain{position:fixed; inset:-60px; z-index:60; pointer-events:none; opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.2s steps(3) infinite;}
+@keyframes grain{0%{transform:translate(0,0)}33%{transform:translate(-24px,14px)}66%{transform:translate(18px,-20px)}100%{transform:translate(0,0)}}
+
+/* ---- loader ---- */
+.loader{position:fixed; inset:0; z-index:150; display:flex; align-items:center; justify-content:center;}
+.door{position:absolute; top:0; bottom:0; width:50.5%; background:linear-gradient(180deg,#0A0810,#120E18 60%,#0A0810);
+  transition:transform .9s cubic-bezier(.77,0,.18,1);}
+.door.l{left:0; border-right:1px solid rgba(232,200,122,.3);}
+.door.r{right:0; border-left:1px solid rgba(232,200,122,.3);}
+.loader.open .door.l{transform:translateX(-101%);}
+.loader.open .door.r{transform:translateX(101%);}
+.loader-core{position:relative; z-index:2; text-align:center; transition:opacity .3s;}
+.loader.open .loader-core{opacity:0;}
+.loader-core b{display:block; font-size:56px; font-weight:800; color:var(--paper); letter-spacing:.1em;}
+.loader-core small{font-family:var(--latin); font-size:12px; letter-spacing:.5em; color:var(--gold);}
+
+/* ---- fixed UI ---- */
+header{position:fixed; top:0; left:0; right:0; z-index:100; display:flex; justify-content:space-between; align-items:center; padding:22px 36px;}
+.brand{display:flex; align-items:center; gap:13px;}
+.brand .bmark{width:38px; height:38px; border:1px solid rgba(245,239,226,.7); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:600; background:rgba(7,6,10,.4); backdrop-filter:blur(4px);}
+.brand small{display:block; font-family:var(--latin); font-size:10px; letter-spacing:.42em; color:var(--paper2);}
+.brand b{font-size:14px; letter-spacing:.3em; font-weight:600;}
+.menu-btn{background:rgba(7,6,10,.4); backdrop-filter:blur(4px); border:1px solid rgba(245,239,226,.25); border-radius:100px;
+  color:var(--paper); font-family:var(--latin); letter-spacing:.3em; font-size:11px; padding:10px 18px; display:flex; align-items:center; gap:10px; cursor:pointer;}
+.menu-btn .bars{width:26px; height:8px; position:relative;}
+.menu-btn .bars i{position:absolute; left:0; right:0; height:1px; background:var(--paper); transition:.4s cubic-bezier(.19,1,.22,1);}
+.menu-btn .bars i:first-child{top:0;} .menu-btn .bars i:last-child{bottom:0;}
+body.menu-open .menu-btn .bars i:first-child{top:3.5px; transform:rotate(22deg);}
+body.menu-open .menu-btn .bars i:last-child{bottom:3.5px; transform:rotate(-22deg);}
+.rail{position:fixed; left:0; top:0; bottom:0; width:52px; z-index:90; display:flex; flex-direction:column;
+  align-items:center; justify-content:space-between; padding:104px 0 30px; pointer-events:none;}
+.rail .line{flex:1; width:1px; background:rgba(245,239,226,.14); position:relative; margin:14px 0;}
+.rail .line i{position:absolute; inset:0; background:linear-gradient(var(--gold),var(--gold-d)); transform-origin:top; transform:scaleY(0);}
+.rail .ch-now{writing-mode:vertical-rl; font-size:11px; letter-spacing:.5em; color:var(--paper2);}
+.rail .en{font-family:var(--latin); font-size:10px; letter-spacing:.3em; color:var(--mist); writing-mode:vertical-rl;}
+.sample-badge{position:fixed; left:16px; bottom:14px; z-index:110; font-family:var(--sans); font-weight:300;
+  font-size:10.5px; letter-spacing:.12em; color:rgba(245,239,226,.9);
+  background:rgba(7,6,10,.6); border:1px solid rgba(232,200,122,.45); border-radius:100px; padding:7px 14px; backdrop-filter:blur(6px);}
+.sample-badge b{color:var(--gold); font-weight:500;}
+
+/* ---- menu overlay ---- */
+.overlay{position:fixed; inset:0; z-index:120; background:rgba(9,7,13,.96); backdrop-filter:blur(10px);
+  clip-path:circle(0px at calc(100% - 70px) 44px); transition:clip-path .7s cubic-bezier(.77,0,.18,1);
+  display:flex; align-items:center; padding:0 12vw;}
+body.menu-open .overlay{clip-path:circle(150% at calc(100% - 70px) 44px);}
+.ov-links{display:flex; flex-direction:column; gap:1.6vh;}
+.ov-links a{display:flex; align-items:baseline; gap:24px; font-size:clamp(30px,5.2vw,56px); font-weight:600;
+  letter-spacing:.14em; color:var(--paper); opacity:0; transform:translateY(34px);
+  transition:opacity .5s cubic-bezier(.19,1,.22,1), transform .5s cubic-bezier(.19,1,.22,1), color .25s;}
+.ov-links a small{font-family:var(--latin); font-size:13px; letter-spacing:.3em; color:var(--gold);}
+.ov-links a:hover{color:var(--gold);}
+body.menu-open .ov-links a{opacity:1; transform:none;}
+body.menu-open .ov-links a:nth-child(1){transition-delay:.15s;}
+body.menu-open .ov-links a:nth-child(2){transition-delay:.22s;}
+body.menu-open .ov-links a:nth-child(3){transition-delay:.29s;}
+body.menu-open .ov-links a:nth-child(4){transition-delay:.36s;}
+.ov-foot{position:absolute; bottom:30px; left:12vw; font-family:var(--latin); font-size:11px; letter-spacing:.35em; color:var(--mist);}
+
+/* ============ sections ============ */
+main{position:relative; z-index:2;}
+.pin{position:sticky; top:0; height:100vh; height:100svh; overflow:hidden;}
+
+/* hero */
+.hero{height:150vh;}
+.hero-copy{position:absolute; left:6vw; bottom:14vh; z-index:5;}
+.hero-copy .jp{font-size:clamp(30px,4.4vw,54px); font-weight:800; letter-spacing:.18em; line-height:1.5;
+  text-shadow:0 2px 30px rgba(7,6,10,.9);}
+.hero-copy .jp em{font-style:normal; color:var(--gold);}
+.hero-copy .en{margin-top:14px; font-family:var(--latin); font-style:italic; font-weight:300; font-size:clamp(14px,1.6vw,19px); letter-spacing:.26em; color:var(--paper2);}
+.hero-copy .est{margin-top:8px; font-family:var(--sans); font-weight:300; font-size:11px; letter-spacing:.4em; color:var(--mist);}
+.hero-hint{position:absolute; right:6vw; bottom:14vh; z-index:5; text-align:right; font-family:var(--sans); font-weight:300;
+  font-size:12px; letter-spacing:.3em; color:var(--paper2); transition:opacity .6s;}
+.hero-hint b{display:block; font-size:20px; margin-bottom:6px;}
+body.touched .hero-hint{opacity:0;}
+.hero-cue{position:absolute; left:50%; bottom:4.5vh; transform:translateX(-50%); z-index:5; text-align:center;}
+.hero-cue small{display:block; font-family:var(--latin); font-size:10px; letter-spacing:.5em; color:var(--mist); margin-bottom:10px;}
+.hero-cue i{display:block; width:1px; height:56px; margin:0 auto; background:linear-gradient(var(--gold),transparent); animation:cue 2s cubic-bezier(.19,1,.22,1) infinite;}
+@keyframes cue{0%{transform:scaleY(0); transform-origin:top}45%{transform:scaleY(1); transform-origin:top}55%{transform:scaleY(1); transform-origin:bottom}100%{transform:scaleY(0); transform-origin:bottom}}
+
+/* chapters */
+.ch{height:185vh;}
+.ch-ui{position:absolute; left:0; right:0; bottom:9vh; z-index:5; text-align:center; padding:0 24px;}
+.ch-index{font-family:var(--latin); font-size:12px; letter-spacing:.55em; color:var(--gold); margin-bottom:2vh;
+  text-shadow:0 0 10px rgba(7,6,10,1),0 0 22px rgba(7,6,10,.95),0 1px 4px rgba(7,6,10,1);
+  opacity:0; transform:translateY(26px); transition:.45s cubic-bezier(.19,1,.22,1);}
+.ch-title{font-size:clamp(30px,4.8vw,56px); font-weight:800; letter-spacing:.16em; line-height:1.4;
+  text-shadow:0 2px 34px rgba(7,6,10,.95); opacity:0; transform:translateY(34px) scale(.97); transition:.5s cubic-bezier(.19,1,.22,1) .05s;}
+.ch-copy{margin-top:2vh; font-family:var(--sans); font-weight:300; font-size:clamp(13px,1.3vw,15px); letter-spacing:.14em; line-height:2.2;
+  color:var(--paper2); max-width:620px; margin-left:auto; margin-right:auto;
+  opacity:0; transform:translateY(30px); transition:.5s cubic-bezier(.19,1,.22,1) .12s;}
+.ch-data{margin-top:2.6vh; display:inline-flex; gap:13px; align-items:baseline; padding:11px 26px;
+  border:1px solid rgba(232,200,122,.5); border-radius:100px; background:rgba(7,6,10,.5); backdrop-filter:blur(4px);
+  opacity:0; transform:translateY(24px); transition:.5s cubic-bezier(.19,1,.22,1) .18s;}
+.ch-data small{font-family:var(--latin); font-size:10px; letter-spacing:.3em; color:var(--mist);}
+.ch-data b{font-family:var(--latin); font-weight:700; font-size:21px; color:var(--gold); letter-spacing:.08em;}
+.ch.on .ch-index,.ch.on .ch-title,.ch.on .ch-copy,.ch.on .ch-data{opacity:1; transform:none;}
+.ch[data-accent="mizu"] .ch-index,.ch[data-accent="mizu"] .ch-data b{color:var(--mizu);}
+.ch[data-accent="mizu"] .ch-data{border-color:rgba(143,216,208,.5);}
+.ch[data-accent="toki"] .ch-index,.ch[data-accent="toki"] .ch-data b{color:var(--toki);}
+.ch[data-accent="toki"] .ch-data{border-color:rgba(224,166,114,.5);}
+.tap-hint{position:absolute; top:12vh; left:0; right:0; z-index:5; text-align:center; font-family:var(--sans); font-weight:300;
+  font-size:11.5px; letter-spacing:.34em; color:var(--paper2); opacity:0; transition:.5s;}
+.ch.on .tap-hint{opacity:.9;}
+
+/* products */
+.products{/* height set by JS */}
+.prod-head{position:absolute; top:8vh; left:7vw; z-index:6;}
+.prod-head small{font-family:var(--latin); font-size:12px; letter-spacing:.5em; color:var(--gold); display:block; margin-bottom:10px;}
+.prod-head h2{font-size:clamp(26px,3.6vw,44px); font-weight:800; letter-spacing:.2em; text-shadow:0 2px 26px rgba(7,6,10,.9);}
+.prod-bg{position:absolute; bottom:3vh; left:0; white-space:nowrap; font-family:var(--latin); font-weight:300;
+  font-size:20vh; line-height:1; color:transparent; -webkit-text-stroke:1px rgba(245,239,226,.10); pointer-events:none;}
+.track{display:flex; gap:5vw; padding-left:32vw; align-items:center; will-change:transform;}
+.card{flex:0 0 auto; width:min(400px,76vw); background:linear-gradient(175deg,rgba(30,25,38,.9),rgba(12,10,16,.94));
+  border:1px solid rgba(232,200,122,.3); border-radius:6px; padding:44px 36px 34px; position:relative;
+  transition:border-color .3s, box-shadow .3s; transform-style:preserve-3d; will-change:transform;}
+.card:hover{border-color:rgba(232,200,122,.85); box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 60px rgba(232,200,122,.08);}
+.card::after{content:attr(data-no); position:absolute; top:16px; right:20px; font-family:var(--latin); font-size:12px; letter-spacing:.3em; color:var(--mist);}
+.card .shine{position:absolute; inset:0; border-radius:6px; background:linear-gradient(120deg,transparent 30%,rgba(245,239,226,.08) 45%,transparent 60%);
+  background-size:250% 100%; background-position:120% 0; transition:background-position .7s; pointer-events:none;}
+.card:hover .shine{background-position:-60% 0;}
+.card svg{display:block; width:120px; height:auto; margin:0 auto 24px; filter:drop-shadow(0 18px 34px rgba(0,0,0,.65)); transform:translateZ(34px);}
+.card .grade{font-family:var(--latin); font-size:11px; letter-spacing:.42em; color:var(--gold); text-align:center;}
+.card h3{text-align:center; font-size:30px; font-weight:800; letter-spacing:.3em; margin:8px 0 2px;}
+.card .romaji{text-align:center; font-family:var(--latin); font-style:italic; font-size:14px; letter-spacing:.3em; color:var(--mist);}
+.card p{margin-top:18px; font-family:var(--sans); font-weight:300; font-size:12.5px; letter-spacing:.1em; line-height:2.1; color:var(--paper2);}
+.card .price{margin-top:16px; padding-top:14px; border-top:1px solid rgba(245,239,226,.14); display:flex; justify-content:space-between; align-items:baseline;}
+.card .price b{font-family:var(--latin); font-weight:700; font-size:20px; letter-spacing:.06em;}
+.card .price small{font-family:var(--sans); font-weight:300; font-size:10px; color:var(--mist); letter-spacing:.16em;}
+.card.hint{border:none; background:none; box-shadow:none; width:26vw; display:flex; align-items:center;}
+.card.hint p{writing-mode:vertical-rl; font-family:var(--serif); font-size:15px; letter-spacing:.4em; color:var(--mist);}
+
+/* finale */
+.finale{height:210vh;}
+.fin-ui{position:absolute; left:0; right:0; bottom:8vh; z-index:5; text-align:center; padding:0 24px;
+  opacity:0; transform:translateY(30px); transition:.6s cubic-bezier(.19,1,.22,1);}
+.finale.on .fin-ui{opacity:1; transform:none;}
+.fin-eye{font-family:var(--latin); font-size:12px; letter-spacing:.55em; color:var(--gold); margin-bottom:2vh;
+  text-shadow:0 0 10px rgba(7,6,10,1),0 0 22px rgba(7,6,10,.95),0 1px 4px rgba(7,6,10,1);}
+.fin-title{font-size:clamp(26px,3.8vw,46px); font-weight:800; letter-spacing:.14em; text-shadow:0 2px 34px rgba(7,6,10,.95);}
+.fin-copy{margin-top:2vh; font-family:var(--sans); font-weight:300; font-size:clamp(13px,1.3vw,15px); letter-spacing:.14em; line-height:2.2; color:var(--paper2);}
+.fin-copy strong{color:var(--gold); font-weight:700;}
+.fin-disc{margin-top:2vh; font-family:var(--sans); font-weight:300; font-size:10.5px; letter-spacing:.18em; color:var(--mist);}
+.fin-btns{margin-top:3.4vh; display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
+.btn{position:relative; display:inline-block; padding:18px 52px; border:1px solid var(--gold); border-radius:100px;
+  font-size:14px; letter-spacing:.34em; color:var(--paper); overflow:hidden; transition:color .35s; cursor:pointer;}
+.btn i{position:absolute; inset:0; background:linear-gradient(100deg,var(--gold),#D8B45E); border-radius:100px;
+  transform:scaleX(0); transform-origin:left; transition:transform .45s cubic-bezier(.77,0,.18,1); z-index:-1;}
+.btn:hover{color:var(--ink);}
+.btn:hover i{transform:scaleX(1);}
+.btn.solid{background:linear-gradient(100deg,var(--gold),#D8B45E); color:var(--ink); font-weight:700;}
+.btn.solid i{background:var(--paper);}
+.click-ripple{position:fixed; z-index:95; width:12px; height:12px; border:1.5px solid var(--gold); border-radius:50%;
+  pointer-events:none; transform:translate(-50%,-50%); animation:crip .8s cubic-bezier(.19,1,.22,1) forwards;}
+@keyframes crip{to{transform:translate(-50%,-50%) scale(10); opacity:0;}}
+
+/* marquee + footer */
+.marquee{overflow:hidden; padding:6vh 0 5vh; border-top:1px solid rgba(245,239,226,.1); position:relative; z-index:2;}
+.mq-track{display:flex; white-space:nowrap; will-change:transform;}
+.mq-track span{font-size:clamp(44px,8.6vw,104px); font-weight:800; letter-spacing:.16em; padding-right:1.2em;
+  color:transparent; -webkit-text-stroke:1px rgba(245,239,226,.35);}
+.mq-track span em{font-style:normal; -webkit-text-stroke:0; color:var(--gold);}
+footer{padding:24px 36px 30px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  font-family:var(--sans); font-weight:300; font-size:10.5px; letter-spacing:.18em; color:var(--mist); position:relative; z-index:2;}
+
+/* responsive */
+@media (max-width:760px){
+  header{padding:14px 16px;}
+  .rail{display:none;}
+  .hero-copy{left:7vw; bottom:16vh;}
+  .hero-hint{right:7vw; bottom:6vh;}
+  .ch-ui{bottom:7vh;}
+  .track{padding-left:9vw; gap:7vw;}
+  .card.hint{width:60vw;}
+  .fin-btns{gap:12px;}
+  .btn{padding:15px 34px; letter-spacing:.24em;}
+  footer{justify-content:center; text-align:center;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important;}
+  .ch-index,.ch-title,.ch-copy,.ch-data,.fin-ui{opacity:1 !important; transform:none !important;}
+}
+</style>
+</head>
+<body class="loading">
+
+<!-- loader -->
+<div class="loader" id="loader">
+  <div class="door l"></div><div class="door r"></div>
+  <div class="loader-core"><b>凪</b><small>NAGI</small></div>
+</div>
+
+<div class="glowbg"></div>
+<canvas id="stage"></canvas>
+<div class="grain"></div>
+
+<header>
+  <a class="brand" href="#top" data-hover>
+    <span class="bmark">凪</span>
+    <span><b>凪 醸 造 所</b><small>NAGI BREWERY — SETOUCHI</small></span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="メニュー">MENU<span class="bars"><i></i><i></i></span></button>
+</header>
+
+<div class="rail">
+  <span class="en">SCROLL</span>
+  <span class="line"><i id="railBar"></i></span>
+  <span class="ch-now" id="railNow">凪</span>
+</div>
+
+<a class="sample-badge" href="index.html"><b>SAMPLE</b>｜CHIKAI制作サンプル（架空の酒蔵）</a>
+
+<div class="overlay">
+  <nav class="ov-links">
+    <a href="#kome"><small>01</small>米</a>
+    <a href="#mizu"><small>02</small>水</a>
+    <a href="#toki"><small>03</small>時</a>
+    <a href="#collection"><small>04</small>銘柄</a>
+  </nav>
+  <div class="ov-foot">NAGI BREWERY (FICTIONAL) — A CHIKAI WEB SAMPLE</div>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" data-glyph="凪" data-accent="gold" data-label="凪">
+    <div class="pin">
+      <div class="hero-copy">
+        <div class="jp">静けさを、<em>醸す</em>。</div>
+        <div class="en">NAGI BREWERY — SETOUCHI</div>
+        <div class="est">明治二年創業（※架空の設定です）</div>
+      </div>
+      <div class="hero-hint"><b>✦</b>カーソルで、粒に触れてみてください</div>
+      <div class="hero-cue"><small>SCROLL</small><i></i></div>
+    </div>
+  </section>
+
+  <!-- 米 -->
+  <section class="ch" id="kome" data-glyph="米" data-accent="gold" data-label="米">
+    <div class="pin">
+      <div class="ch-ui">
+        <div class="ch-index">CHAPTER 壱 — RICE</div>
+        <h2 class="ch-title">一粒に、宿る。</h2>
+        <p class="ch-copy">契約農家とともに育てた酒米だけを使う。手のひらの一粒に、その年の風と水が宿っている。私たちの仕事は、それを損なわないこと。</p>
+        <div class="ch-data"><small>精米歩合</small><b>35%</b><small>（※架空）</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 水 -->
+  <section class="ch" id="mizu" data-glyph="水" data-accent="mizu" data-label="水">
+    <div class="pin">
+      <div class="tap-hint">— 画面をクリックすると、水面が揺れます —</div>
+      <div class="ch-ui">
+        <div class="ch-index">CHAPTER 弐 — WATER</div>
+        <h2 class="ch-title">軟水の、しずけさ。</h2>
+        <p class="ch-copy">瀬戸内の花崗岩が、長い年月をかけて磨いた軟水。口に含むと、音が消える。この静けさが、凪の酒の輪郭になる。</p>
+        <div class="ch-data"><small>仕込み水 硬度</small><b>42</b><small>（※架空）</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 時 -->
+  <section class="ch" id="toki" data-glyph="時" data-accent="toki" data-label="時">
+    <div class="pin">
+      <div class="ch-ui">
+        <div class="ch-index">CHAPTER 参 — TIME</div>
+        <h2 class="ch-title">急がない、という技術。</h2>
+        <p class="ch-copy">発酵は、待つことの連続。蔵人は温度を測り、香りを聞き、あとは時間に任せる。三十二日目の朝、酒のほうから「できた」と教えてくれる。</p>
+        <div class="ch-data"><small>醪（もろみ）日数</small><b>32日</b><small>（※架空）</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 盃 -->
+  <section class="ch" id="sakazuki" data-glyph="盃" data-accent="gold" data-label="盃">
+    <div class="pin">
+      <div class="ch-ui">
+        <div class="ch-index">CHAPTER 肆 — CUP</div>
+        <h2 class="ch-title">注ぐまでが、酒づくり。</h2>
+        <p class="ch-copy">瓶を出て、盃に満ちて、誰かの時間を少しだけ遅くする。そこまで見届けて、凪の仕事は終わります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="products" id="collection" data-glyph="盃" data-dim="1" data-accent="gold" data-label="銘">
+    <div class="pin">
+      <div class="prod-head">
+        <small>COLLECTION — 銘柄（すべて架空）</small>
+        <h2>凪の、三つの顔。</h2>
+      </div>
+      <div class="prod-bg">SILENCE IN A BOTTLE — NAGI BREWERY —</div>
+      <div class="track" id="track">
+        <article class="card tilt" data-no="01">
+          <span class="shine"></span>
+          <svg viewBox="0 0 140 340"><defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A3220"/><stop offset=".55" stop-color="#1E1810"/><stop offset="1" stop-color="#0F0C08"/></linearGradient>
+          </defs>
+            <rect x="56" y="6" width="28" height="12" rx="3" fill="#E8C87A"/>
+            <path d="M62 16 v22 c0 8 -3 12 -8 20 c-8 12 -12 24 -12 44 v186 c0 24 12 36 28 36 s28 -12 28 -36 v-186 c0 -20 -4 -32 -12 -44 c-5 -8 -8 -12 -8 -20 v-22 z" fill="url(#g1)" stroke="rgba(232,200,122,.7)" stroke-width="1.2"/>
+            <rect x="52" y="150" width="36" height="104" rx="2" fill="#F5EFE2"/>
+            <text x="70" y="163" writing-mode="tb" font-family="'Shippori Mincho B1',serif" font-size="21" font-weight="600" fill="#0B0A08" letter-spacing="4">白鷺</text>
+          </svg>
+          <div class="grade">JUNMAI DAIGINJO</div>
+          <h3>白鷺</h3>
+          <div class="romaji">— HAKURO —</div>
+          <p>磨き三割五分。梨と白い花の香り。凪のいちばん静かな酒。冷やで、音のない夜に。</p>
+          <div class="price"><small>720ml（価格・銘柄は架空）</small><b>¥8,800</b></div>
+        </article>
+        <article class="card tilt" data-no="02">
+          <span class="shine"></span>
+          <svg viewBox="0 0 140 340"><defs>
+            <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#20393B"/><stop offset=".55" stop-color="#12201F"/><stop offset="1" stop-color="#0A1210"/></linearGradient>
+          </defs>
+            <rect x="56" y="6" width="28" height="12" rx="3" fill="#8FD8D0"/>
+            <path d="M62 16 v22 c0 8 -3 12 -8 20 c-8 12 -12 24 -12 44 v186 c0 24 12 36 28 36 s28 -12 28 -36 v-186 c0 -20 -4 -32 -12 -44 c-5 -8 -8 -12 -8 -20 v-22 z" fill="url(#g2)" stroke="rgba(143,216,208,.7)" stroke-width="1.2"/>
+            <rect x="52" y="150" width="36" height="104" rx="2" fill="#F5EFE2"/>
+            <text x="70" y="163" writing-mode="tb" font-family="'Shippori Mincho B1',serif" font-size="21" font-weight="600" fill="#0B0A08" letter-spacing="4">青凪</text>
+          </svg>
+          <div class="grade">JUNMAI GINJO</div>
+          <h3>青凪</h3>
+          <div class="romaji">— AONAGI —</div>
+          <p>凪いだ海の色を映した一本。ミネラルの輪郭と、かすかな潮の余韻。魚と合わせて。</p>
+          <div class="price"><small>720ml（価格・銘柄は架空）</small><b>¥4,950</b></div>
+        </article>
+        <article class="card tilt" data-no="03">
+          <span class="shine"></span>
+          <svg viewBox="0 0 140 340"><defs>
+            <linearGradient id="g3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B2C1E"/><stop offset=".55" stop-color="#201712"/><stop offset="1" stop-color="#100B08"/></linearGradient>
+          </defs>
+            <rect x="56" y="6" width="28" height="12" rx="3" fill="#E0A672"/>
+            <path d="M62 16 v22 c0 8 -3 12 -8 20 c-8 12 -12 24 -12 44 v186 c0 24 12 36 28 36 s28 -12 28 -36 v-186 c0 -20 -4 -32 -12 -44 c-5 -8 -8 -12 -8 -20 v-22 z" fill="url(#g3)" stroke="rgba(224,166,114,.7)" stroke-width="1.2"/>
+            <rect x="52" y="150" width="36" height="104" rx="2" fill="#F5EFE2"/>
+            <text x="70" y="163" writing-mode="tb" font-family="'Shippori Mincho B1',serif" font-size="21" font-weight="600" fill="#0B0A08" letter-spacing="4">常夜</text>
+          </svg>
+          <div class="grade">TOKUBETSU JUNMAI</div>
+          <h3>常夜</h3>
+          <div class="romaji">— TOKOYO —</div>
+          <p>毎晩の食卓のための、飾らない一本。燗にすると米の甘さがほどける。日常の酒。</p>
+          <div class="price"><small>720ml（価格・銘柄は架空）</small><b>¥3,300</b></div>
+        </article>
+        <div class="card hint"><p>酒は、静けさの器。——凪醸造所</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINALE -->
+  <section class="finale" id="ck" data-glyph="CHIKAI" data-latin="1" data-accent="paper" data-label="終">
+    <div class="pin">
+      <div class="fin-ui">
+        <div class="fin-eye">— AND NOW, THE TRUTH —</div>
+        <h2 class="fin-title">ここまでは、架空の蔵の物語。</h2>
+        <p class="fin-copy">このページはCHIKAIの制作サンプル。<strong>写真ゼロ、ライブラリゼロ、コードだけ</strong>。<br>
+        いま画面で光っている粒の一つひとつまで、設計されたデザインです。<br>
+        あなたの商売の物語も、このクオリティで。</p>
+        <p class="fin-disc">※ 蔵元・人物・銘柄・価格・数値はすべて架空です。実在の団体とは関係ありません。</p>
+        <div class="fin-btns">
+          <a class="btn solid" href="../index.html#contact"><i></i>制作の相談をする（無料）</a>
+          <a class="btn" href="index.html"><i></i>他のサンプルを見る</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee"><div class="mq-track" id="mq">
+    <span>静けさを、醸す。<em>NAGI</em> BREWERY — </span><span>静けさを、醸す。<em>NAGI</em> BREWERY — </span><span>静けさを、醸す。<em>NAGI</em> BREWERY — </span><span>静けさを、醸す。<em>NAGI</em> BREWERY — </span>
+  </div></div>
+
+  <footer>
+    <span>凪醸造所（架空）— A FICTIONAL BRAND</span>
+    <span>Design &amp; Code : <a href="../index.html" style="color:var(--gold)">CHIKAI</a> — Web Production Sample</span>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+'use strict';
+/* ================= utils ================= */
+var clamp=function(v,a,b){return Math.min(b,Math.max(a,v));};
+var lerp=function(a,b,t){return a+(b-a)*t;};
+var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var isTouch=window.matchMedia('(pointer:coarse)').matches;
+var vw=innerWidth, vh=innerHeight;
+var DPR=Math.min(devicePixelRatio||1, 1.6);
+
+/* ================= loader ================= */
+var loader=document.getElementById('loader');
+document.documentElement.classList.add('lock');
+setTimeout(function(){ loader.classList.add('open'); document.body.classList.add('ready');
+  setTimeout(function(){ loader.style.display='none'; document.documentElement.classList.remove('lock'); measure(); }, reduced?50:900);
+}, reduced?100:700);
+
+/* ================= canvas stage ================= */
+var cv=document.getElementById('stage'), ctx=cv.getContext('2d');
+function sizeCanvas(){ vw=innerWidth; vh=innerHeight; cv.width=Math.round(vw*DPR); cv.height=Math.round(vh*DPR);
+  cv.style.width=vw+'px'; cv.style.height=vh+'px'; ctx.setTransform(DPR,0,0,DPR,0,0); }
+sizeCanvas();
+
+/* glow sprites（粒の光は事前描画で高速化） */
+var TINTS={gold:'232,200,122', mizu:'143,216,208', toki:'224,166,114', paper:'245,239,226'};
+var sprites={};
+Object.keys(TINTS).forEach(function(k){
+  var s=document.createElement('canvas'); s.width=s.height=48; var c=s.getContext('2d');
+  var g=c.createRadialGradient(24,24,0,24,24,24);
+  g.addColorStop(0,'rgba('+TINTS[k]+',1)'); g.addColorStop(.35,'rgba('+TINTS[k]+',.55)'); g.addColorStop(1,'rgba('+TINTS[k]+',0)');
+  c.fillStyle=g; c.fillRect(0,0,48,48); sprites[k]=s;
+});
+
+/* ============ 星（奥から飛んでくるワープ空間） ============ */
+var stars=[], NSTAR=isTouch?120:240;
+function initStars(){ stars=[]; for(var i=0;i<NSTAR;i++) stars.push({x:(Math.random()*2-1), y:(Math.random()*2-1), z:Math.random()*1.4+0.15, pz:0}); }
+initStars();
+function drawStars(speed){
+  var f=Math.min(vw,vh)*0.55, cx=vw/2, cy=vh/2;
+  for(var i=0;i<stars.length;i++){ var s=stars[i];
+    s.pz=s.z; s.z-=speed;
+    if(s.z<=0.06){ s.x=Math.random()*2-1; s.y=Math.random()*2-1; s.z=1.5; s.pz=s.z; }
+    var px=cx+(s.x/s.z)*f, py=cy+(s.y/s.z)*f;
+    if(px<-30||px>vw+30||py<-30||py>vh+30) continue;
+    var qx=cx+(s.x/s.pz)*f, qy=cy+(s.y/s.pz)*f;
+    var a=clamp(1.2-s.z,0.06,0.7);
+    ctx.strokeStyle='rgba(232,200,122,'+a.toFixed(3)+')';
+    ctx.lineWidth=clamp((1/s.z)*0.9,0.4,2.2);
+    ctx.beginPath(); ctx.moveTo(qx,qy); ctx.lineTo(px,py); ctx.stroke();
+  }
+}
+
+/* ============ 粒子（漢字を組む・砕ける・作り直す） ============ */
+var N=isTouch?1500:3800;
+var pts=[], parts=[];
+for(var i=0;i<N;i++) parts.push({x:Math.random()*vw, y:Math.random()*vh, vx:0, vy:0, tx:0, ty:0, sz:Math.random()*5+3.5, tint:'gold', tw:Math.random()*6.28});
+
+function sampleGlyph(text, latin){
+  var box=Math.min(vw,vh)*(latin?0.96:0.76);
+  var S=document.createElement('canvas'); S.width=S.height=Math.round(box);
+  var c=S.getContext('2d');
+  c.fillStyle='#fff'; c.textAlign='center'; c.textBaseline='middle';
+  c.font=(latin?'700 ':'800 ')+Math.round(latin?box*0.26:box*0.84)+'px '+(latin?"'Cormorant Garamond'":"'Shippori Mincho B1'")+',serif';
+  c.fillText(text, box/2, box/2+(latin?0:box*0.03));
+  var img=c.getImageData(0,0,S.width,S.height).data;
+  var out=[], step=Math.max(2, Math.round(box/110));
+  for(var y=0;y<S.height;y+=step)for(var x=0;x<S.width;x+=step){
+    if(img[(y*S.width+x)*4+3]>120) out.push({x:x-box/2, y:y-box/2});
+  }
+  return out;
+}
+function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+var glyphCache={};
+var curGlyph='', dimmed=false;
+function morphTo(text, latin, tint, burst){
+  if(curGlyph===text+tint) return;
+  curGlyph=text+tint;
+  var key=text+'@'+(latin?'L':'J')+Math.round(Math.min(vw,vh));
+  if(!glyphCache[key]) glyphCache[key]=sampleGlyph(text,latin);
+  pts=glyphCache[key];
+  if(!pts.length) return;
+  var order=shuffle(parts.slice());
+  var cx=vw/2, cy=vh*0.42;
+  for(var i=0;i<order.length;i++){
+    var p=order[i], t=pts[i%pts.length];
+    p.tx=cx+t.x; p.ty=cy+t.y; p.tint=tint;
+    if(burst && !reduced){ var a=Math.random()*6.28, f=Math.random()*16+7; p.vx+=Math.cos(a)*f; p.vy+=Math.sin(a)*f; }
+  }
+}
+/* クリック/タップ＝衝撃波 */
+function blast(x,y,power){
+  for(var i=0;i<parts.length;i++){ var p=parts[i];
+    var dx=p.x-x, dy=p.y-y, d=Math.sqrt(dx*dx+dy*dy)+0.001;
+    if(d<260){ var f=(1-d/260)*power; p.vx+=dx/d*f; p.vy+=dy/d*f; } }
+  var r=document.createElement('div'); r.className='click-ripple'; r.style.left=x+'px'; r.style.top=y+'px';
+  document.body.appendChild(r); setTimeout(function(){r.remove();},850);
+}
+
+/* マウス */
+var mx=vw/2, my=vh/2, hasMouse=false;
+addEventListener('mousemove',function(e){ mx=e.clientX; my=e.clientY; hasMouse=true; document.body.classList.add('touched'); },{passive:true});
+addEventListener('touchmove',function(e){ if(e.touches[0]){ mx=e.touches[0].clientX; my=e.touches[0].clientY; hasMouse=true; document.body.classList.add('touched'); } },{passive:true});
+addEventListener('click',function(e){ if(e.target.closest('a,button'))return; blast(e.clientX,e.clientY,15); });
+
+function drawParts(alpha){
+  ctx.globalCompositeOperation='lighter';
+  for(var i=0;i<parts.length;i++){ var p=parts[i];
+    /* ばね：目標（文字の画素）へ */
+    p.vx+=(p.tx-p.x)*0.055; p.vy+=(p.ty-p.y)*0.055;
+    /* マウス反発 */
+    if(hasMouse){ var dx=p.x-mx, dy=p.y-my, d2=dx*dx+dy*dy;
+      if(d2<15000){ var d=Math.sqrt(d2)+0.001, f=(1-d/122)*3.4; p.vx+=dx/d*f; p.vy+=dy/d*f; } }
+    p.vx*=0.865; p.vy*=0.865;
+    p.x+=p.vx; p.y+=p.vy;
+    p.tw+=0.05;
+    var tw=0.65+0.35*Math.sin(p.tw);
+    var s=p.sz*tw;
+    ctx.globalAlpha=alpha*tw;
+    ctx.drawImage(sprites[p.tint], p.x-s, p.y-s, s*2, s*2);
+  }
+  ctx.globalAlpha=1; ctx.globalCompositeOperation='source-over';
+}
+
+/* ============ scroll engine ============ */
+var sections=[];
+document.querySelectorAll('[data-glyph]').forEach(function(el){
+  sections.push({el:el, glyph:el.getAttribute('data-glyph'), latin:!!el.getAttribute('data-latin'),
+    tint:el.getAttribute('data-accent')||'gold', dim:!!el.getAttribute('data-dim'),
+    label:el.getAttribute('data-label')||'', top:0, h:0});
+});
+var track=document.getElementById('track');
+function measure(){
+  vw=innerWidth; vh=innerHeight;
+  var prodSec=document.querySelector('.products');
+  var dist=Math.max(0, track.scrollWidth - vw + vw*0.08);
+  prodSec.style.height=(dist+vh*1.5)+'px';
+  prodSec._dist=dist;
+  sections.forEach(function(s){ var r=s.el.getBoundingClientRect(); s.top=r.top+scrollY; s.h=s.el.offsetHeight; });
+  sizeCanvas();
+  glyphCache={}; curGlyph='';
+  var act=activeSection(); if(act) morphTo(act.glyph, act.latin, act.tint, false);
+}
+function activeSection(){
+  var mid=scrollY+vh*0.5;
+  for(var i=sections.length-1;i>=0;i--){ if(mid>=sections[i].top) return sections[i]; }
+  return sections[0];
+}
+
+var railBar=document.getElementById('railBar'), railNow=document.getElementById('railNow');
+var mq=document.getElementById('mq'), mqx=0;
+var lastY=scrollY, vel=0, curSec=null;
+
+function frame(){
+  var sy=scrollY;
+  vel+=((sy-lastY)-vel)*0.12; lastY=sy;
+
+  /* シーン切替（粒子が砕けて次の文字へ） */
+  var act=activeSection();
+  if(act!==curSec){ curSec=act;
+    morphTo(act.glyph, act.latin, act.tint, true);
+    if(railNow.textContent!==act.label) railNow.textContent=act.label;
+    document.querySelectorAll('.ch,.finale').forEach(function(el){ el.classList.toggle('on', el===act.el); });
+  }
+  /* 章内の進捗で products の横移動 */
+  sections.forEach(function(s){
+    if(!s.el.classList.contains('products')) return;
+    var p=clamp((sy-s.top)/Math.max(1,s.h-vh),0,1);
+    track.style.transform='translateX('+(-p*s.el._dist)+'px)';
+    document.querySelector('.prod-bg').style.transform='translateX('+(p*12)+'vw)';
+  });
+
+  /* rail */
+  var total=clamp(sy/Math.max(1,(document.documentElement.scrollHeight-vh)),0,1);
+  railBar.style.transform='scaleY('+total+')';
+
+  /* marquee */
+  if(!reduced){ mqx-=(0.7+clamp(Math.abs(vel)*0.05,0,3)); var w=mq.scrollWidth/4; if(-mqx>=w)mqx+=w;
+    mq.style.transform='translateX('+mqx+'px)'; }
+
+  /* ===== draw ===== */
+  ctx.clearRect(0,0,vw,vh);
+  if(!reduced){
+    var warp=0.0035+clamp(Math.abs(vel)*0.00075,0,0.06);
+    drawStars(warp);
+    var dimA=(curSec&&curSec.dim)?0.28:0.9;
+    drawParts(dimA);
+  }
+}
+function tick(){ frame(); requestAnimationFrame(tick); }
+
+/* ============ tilt cards（マウスで3D傾き） ============ */
+if(!isTouch){
+  document.querySelectorAll('.card.tilt').forEach(function(card){
+    card.addEventListener('mousemove',function(e){
+      var r=card.getBoundingClientRect();
+      var rx=((e.clientY-r.top)/r.height-0.5)*-14, ry=((e.clientX-r.left)/r.width-0.5)*14;
+      card.style.transform='perspective(900px) rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg) translateZ(6px)';
+    });
+    card.addEventListener('mouseleave',function(){ card.style.transform='perspective(900px) rotateX(0) rotateY(0)'; });
+  });
+}
+
+/* ============ menu ============ */
+var menuBtn=document.getElementById('menuBtn');
+menuBtn.addEventListener('click',function(){
+  document.body.classList.toggle('menu-open');
+  document.documentElement.classList.toggle('lock',document.body.classList.contains('menu-open'));
+});
+document.querySelectorAll('.ov-links a').forEach(function(a){
+  a.addEventListener('click',function(ev){ ev.preventDefault();
+    document.body.classList.remove('menu-open'); document.documentElement.classList.remove('lock');
+    var t=document.querySelector(a.getAttribute('href'));
+    if(t) setTimeout(function(){ t.scrollIntoView({behavior:reduced?'auto':'smooth'}); },360);
+  });
+});
+
+/* ============ init ============ */
+addEventListener('resize',measure);
+function boot(){
+  measure();
+  morphTo('凪', false, 'gold', false);
+  /* 初回：画面外から粒が飛んできて「凪」を組む */
+  if(!reduced){ for(var i=0;i<parts.length;i++){ var p=parts[i];
+    var edge=Math.floor(Math.random()*4);
+    p.x=edge===0?-40:edge===1?vw+40:Math.random()*vw;
+    p.y=edge===2?-40:edge===3?vh+40:(edge<2?Math.random()*vh:p.y); } }
+  tick();
+}
+if(document.fonts && document.fonts.ready){
+  Promise.race([document.fonts.ready, new Promise(function(r){setTimeout(r,1600);})]).then(boot);
+} else boot();
+})();
+</script>
+</body>
+</html>
